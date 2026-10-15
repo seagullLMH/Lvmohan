@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2,h3,p{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 400px;
+            border: 1px solid black;
+            margin: 20px;
+            padding: 8px;
+            font-size: 12px;
+        }
+        #box p{
+            font-size: 14px;
+            line-height: 30px;
+            letter-spacing: 2px;
+        }
+        #box h3{
+            font-size: 16px;
+            text-align: center;
+            line-height: 30px;
+            letter-spacing: 2px;
+            color: rgb(241, 44, 44);
+        }
+        #box a{
+            color: blue;
+            text-decoration: none;
+        }
+        /* 新增：知识点紫色边框样式 */
+        .knowledge{
+            border:2px solid purple;
+        }
+    </style>
+</head>
+<body>
+    <h2>css进阶</h2>
+    <div id="box">
+        <h3>CSS哪些事</h3>
+        <p>
+        学号：<b style="color: blue;">24005240119</b>，姓名：<b>吕墨涵</b>，班级：<b>计算机24002</b>，对于《高级网页设计》课程的难度认知为：<b style="color: red;">难</b>。
+            <span class="knowledge">这个例子对应的知识点是：群组选择器、后代选择器、层叠与继承。</span>
+            <a href="#">更多>></a>
+        </p>
+    </div>
+    <!-- 学号:蓝色加粗 难度的值：红色加粗，知识点，紫色边框，边框为额外内容，使用内部css -->
+</body>
+</html>

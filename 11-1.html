@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>119 吕墨涵</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: "Microsoft YaHei", sans-serif;
+            background: #f5f6f8;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        /* 每个单位一张卡片 */
+        .lvmohan_unit {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px 24px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .lvmohan_unit h2 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        .lvmohan_unit .lvmohan_desc {
+            margin: 0 0 12px;
+            font-size: 14px;
+            color: #666;
+        }
+        .lvmohan_code {
+            display: block;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            background: #282c34;
+            color: #98c379;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            border-radius: 4px;
+        }
+        /* 演示区域公共样式 */
+        .lvmohan_demo {
+            padding: 10px;
+            background: #f0f4f8;
+            border: 1px dashed #aaa;
+        }
+        .lvmohan_bar {
+            height: 30px;
+            margin-bottom: 8px;
+            background: #4285f4;
+            color: #fff;
+            font-size: 12px;
+            line-height: 30px;
+            padding-left: 8px;
+            white-space: nowrap;
+            overflow: visible;
+        }
+        .lvmohan_bar:last-child {
+            margin-bottom: 0;
+        }
+        .lvmohan_red { background: #ea4335; }
+        .lvmohan_yellow { background: #fbbc05; color: #333; }
+        .lvmohan_green { background: #34a853; }
+    </style>
+</head>
+<body>
+    <p style="max-width: 800px; margin: 0 auto 10px; font-size: 14px;"><a href="../index.html" style="color: #4285f4; text-decoration: none;">&larr; 返回首页</a></p>
+    <h1>CSS 长度单位演示</h1>
+
+    <!-- 1. px 绝对单位 -->
+    <section class="lvmohan_unit">
+        <h2>1. px（像素，绝对单位）</h2>
+        <p class="lvmohan_desc">最常用的长度单位，1px 表示一个屏幕像素点，不随其他元素或浏览器设置变化。</p>
+        <code class="lvmohan_code">width: 100px; width: 200px; width: 400px;</code>
+        <div class="lvmohan_demo">
+            <div class="lvmohan_bar" style="width: 100px;">100px</div>
+            <div class="lvmohan_bar lvmohan_red" style="width: 200px;">200px</div>
+            <div class="lvmohan_bar lvmohan_yellow" style="width: 400px;">400px</div>
+        </div>
+    </section>
+
+    <!-- 2. % 相对单位 -->
+    <section class="lvmohan_unit">
+        <h2>2. %（百分比，相对单位）</h2>
+        <p class="lvmohan_desc">相对于父元素的宽度（或高度）计算，常用于做自适应布局。</p>
+        <code class="lvmohan_code">width: 25%; width: 50%; width: 100%;</code>
+        <div class="lvmohan_demo">
+            <div class="lvmohan_bar" style="width: 25%;">25%</div>
+            <div class="lvmohan_bar lvmohan_red" style="width: 50%;">50%</div>
+            <div class="lvmohan_bar lvmohan_yellow" style="width: 100%;">100%</div>
+        </div>
+    </section>
+
+    <!-- 3. em -->
+    <section class="lvmohan_unit">
+        <h2>3. em（相对单位）</h2>
+        <p class="lvmohan_desc">相对于<strong>当前元素</strong>的 font-size 计算。若用在 font-size 上，则相对其父元素的 font-size。默认 1em = 16px。</p>
+        <code class="lvmohan_code">font-size: 16px; font-size: 1em; font-size: 2em; font-size: 3em;</code>
+        <div class="lvmohan_demo">
+            <p style="font-size: 16px; margin: 4px 0;">父元素 font-size: 16px（基准）</p>
+            <p style="font-size: 1em; margin: 4px 0;">1em = 16px</p>
+            <p style="font-size: 2em; margin: 4px 0;">2em = 32px</p>
+            <p style="font-size: 3em; margin: 4px 0;">3em = 48px</p>
+        </div>
+    </section>
+
+    <!-- 4. rem -->
+    <section class="lvmohan_unit">
+        <h2>4. rem（相对单位）</h2>
+        <p class="lvmohan_desc">相对于<strong>根元素 html</strong> 的 font-size 计算，不受父元素影响，比 em 更易控制。</p>
+        <code class="lvmohan_code">html { font-size: 16px; } /* 1rem = 16px */</code>
+        <div class="lvmohan_demo">
+            <div style="font-size: 10px;">
+                <p style="font-size: 1rem; margin: 4px 0;">外层 font-size: 10px，1rem 仍 = 16px</p>
+                <p style="font-size: 2rem; margin: 4px 0;">2rem = 32px</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. vw / vh 视口单位 -->
+    <section class="lvmohan_unit">
+        <h2>5. vw / vh（视口相对单位）</h2>
+        <p class="lvmohan_desc">vw 相对于浏览器视口宽度（1vw = 视口宽的 1%），vh 相对于视口高度（1vh = 视口高的 1%），常用于大屏展示和响应式页面。</p>
+        <code class="lvmohan_code">width: 25vw; width: 50vw; width: 100vw;</code>
+        <div class="lvmohan_demo">
+            <div class="lvmohan_bar" style="width: 25vw;">25vw</div>
+            <div class="lvmohan_bar lvmohan_red" style="width: 50vw;">50vw</div>
+            <div class="lvmohan_bar lvmohan_yellow" style="width: 100vw;">100vw（横滑出演示区属正常现象）</div>
+        </div>
+    </section>
+
+    <!-- 6. vmin / vmax -->
+    <section class="lvmohan_unit">
+        <h2>6. vmin / vmax（视口相对单位）</h2>
+        <p class="lvmohan_desc">vmin 取视口宽、高中较小值的 1%，vmax 取较大值的 1%。适合书写在横竖屏下都协调的尺寸。</p>
+        <code class="lvmohan_code">width: 20vmin; width: 20vmax;</code>
+        <div class="lvmohan_demo">
+            <div class="lvmohan_bar lvmohan_green" style="width: 20vmin;">20vmin</div>
+            <div class="lvmohan_bar lvmohan_red" style="width: 20vmax;">20vmax</div>
+        </div>
+    </section>
+
+    <!-- 7. 物理单位 -->
+    <section class="lvmohan_unit">
+        <h2>7. cm / mm / in / pt / pc（绝对物理单位）</h2>
+        <p class="lvmohan_desc">与实际物理长度对应：1in = 2.54cm = 96px，1cm ≈ 37.8px，1mm ≈ 3.78px，1pt = 1/72in，1pc = 12pt。多用于打印样式。</p>
+        <code class="lvmohan_code">width: 2cm; width: 5cm; width: 1in;</code>
+        <div class="lvmohan_demo">
+            <div class="lvmohan_bar" style="width: 2cm;">2cm ≈ 75.6px</div>
+            <div class="lvmohan_bar lvmohan_red" style="width: 5cm;">5cm ≈ 189px</div>
+            <div class="lvmohan_bar lvmohan_yellow" style="width: 1in;">1in = 96px</div>
+        </div>
+    </section>
+
+    <!-- 8. ch / ex -->
+    <section class="lvmohan_unit">
+        <h2>8. ch / ex（字体相关相对单位）</h2>
+        <p class="lvmohan_desc">ch 相对于当前字体数字 0 的宽度，ex 相对于字体 x 的高度（x-height），常用于设定与文字排版相关的宽度。</p>
+        <code class="lvmohan_code">width: 10ch; width: 20ch;</code>
+        <div class="lvmohan_demo">
+            <p style="font-family: Consolas, monospace; margin: 4px 0;">
+                <span style="display: inline-block; width: 10ch; border: 1px solid #4285f4;">0000000000</span> 10ch
+            </p>
+            <p style="font-family: Consolas, monospace; margin: 4px 0;">
+                <span style="display: inline-block; width: 20ch; border: 1px solid #ea4335;">00000000000000000000</span> 20ch
+            </p>
+        </div>
+    </section>
+
+    <!-- 总结 -->
+    <section class="lvmohan_unit">
+        <h2>总结</h2>
+        <p class="lvmohan_desc">
+            长度单位分为<strong>绝对单位</strong>（px、cm、mm、in、pt、pc）和<strong>相对单位</strong>（%、em、rem、vw、vh、vmin、vmax、ch、ex）两大类。<br>
+            布局中推荐优先使用相对单位（如 %、rem、vw/vh），有利于实现响应式设计；px 适合边框、阴影等不需要缩放的细节。
+        </p>
+    </section>
+</body>
+</html>

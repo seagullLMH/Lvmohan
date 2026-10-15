@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>119吕墨涵</title>
+    <style>
+        p{
+            font-size: 50px;
+        }
+        /* 第一个盒子 */
+        #box1{
+            width: 400px;
+            height: 200px;
+            background-color: rgb(14, 221, 52);
+        }
+        /* 第二个盒子，颜色不一样 */
+        #box2{
+            width: 400px;
+            height: 200px;
+            background-color: rgb(30, 144, 255);
+        }
+        /* 扩展2 h2黑底白字 */
+        h2{
+            background-color: black;
+            color: white;
+        }
+        /* 扩展3：两个盒子里p全部白字 */
+        #box1 p,#box2 p{
+            color: white;
+        }
+        /* 名字每个字不同颜色 */
+        .n1{
+            color: red;
+        }
+        .n2{
+            color: gold;
+        }
+        .n3{
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <h2>层叠样式表 CSS</h2>
+    <!-- 第一个盒子 绿色 -->
+    <div id="box1">
+        <p>CSS选择器</p>
+        <p><span class="n1">吕</span><span class="n2">墨</span><span class="n3">涵</span></p>
+    </div>
+    <!-- 第二个盒子 蓝色 -->
+    <div id="box2">
+        <p>CSS属性</p>
+    </div>
+</body>
+</html>

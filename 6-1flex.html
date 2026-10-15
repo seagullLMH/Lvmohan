@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        。flex{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .flex li{
+            float: left;
+            border: 1px solid red;
+            width: 50px;
+            list-style: none;
+            line-height: 50px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+        }
+        .flex li:nth-child(1){
+            
+            align-items: center;
+            justify-content: center;
+        }
+        .box{
+            width: 50px;
+            height: 100px;
+            background-color: rgb(243, 237, 237);
+        }.flex li:nth-child(1) .box{
+            background-color: rgb(243, 237, 237);
+        }
+       
+    </style>
+</head>
+<body>
+    <h2>119 吕墨涵</h2>
+    <ul class="flex">
+        <li>
+            <div class="box"></div>
+        </li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+
+</body>
+</html>

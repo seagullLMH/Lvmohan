@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吕墨涵 | Digital Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --ink: #101415; --paper: #e9f1ec; --cyan: #8fffe0; --coral: #ff775c; }
+        * { box-sizing: border-box; }
+        body { margin: 0; color: var(--paper); background: var(--ink); font-family: 'Space Grotesk', sans-serif; }
+        .mono { font-family: 'DM Mono', monospace; }
+        .grid-lines { background-image: linear-gradient(rgba(233,241,236,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(233,241,236,.07) 1px, transparent 1px); background-size: 42px 42px; }
+        .reveal { animation: rise .7s ease both; }
+        .delay-1 { animation-delay: .12s; }
+        .delay-2 { animation-delay: .24s; }
+        @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        .portrait { background: linear-gradient(140deg, rgba(16,20,21,.08), rgba(16,20,21,.65)), url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=85') center/cover; }
+        .link-arrow { transition: transform .2s ease; }
+        a:hover .link-arrow { transform: translate(3px, -3px); }
+    </style>
+</head>
+<body>
+    <main class="grid-lines min-h-screen overflow-hidden">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 sm:px-10 lg:px-14 reveal">
+            <a href="#top" class="mono text-sm tracking-[.2em] text-[var(--cyan)]">LM / 219</a>
+            <div class="flex items-center gap-6 text-xs uppercase tracking-[.18em] text-white/60">
+                <a class="transition hover:text-[var(--cyan)]" href="#about">关于</a>
+                <a class="transition hover:text-[var(--cyan)]" href="#contact">联系</a>
+                <span class="hidden h-2 w-2 rounded-full bg-[var(--coral)] sm:block"></span>
+            </div>
+        </nav>
+
+        <section id="top" class="mx-auto grid max-w-7xl items-end gap-10 px-6 pb-20 pt-12 sm:px-10 sm:pt-24 lg:grid-cols-[1.2fr_.8fr] lg:px-14 lg:pb-28">
+            <div class="reveal delay-1">
+                <p class="mono mb-8 text-xs uppercase tracking-[.22em] text-[var(--coral)]">Independent digital creator</p>
+                <h1 class="max-w-4xl text-6xl font-semibold leading-[.9] tracking-[-.06em] text-[var(--paper)] sm:text-8xl lg:text-[9.5rem]">吕<br><span class="text-[var(--cyan)]">墨涵</span></h1>
+                <div class="mt-10 flex max-w-xl items-start gap-5 border-t border-white/20 pt-5">
+                    <span class="mono text-xs text-white/40">01 / 03</span>
+                    <p class="text-base leading-7 text-white/65 sm:text-lg">用设计、代码和一点点好奇心，把想法变成值得被记住的数字体验。</p>
+                </div>
+            </div>
+            <div class="reveal delay-2 relative lg:pb-4">
+                <div class="portrait relative aspect-[4/5] max-w-sm overflow-hidden border border-white/20 lg:ml-auto">
+                    <div class="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/80 to-transparent p-5 pt-20">
+                        <span class="mono text-[10px] uppercase tracking-[.18em] text-white/70">Visual notes / 2024—25</span>
+                        <span class="text-2xl text-[var(--cyan)]">↗</span>
+                    </div>
+                </div>
+                <p class="mono mt-3 text-right text-[10px] uppercase tracking-[.18em] text-white/35">31° 13′ N / 121° 28′ E</p>
+            </div>
+        </section>
+
+        <section id="about" class="border-y border-white/15 bg-[#17201e]">
+            <div class="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:px-10 lg:grid-cols-[.7fr_1.3fr] lg:px-14 lg:py-20">
+                <div>
+                    <p class="mono text-xs uppercase tracking-[.2em] text-[var(--coral)]">/ selected focus</p>
+                </div>
+                <div class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+                    <div class="border-l border-[var(--cyan)] pl-5"><p class="mono text-xs text-white/40">01</p><h2 class="mt-2 text-xl text-[var(--paper)]">视觉方向</h2><p class="mt-2 text-sm leading-6 text-white/50">让品牌拥有清晰、鲜活的第一印象。</p></div>
+                    <div class="border-l border-[var(--coral)] pl-5"><p class="mono text-xs text-white/40">02</p><h2 class="mt-2 text-xl text-[var(--paper)]">交互体验</h2><p class="mt-2 text-sm leading-6 text-white/50">在细节里找到顺手与惊喜的平衡。</p></div>
+                    <div class="border-l border-white/40 pl-5"><p class="mono text-xs text-white/40">03</p><h2 class="mt-2 text-xl text-[var(--paper)]">持续探索</h2><p class="mt-2 text-sm leading-6 text-white/50">记录灵感，也把灵感落到现实。</p></div>
+                    <div class="flex items-end justify-start sm:justify-end"><span class="mono text-xs text-[var(--cyan)]">BUILD WITH INTENT.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-10 sm:flex-row sm:items-end sm:justify-between sm:px-10 lg:px-14">
+            <div><p class="mono mb-3 text-xs uppercase tracking-[.2em] text-white/40">Start a conversation</p><a href="mailto:hello@example.com" class="group text-2xl text-[var(--paper)] sm:text-3xl">hello@example.com <span class="link-arrow inline-block text-[var(--coral)]">↗</span></a></div>
+            <div class="flex gap-5 text-lg text-white/50"><a href="#" aria-label="Instagram" class="transition hover:text-[var(--cyan)]"><i class="fa fa-instagram"></i></a><a href="#" aria-label="GitHub" class="transition hover:text-[var(--cyan)]"><i class="fa fa-github"></i></a><a href="#" aria-label="Weibo" class="transition hover:text-[var(--cyan)]"><i class="fa fa-weibo"></i></a></div>
+        </footer>
+    </main>
+</body>
+</html>
