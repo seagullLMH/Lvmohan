@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<!--
+    ============================================================
+    课程作业：移动端固定底部导航栏（SVG 版）
+    学号：24005240119   姓名：lvmohan
+    图标来源：font_5244715_6fbx2jueos2/iconfont.js 内联 symbol
+    要点：fixed 固定底部 + flex:1 自适应宽度 + 徽章/红点
+    ============================================================
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="author" content="lvmohan">
+    <meta name="student-id" content="24005240119">
+    <title>移动端底部导航（SVG 版）</title>
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+            background-color: #f5f5f5;
+            color: #333333;
+            line-height: 1.5;
+            /* 预留底部导航高度，避免内容被遮挡 */
+            padding-bottom: calc(56px + env(safe-area-inset-bottom));
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== 页面顶部标题栏（示意内容）===== */
+        .page-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eaeaea;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        /* ===== 页面示意内容区 ===== */
+        .page-body {
+            padding: 16px;
+        }
+
+        .demo-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        .demo-card-dot {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00b96b, #7bd8a8);
+        }
+
+        .demo-card-text {
+            flex: 1;
+        }
+
+        .demo-card-title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .demo-card-desc {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        /* ================================================================
+           移动端固定底部导航：fixed 固定 + flex 自适应宽度
+           ================================================================ */
+        .tabbar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            height: calc(56px + env(safe-area-inset-bottom));
+            padding-bottom: env(safe-area-inset-bottom);
+            background-color: #ffffff;
+            border-top: 1px solid #eaeaea;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        /* 单个导航项：flex:1 平分宽度，自适应任意屏宽 */
+        .tabbar-item {
+            flex: 1 1 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+            height: 100%;
+            font-size: 11px;
+            color: #666666;
+            transition: color 0.2s ease;
+        }
+
+        /* 当前选中项：主题绿色高亮 */
+        .tabbar-item.is-active {
+            color: #00b96b;
+        }
+
+        /* 图标包裹层：徽章/红点相对此层定位 */
+        .tabbar-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 26px;
+            margin-bottom: 2px;
+        }
+
+        /* SVG 图标尺寸；fill 跟随文字颜色（currentColor） */
+        .tabbar-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transition: color 0.2s ease;
+        }
+
+        /* ===== 右上角数字徽章 ===== */
+        .tabbar-badge {
+            position: absolute;
+            top: -6px;
+            left: 100%;
+            transform: translateX(-50%);
+            min-width: 16px;
+            height: 16px;
+            padding: 0 4px;
+            border-radius: 8px;
+            background-color: #f53f3f;
+            border: 1.5px solid #ffffff;
+            color: #ffffff;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 13px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ===== 右上角红点（无数字）===== */
+        .tabbar-dot {
+            position: absolute;
+            top: -2px;
+            left: 100%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #f53f3f;
+            border: 1.5px solid #ffffff;
+        }
+
+        /* 文字标签 */
+        .tabbar-label {
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SVG 雪碧图：内联 symbol 定义（来自 iconfont.js，路径 fill 已移除以支持 currentColor）===== -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" aria-hidden="true">
+        <symbol id="icon-shouye" viewBox="0 0 1024 1024">
+            <path d="M896 1015.36H128v-416h64v352h640v-352h64v416zM968.64 589.12L512 102.08 55.36 589.12 8.64 545.6 512 8.64l503.36 536.96-46.72 43.52z"></path>
+            <path d="M640 887.36h-64v-224h-128v224h-64v-288h256v288zM512 535.36a128 128 0 1 1 128-128 128 128 0 0 1-128 128z m0-192a64 64 0 1 0 64 64 64 64 0 0 0-64-64z"></path>
+        </symbol>
+        <symbol id="icon-sousuo" viewBox="0 0 1024 1024">
+            <path d="M704 448a256 256 0 1 0-256 256V768a320 320 0 1 1 0-640 320 320 0 0 1 0 640v-64a256 256 0 0 0 256-256z"></path>
+            <path d="M617.386667 660.053333a32 32 0 0 1 45.226666 0l149.333334 149.333334a32 32 0 1 1-45.226667 45.226666l-149.333333-149.333333a32 32 0 0 1 0-45.226667z"></path>
+        </symbol>
+        <symbol id="icon-shoucang" viewBox="0 0 1024 1024">
+            <path d="M832.8 63.9H191.2c-17.8 0-32.3 14.5-32.3 32.3V878c0 23.3 23.9 38.9 45.3 29.6L489.8 782l331.4 128.4c21.2 8.2 44-7.4 44-30.1V96.2c-0.1-17.9-14.5-32.3-32.4-32.3z"></path>
+        </symbol>
+        <symbol id="icon-gengduo" viewBox="0 0 1024 1024">
+            <path d="M298.666667 469.333333V405.333333h106.666666V298.666667A106.666667 106.666667 0 1 0 298.666667 405.333333V469.333333a170.666667 170.666667 0 1 1 170.666666-170.666666v128a42.666667 42.666667 0 0 1-42.666666 42.666666H298.666667zM725.333333 469.333333V405.333333h-106.666666V298.666667A106.666667 106.666667 0 1 1 725.333333 405.333333V469.333333a170.666667 170.666667 0 1 0-170.666666-170.666666v128a42.666667 42.666667 0 0 0 42.666666 42.666666h128zM725.333333 554.666667v64h-106.666666V725.333333a106.666667 106.666667 0 1 0 106.666666-106.666666V554.666667a170.666667 170.666667 0 1 1-170.666666 170.666666v-128a42.666667 42.666667 0 0 1 42.666666-42.666666h128zM298.666667 554.666667v64h106.666666V725.333333A106.666667 106.666667 0 1 1 298.666667 618.666667V554.666667a170.666667 170.666667 0 1 0 170.666666 170.666666v-128a42.666667 42.666667 0 0 0-42.666666-42.666666H298.666667z"></path>
+        </symbol>
+    </svg>
+
+    <!-- ===== 页面顶部标题（示意）===== -->
+    <header class="page-header">底部导航演示 · SVG 版</header>
+
+    <!-- ===== 页面示意内容：滚动查看固定效果 ===== -->
+    <main class="page-body">
+        <div class="demo-card">
+            <span class="demo-card-dot"></span>
+            <div class="demo-card-text">
+                <p class="demo-card-title">首页 · 红点提示</p>
+                <p class="demo-card-desc">向下滚动页面，导航栏始终固定在底部</p>
+            </div>
+        </div>
+        <div class="demo-card">
+            <span class="demo-card-dot"></span>
+            <div class="demo-card-text">
+                <p class="demo-card-title">收藏 · 数字徽章</p>
+                <p class="demo-card-desc">图标右上角显示红色数字徽章</p>
+            </div>
+        </div>
+        <div class="demo-card">
+            <span class="demo-card-dot"></span>
+            <div class="demo-card-text">
+                <p class="demo-card-title">自适应宽度</p>
+                <p class="demo-card-desc">4 个导航项 flex:1 平分，适配不同屏宽</p>
+            </div>
+        </div>
+        <div class="demo-card">
+            <span class="demo-card-dot"></span>
+            <div class="demo-card-text">
+                <p class="demo-card-title">更多 · 徽章 + 红点</p>
+                <p class="demo-card-desc">99+ 超出上限时显示省略数字</p>
+            </div>
+        </div>
+        <div class="demo-card">
+            <span class="demo-card-dot"></span>
+            <div class="demo-card-text">
+                <p class="demo-card-title">安全区适配</p>
+                <p class="demo-card-desc">使用 env(safe-area-inset-bottom) 适配刘海屏</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== 移动端固定底部导航：SVG 实现 ===== -->
+    <nav class="tabbar">
+        <!-- 首页：红点提示 -->
+        <a href="#" class="tabbar-item is-active">
+            <span class="tabbar-icon">
+                <svg aria-hidden="true"><use href="#icon-shouye"></use></svg>
+                <span class="tabbar-dot"></span>
+            </span>
+            <span class="tabbar-label">首页</span>
+        </a>
+
+        <!-- 搜索：无提示 -->
+        <a href="#" class="tabbar-item">
+            <span class="tabbar-icon">
+                <svg aria-hidden="true"><use href="#icon-sousuo"></use></svg>
+            </span>
+            <span class="tabbar-label">搜索</span>
+        </a>
+
+        <!-- 收藏：数字徽章 -->
+        <a href="#" class="tabbar-item">
+            <span class="tabbar-icon">
+                <svg aria-hidden="true"><use href="#icon-shoucang"></use></svg>
+                <em class="tabbar-badge">12</em>
+            </span>
+            <span class="tabbar-label">收藏</span>
+        </a>
+
+        <!-- 更多：99+ 徽章 -->
+        <a href="#" class="tabbar-item">
+            <span class="tabbar-icon">
+                <svg aria-hidden="true"><use href="#icon-gengduo"></use></svg>
+                <em class="tabbar-badge">99+</em>
+            </span>
+            <span class="tabbar-label">更多</span>
+        </a>
+    </nav>
+
+</body>
+</html>

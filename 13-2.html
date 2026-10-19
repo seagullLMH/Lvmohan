@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucide SVG 图标</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; padding: 40px; }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; }
+        .lvmohan_sub { text-align: center; color: #666; margin-bottom: 40px; }
+        .lvmohan_grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .lvmohan_card { background: #fff; border-radius: 12px; padding: 30px 15px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.08); transition: transform .2s; }
+        .lvmohan_card:hover { transform: translateY(-5px); }
+        .lvmohan_card svg { width: 36px; height: 36px; color: #4a90d9; display: block; margin: 0 auto 12px; }
+        .lvmohan_name { font-size: 13px; color: #666; }
+        .lvmohan_code { font-size: 11px; color: #999; margin-top: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Lucide SVG 图标示例</h1>
+    <p class="lvmohan_sub">使用 SVG 方式渲染图标</p>
+    <div class="lvmohan_grid">
+        <div class="lvmohan_card"><i data-lucide="house"></i><div class="lvmohan_name">首页</div><div class="lvmohan_code">house</div></div>
+        <div class="lvmohan_card"><i data-lucide="user"></i><div class="lvmohan_name">用户</div><div class="lvmohan_code">user</div></div>
+        <div class="lvmohan_card"><i data-lucide="mail"></i><div class="lvmohan_name">邮件</div><div class="lvmohan_code">mail</div></div>
+        <div class="lvmohan_card"><i data-lucide="search"></i><div class="lvmohan_name">搜索</div><div class="lvmohan_code">search</div></div>
+        <div class="lvmohan_card"><i data-lucide="settings"></i><div class="lvmohan_name">设置</div><div class="lvmohan_code">settings</div></div>
+        <div class="lvmohan_card"><i data-lucide="heart"></i><div class="lvmohan_name">收藏</div><div class="lvmohan_code">heart</div></div>
+        <div class="lvmohan_card"><i data-lucide="star"></i><div class="lvmohan_name">星标</div><div class="lvmohan_code">star</div></div>
+        <div class="lvmohan_card"><i data-lucide="camera"></i><div class="lvmohan_name">相机</div><div class="lvmohan_code">camera</div></div>
+        <div class="lvmohan_card"><i data-lucide="music"></i><div class="lvmohan_name">音乐</div><div class="lvmohan_code">music</div></div>
+        <div class="lvmohan_card"><i data-lucide="map-pin"></i><div class="lvmohan_name">位置</div><div class="lvmohan_code">map-pin</div></div>
+        <div class="lvmohan_card"><i data-lucide="phone"></i><div class="lvmohan_name">电话</div><div class="lvmohan_code">phone</div></div>
+        <div class="lvmohan_card"><i data-lucide="trash-2"></i><div class="lvmohan_name">删除</div><div class="lvmohan_code">trash-2</div></div>
+        <div class="lvmohan_card"><i data-lucide="pencil"></i><div class="lvmohan_name">编辑</div><div class="lvmohan_code">pencil</div></div>
+        <div class="lvmohan_card"><i data-lucide="download"></i><div class="lvmohan_name">下载</div><div class="lvmohan_code">download</div></div>
+        <div class="lvmohan_card"><i data-lucide="share-2"></i><div class="lvmohan_name">分享</div><div class="lvmohan_code">share-2</div></div>
+        <div class="lvmohan_card"><i data-lucide="lock"></i><div class="lvmohan_name">锁定</div><div class="lvmohan_code">lock</div></div>
+        <div class="lvmohan_card"><i data-lucide="unlock"></i><div class="lvmohan_name">解锁</div><div class="lvmohan_code">unlock</div></div>
+        <div class="lvmohan_card"><i data-lucide="check"></i><div class="lvmohan_name">完成</div><div class="lvmohan_code">check</div></div>
+        <div class="lvmohan_card"><i data-lucide="x"></i><div class="lvmohan_name">关闭</div><div class="lvmohan_code">x</div></div>
+        <div class="lvmohan_card"><i data-lucide="plus"></i><div class="lvmohan_name">添加</div><div class="lvmohan_code">plus</div></div>
+        <div class="lvmohan_card"><i data-lucide="minus"></i><div class="lvmohan_name">减少</div><div class="lvmohan_code">minus</div></div>
+        <div class="lvmohan_card"><i data-lucide="arrow-up"></i><div class="lvmohan_name">向上</div><div class="lvmohan_code">arrow-up</div></div>
+        <div class="lvmohan_card"><i data-lucide="arrow-down"></i><div class="lvmohan_name">向下</div><div class="lvmohan_code">arrow-down</div></div>
+        <div class="lvmohan_card"><i data-lucide="refresh-cw"></i><div class="lvmohan_name">刷新</div><div class="lvmohan_code">refresh-cw</div></div>
+    </div>
+
+    <script src="cdn/lucide.min.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
