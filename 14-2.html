@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--
+    姓名：吕墨涵
+    日期：2026-10-22
+    功能名称：JavaScript 基本数据类型演示
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 基本数据类型 - 吕墨涵</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #e0e0e0;
+        }
+        .lmh_container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .lmh_header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .lmh_header h1 {
+            font-size: 28px;
+            color: #00d4ff;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+        .lmh_header p {
+            color: #8892b0;
+            font-size: 14px;
+        }
+        .lmh_home_link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 16px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 20px;
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        .lmh_home_link:hover {
+            background: rgba(0, 212, 255, 0.25);
+        }
+        .lmh_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .lmh_card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .lmh_card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+            border-color: #00d4ff;
+        }
+        .lmh_card_header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .lmh_badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .lmh_badge_string { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+        .lmh_badge_number { background: linear-gradient(135deg, #51cf66, #40c057); }
+        .lmh_badge_boolean { background: linear-gradient(135deg, #ffd43b, #fab005); }
+        .lmh_badge_null { background: linear-gradient(135deg, #845ef7, #7950f2); }
+        .lmh_badge_undefined { background: linear-gradient(135deg, #ff922b, #f76707); }
+        .lmh_badge_object { background: linear-gradient(135deg, #339af0, #228be6); }
+        .lmh_card_title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+        .lmh_card_desc {
+            font-size: 13px;
+            color: #8892b0;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .lmh_code_block {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            overflow-x: auto;
+        }
+        .lmh_code_line {
+            color: #c9d1d9;
+        }
+        .lmh_code_keyword {
+            color: #ff7b72;
+        }
+        .lmh_code_string {
+            color: #a5d6ff;
+        }
+        .lmh_code_comment {
+            color: #6e7681;
+        }
+        .lmh_code_equals {
+            color: #ffd43b;
+        }
+        .lmh_output {
+            margin-top: 14px;
+            padding: 10px 12px;
+            background: rgba(0, 212, 255, 0.08);
+            border-left: 3px solid #00d4ff;
+            border-radius: 0 6px 6px 0;
+            font-size: 12px;
+            font-family: "Consolas", monospace;
+        }
+        .lmh_output_label {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        .lmh_output_value {
+            color: #7ee787;
+        }
+        .lmh_output_type {
+            color: #e3b341;
+            font-style: italic;
+        }
+        .lmh_typeof_row {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            font-size: 11px;
+            color: #8b949e;
+        }
+        .lmh_footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #484f58;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="lmh_container">
+        <header class="lmh_header">
+            <h1>JavaScript 6 种基本数据类型</h1>
+            <p>String · Number · Boolean · Null · Undefined · Object</p>
+            <a href="13/index.html" class="lmh_home_link">← 返回首页</a>
+        </header>
+
+        <div class="lmh_grid">
+
+            <div class="lmh_card">
+                <div class="lmh_card_header">
+                    <span class="lmh_badge lmh_badge_string">S</span>
+                    <span class="lmh_card_title">String 字符串</span>
+                </div>
+                <p class="lmh_card_desc">用引号包裹的文本内容，支持单引号、双引号和模板字符串。</p>
+                <div class="lmh_code_block">
+                    <div class="lmh_code_line"><span class="lmh_code_keyword">var</span> lmh_str <span class="lmh_code_equals">=</span> <span class="lmh_code_string">'你好，JavaScript!'</span>;</div>
+                </div>
+                <div class="lmh_output" id="lmh_output_string"></div>
+            </div>
+
+            <div class="lmh_card">
+                <div class="lmh_card_header">
+                    <span class="lmh_badge lmh_badge_number">N</span>
+                    <span class="lmh_card_title">Number 数字</span>
+                </div>
+                <p class="lmh_card_desc">整数、浮点数、科学计数法，还包括 Infinity 和 NaN。</p>
+                <div class="lmh_code_block">
+                    <div class="lmh_code_line"><span class="lmh_code_keyword">var</span> lmh_num <span class="lmh_code_equals">=</span> <span>3.14</span>;</div>
+                </div>
+                <div class="lmh_output" id="lmh_output_number"></div>
+            </div>
+
+            <div class="lmh_card">
+                <div class="lmh_card_header">
+                    <span class="lmh_badge lmh_badge_boolean">B</span>
+                    <span class="lmh_card_title">Boolean 布尔</span>
+                </div>
+                <p class="lmh_card_desc">只有两个值：true 和 false，常用于条件判断。</p>
+                <div class="lmh_code_block">
+                    <div class="lmh_code_line"><span class="lmh_code_keyword">var</span> lmh_flag <span class="lmh_code_equals">=</span> <span>true</span>;</div>
+                </div>
+                <div class="lmh_output" id="lmh_output_boolean"></div>
+            </div>
+
+            <div class="lmh_card">
+                <div class="lmh_card_header">
+                    <span class="lmh_badge lmh_badge_null">∅</span>
+                    <span class="lmh_card_title">Null 空值</span>
+                </div>
+                <p class="lmh_card_desc">表示"无值"或"空对象引用"，注意 typeof null 返回 "object"（历史遗留 bug）。</p>
+                <div class="lmh_code_block">
+                    <div class="lmh_code_line"><span class="lmh_code_keyword">var</span> lmh_empty <span class="lmh_code_equals">=</span> <span>null</span>;</div>
+                </div>
+                <div class="lmh_output" id="lmh_output_null"></div>
+            </div>
+
+            <div class="lmh_card">
+                <div class="lmh_card_header">
+                    <span class="lmh_badge lmh_badge_undefined">U</span>
+                    <span class="lmh_card_title">Undefined 未定义</span>
+                </div>
+                <p class="lmh_card_desc">变量声明后未赋值、访问不存在的属性、函数无返回值时出现。</p>
+                <div class="lmh_code_block">
+                    <div class="lmh_code_line"><span class="lmh_code_keyword">var</span> lmh_x;</div>
+                </div>
+                <div class="lmh_output" id="lmh_output_undefined"></div>
+            </div>
+
+            <div class="lmh_card">
+                <div class="lmh_card_header">
+                    <span class="lmh_badge lmh_badge_object">O</span>
+                    <span class="lmh_card_title">Object 对象</span>
+                </div>
+                <p class="lmh_card_desc">键值对的集合，数组、函数、Date 等本质上都是 Object。</p>
+                <div class="lmh_code_block">
+                    <div class="lmh_code_line"><span class="lmh_code_keyword">var</span> lmh_obj <span class="lmh_code_equals">=</span> { name: <span class="lmh_code_string">'吕墨涵'</span>, age: <span>19</span> };</div>
+                </div>
+                <div class="lmh_output" id="lmh_output_object"></div>
+            </div>
+
+        </div>
+
+        <footer class="lmh_footer">
+            <p>吕墨涵 119 · JavaScript 数据类型演示 · 2026-10-22</p>
+        </footer>
+    </div>
+
+    <script>
+        var lmh_str = '你好，JavaScript!';
+        var lmh_num = 3.14;
+        var lmh_flag = true;
+        var lmh_empty = null;
+        var lmh_x;
+        var lmh_obj = { name: '吕墨涵', age: 19 };
+
+        function lmh_renderOutput(lmh_id, lmh_value) {
+            var lmh_el = document.getElementById(lmh_id);
+            var lmh_type = typeof lmh_value;
+            var lmh_display = (lmh_value === null) ? 'null' :
+                              (lmh_type === 'object') ? JSON.stringify(lmh_value) :
+                              (lmh_type === 'string') ? '"' + lmh_value + '"' :
+                              String(lmh_value);
+            lmh_el.innerHTML =
+                '<div><span class="lmh_output_label">值：</span><span class="lmh_output_value">' + lmh_display + '</span></div>' +
+                '<div class="lmh_typeof_row">typeof → <span class="lmh_output_type">"' + lmh_type + '"</span></div>';
+        }
+
+        lmh_renderOutput('lmh_output_string', lmh_str);
+        lmh_renderOutput('lmh_output_number', lmh_num);
+        lmh_renderOutput('lmh_output_boolean', lmh_flag);
+        lmh_renderOutput('lmh_output_null', lmh_empty);
+        lmh_renderOutput('lmh_output_undefined', lmh_x);
+        lmh_renderOutput('lmh_output_object', lmh_obj);
+
+        console.log('=== JavaScript 6 种基本数据类型 ===');
+        console.log('String:', lmh_str, typeof lmh_str);
+        console.log('Number:', lmh_num, typeof lmh_num);
+        console.log('Boolean:', lmh_flag, typeof lmh_flag);
+        console.log('Null:', lmh_empty, typeof lmh_empty);
+        console.log('Undefined:', lmh_x, typeof lmh_x);
+        console.log('Object:', lmh_obj, typeof lmh_obj);
+    </script>
+</body>
+</html>
