@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<!--
+    姓名：吕墨涵
+    日期：2026-10-22
+    功能名称：媒体查询网格布局
+-->
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>媒体查询网格布局</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			min-width: 320px;
+			min-height: 100vh;
+			margin: 0;
+			background: #f2f4ef;
+			color: #26332c;
+			font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+		}
+
+		.lmh_page {
+			width: min(100% - 32px, 1100px);
+			margin: 0 auto;
+			padding: 32px 0;
+		}
+
+		h1 {
+			margin: 0 0 24px;
+			font-size: 28px;
+		}
+
+		.lmh_grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.lmh_box {
+			aspect-ratio: 4 / 3;
+			display: grid;
+			place-items: center;
+			border-radius: 8px;
+			color: #fff;
+			font-size: 24px;
+			font-weight: 700;
+		}
+
+		.lmh_box:nth-child(4n + 1) { background: #d45d45; }
+		.lmh_box:nth-child(4n + 2) { background: #397b72; }
+		.lmh_box:nth-child(4n + 3) { background: #5579a5; }
+		.lmh_box:nth-child(4n) { background: #c18b35; }
+
+		@media (min-width: 600px) {
+			.lmh_grid {
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 16px;
+			}
+		}
+
+		@media (min-width: 1000px) {
+			.lmh_grid {
+				grid-template-columns: repeat(8, minmax(0, 1fr));
+				gap: 12px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="lmh_page">
+		<h1>吕墨涵 · 响应式盒子</h1>
+		<section class="lmh_grid" aria-label="八个响应式盒子">
+			<div class="lmh_box">1</div>
+			<div class="lmh_box">2</div>
+			<div class="lmh_box">3</div>
+			<div class="lmh_box">4</div>
+			<div class="lmh_box">5</div>
+			<div class="lmh_box">6</div>
+			<div class="lmh_box">7</div>
+			<div class="lmh_box">8</div>
+		</section>
+	</main>
+</body>
+</html>

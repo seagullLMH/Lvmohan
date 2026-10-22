@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<!--
+    姓名：吕墨涵
+    日期：2026-10-22
+    功能名称：吕墨涵的运动相册
+-->
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>吕墨涵的运动相册</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			min-height: 100vh;
+			margin: 0;
+			background: #f2f5f0;
+			color: #202d28;
+			font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+		}
+
+		.lmh_page {
+			width: min(100% - 40px, 960px);
+			margin: 0 auto;
+			padding: 38px 0 48px;
+		}
+
+		.lmh_page_header {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			gap: 20px;
+			margin-bottom: 24px;
+		}
+
+		.lmh_eyebrow {
+			margin: 0 0 8px;
+			color: #d05236;
+			font-size: 13px;
+			font-weight: 700;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 36px;
+			line-height: 1.2;
+		}
+
+		.lmh_edition {
+			margin: 0 0 4px;
+			color: #68756f;
+			font-size: 14px;
+		}
+
+		.lmh_slideshow {
+			position: relative;
+			height: 580px;
+			overflow: hidden;
+			border: 1px solid #d8e0d9;
+			border-radius: 14px;
+			background: #fff;
+			box-shadow: 0 18px 48px rgb(35 54 44 / 10%);
+		}
+
+		.lmh_slide {
+			position: absolute;
+			inset: 0;
+			display: grid;
+			grid-template-rows: minmax(0, 1fr) auto;
+			margin: 0;
+			opacity: 0;
+			visibility: hidden;
+			animation: show-slide 12s linear infinite;
+		}
+
+		.lmh_slide:nth-child(2) {
+			animation-delay: -8s;
+		}
+
+		.lmh_slide:nth-child(3) {
+			animation-delay: -4s;
+		}
+
+		.lmh_slide img {
+			width: 100%;
+			height: 100%;
+			min-height: 0;
+			object-fit: cover;
+		}
+
+		.lmh_caption {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			padding: 18px 24px;
+			background: #fff;
+		}
+
+		.lmh_caption h2 {
+			margin: 0 0 5px;
+			font-size: 21px;
+		}
+
+		.lmh_caption p {
+			margin: 0;
+			color: #68756f;
+			font-size: 14px;
+		}
+
+		.lmh_number {
+			flex: none;
+			color: #d05236;
+			font-size: 14px;
+			font-weight: 700;
+			font-variant-numeric: tabular-nums;
+		}
+
+		@keyframes show-slide {
+			0%, 30% {
+				opacity: 1;
+				visibility: visible;
+			}
+			34%, 100% {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+
+		@media (max-width: 600px) {
+			.lmh_page {
+				width: min(100% - 28px, 960px);
+				padding-top: 26px;
+			}
+
+			.lmh_page_header {
+				align-items: start;
+			}
+
+			h1 {
+				font-size: 30px;
+			}
+
+			.lmh_edition {
+				font-size: 12px;
+			}
+
+			.lmh_slideshow {
+				height: 470px;
+			}
+
+			.lmh_caption {
+				padding: 16px;
+			}
+
+			.lmh_caption h2 {
+				font-size: 18px;
+			}
+
+			.lmh_caption p {
+				font-size: 13px;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.lmh_slide {
+				animation: none;
+			}
+
+			.lmh_slide:not(:first-child) {
+				display: none;
+			}
+
+			.lmh_slide:first-child {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="lmh_page">
+		<header class="lmh_page_header">
+			<div>
+				<p class="lmh_eyebrow">活力 · 成长 · 瞬间</p>
+				<h1>吕墨涵</h1>
+			</div>
+			<p class="lmh_edition">运动相册　/　2026</p>
+		</header>
+
+		<section class="lmh_slideshow" aria-label="吕墨涵的运动相册">
+			<figure class="lmh_slide">
+				<img src="../9/img/1.jpg" alt="孩子们在绿茵场上练习足球">
+				<figcaption class="lmh_caption">
+					<div>
+						<h2>绿茵场上的小球员</h2>
+						<p>迎着阳光，向着足球奔跑。</p>
+					</div>
+					<span class="lmh_number">01 / 03</span>
+				</figcaption>
+			</figure>
+
+			<figure class="lmh_slide">
+				<img src="../9/img/2.jpg" alt="一群孩子在操场上进行足球训练">
+				<figcaption class="lmh_caption">
+					<div>
+						<h2>一起练习，一起进步</h2>
+						<p>操场上的每一次奔跑，都是新的尝试。</p>
+					</div>
+					<span class="lmh_number">02 / 03</span>
+				</figcaption>
+			</figure>
+
+			<figure class="lmh_slide">
+				<img src="../9/img/3.jpg" alt="孩子们在操场上参加跳绳活动">
+				<figcaption class="lmh_caption">
+					<div>
+						<h2>跳出轻快的节奏</h2>
+						<p>和伙伴们一起，享受运动的快乐。</p>
+					</div>
+					<span class="lmh_number">03 / 03</span>
+				</figcaption>
+			</figure>
+		</section>
+	</main>
+</body>
+</html>
