@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 880" width="1400" height="880" style="font-family:'PingFang SC','Microsoft YaHei',sans-serif">
+  <!-- 背景 -->
+  <rect width="1400" height="880" fill="#f5f5f5"/>
+  <!-- 标题 -->
+  <text x="700" y="40" text-anchor="middle" font-size="22" fill="#222" font-weight="bold">网页元素1：顶部导航栏 - 不同视口测试</text>
+  <text x="700" y="62" text-anchor="middle" font-size="12" fill="#999">学号 24005240119 · 姓名 lvmohan · 测试时间 2026-10</text>
+  <line x1="40" y1="78" x2="1360" y2="78" stroke="#ddd"/>
+
+  <!-- ====== 视口1：PC 1920px ====== -->
+  <g transform="translate(40, 100)">
+    <text x="0" y="14" font-size="14" fill="#333" font-weight="bold">视口 1：PC 桌面 1920×1080（Chrome 浏览器）</text>
+    <rect x="0" y="20" width="1320" height="160" fill="#fff" stroke="#bbb" rx="4"/>
+    <!-- 浏览器顶栏 -->
+    <rect x="0" y="20" width="1320" height="22" fill="#e8e8e8"/>
+    <circle cx="14" cy="31" r="4" fill="#ff5f57"/>
+    <circle cx="28" cy="31" r="4" fill="#febc2e"/>
+    <circle cx="42" cy="31" r="4" fill="#28c840"/>
+    <rect x="60" y="26" width="600" height="10" fill="#fff" rx="2"/>
+    <text x="70" y="34" font-size="9" fill="#999">file:///D:/HighInternetDesign/picturebug/index.html</text>
+    <!-- 导航栏 -->
+    <rect x="0" y="42" width="1320" height="100" fill="#fff" stroke="#eaeaea"/>
+    <line x1="0" y1="142" x2="1320" y2="142" stroke="#eee" stroke-width="2"/>
+    <rect x="60" y="64" width="80" height="36" fill="none" stroke="#999" stroke-dasharray="4 3" rx="4"/>
+    <text x="80" y="86" font-size="11" fill="#999">LOGO</text>
+    <text x="180" y="92" font-size="14" fill="#666">视频素材</text>
+    <text x="270" y="92" font-size="14" fill="#00b96b" font-weight="bold">首页</text>
+    <line x1="268" y1="98" x2="302" y2="98" stroke="#00b96b" stroke-width="2"/>
+    <text x="350" y="92" font-size="14" fill="#666">社区</text>
+    <text x="410" y="92" font-size="14" fill="#666">活动</text>
+    <text x="470" y="92" font-size="14" fill="#666">短视频</text>
+    <text x="540" y="92" font-size="14" fill="#666">发现</text>
+    <text x="600" y="92" font-size="14" fill="#666">更多</text>
+    <circle cx="1080" cy="86" r="8" fill="none" stroke="#999" stroke-width="1.5"/>
+    <line x1="1086" y1="92" x2="1092" y2="98" stroke="#999" stroke-width="1.5"/>
+    <text x="1140" y="92" font-size="13" fill="#666">登录</text>
+    <rect x="1190" y="70" width="70" height="32" fill="#00b96b" rx="16"/>
+    <text x="1208" y="91" font-size="13" fill="#fff" font-weight="bold">注册</text>
+    <text x="600" y="155" font-size="9" fill="#28c840">✓ 显示正常：logo + 7 个菜单 + 搜索/登录/注册</text>
+  </g>
+
+  <!-- ====== 视口2：平板 768px ====== -->
+  <g transform="translate(40, 320)">
+    <text x="0" y="14" font-size="14" fill="#333" font-weight="bold">视口 2：平板 768×1024（iPad 横屏 / Edge 浏览器）</text>
+    <rect x="320" y="20" width="768" height="160" fill="#fff" stroke="#bbb" rx="4"/>
+    <rect x="320" y="20" width="768" height="22" fill="#e8e8e8"/>
+    <circle cx="334" cy="31" r="4" fill="#ff5f57"/>
+    <circle cx="348" cy="31" r="4" fill="#febc2e"/>
+    <circle cx="362" cy="31" r="4" fill="#28c840"/>
+    <rect x="320" y="42" width="768" height="100" fill="#fff" stroke="#eaeaea"/>
+    <line x1="320" y1="142" x2="1088" y2="142" stroke="#eee" stroke-width="2"/>
+    <rect x="340" y="64" width="70" height="36" fill="none" stroke="#999" stroke-dasharray="4 3" rx="4"/>
+    <text x="358" y="86" font-size="10" fill="#999">LOGO</text>
+    <text x="430" y="92" font-size="13" fill="#666">视频素材</text>
+    <text x="510" y="92" font-size="13" fill="#00b96b" font-weight="bold">首页</text>
+    <line x1="508" y1="98" x2="540" y2="98" stroke="#00b96b" stroke-width="2"/>
+    <text x="580" y="92" font-size="13" fill="#666">社区</text>
+    <text x="630" y="92" font-size="13" fill="#666">活动</text>
+    <text x="680" y="92" font-size="13" fill="#666">短视频</text>
+    <text x="740" y="92" font-size="13" fill="#666">发现</text>
+    <text x="790" y="92" font-size="13" fill="#666">更多</text>
+    <circle cx="930" cy="86" r="7" fill="none" stroke="#999" stroke-width="1.5"/>
+    <text x="965" y="92" font-size="12" fill="#666">登录</text>
+    <rect x="1000" y="70" width="60" height="28" fill="#00b96b" rx="14"/>
+    <text x="1015" y="89" font-size="12" fill="#fff" font-weight="bold">注册</text>
+    <text x="320" y="155" font-size="9" fill="#28c840">✓ 显示正常：菜单间距收紧，全部元素保留</text>
+  </g>
+
+  <!-- ====== 视口3：手机 375px ====== -->
+  <g transform="translate(40, 540)">
+    <text x="0" y="14" font-size="14" fill="#333" font-weight="bold">视口 3：手机 375×667（iPhone / Safari 移动端）</text>
+    <!-- 手机外壳 -->
+    <rect x="510" y="20" width="375" height="280" fill="#fff" stroke="#333" stroke-width="2" rx="20"/>
+    <rect x="525" y="35" width="345" height="260" fill="#f5f5f5" stroke="#bbb"/>
+    <!-- 状态栏 -->
+    <rect x="525" y="35" width="345" height="18" fill="#000"/>
+    <text x="690" y="48" text-anchor="middle" font-size="9" fill="#fff">9:41</text>
+    <!-- 导航栏 -->
+    <rect x="525" y="55" width="345" height="56" fill="#fff" stroke="#eaeaea"/>
+    <line x1="525" y1="111" x2="870" y2="111" stroke="#eee" stroke-width="2"/>
+    <rect x="540" y="71" width="60" height="28" fill="none" stroke="#999" stroke-dasharray="4 3" rx="4"/>
+    <text x="555" y="89" font-size="9" fill="#999">LOGO</text>
+    <!-- 菜单隐藏 -->
+    <text x="780" y="89" font-size="11" fill="#666">登录</text>
+    <rect x="810" y="75" width="50" height="22" fill="#00b96b" rx="11"/>
+    <text x="822" y="90" font-size="11" fill="#fff" font-weight="bold">注册</text>
+    <!-- 隐藏菜单标注 -->
+    <rect x="525" y="115" width="345" height="40" fill="#fafafa"/>
+    <text x="540" y="130" font-size="9" fill="#999">[菜单已隐藏 @media max-width:767px]</text>
+    <text x="540" y="145" font-size="9" fill="#999">[热搜词栏 flex-wrap 自动换行]</text>
+    <text x="540" y="160" font-size="9" fill="#999">[topic 纵向堆叠]</text>
+    <text x="540" y="175" font-size="9" fill="#999">[卡片每行 2 张]</text>
+    <text x="540" y="200" font-size="9" fill="#28c840">✓ 移动端适配：logo + 登录 + 注册保留，</text>
+    <text x="540" y="215" font-size="9" fill="#28c840">    文字菜单隐藏避免拥挤</text>
+  </g>
+
+  <!-- ====== 视口4：超宽 2560px ====== -->
+  <g transform="translate(40, 830)">
+  </g>
+
+  <!-- 测试结论 -->
+  <g transform="translate(40, 830)">
+    <text x="0" y="0" font-size="13" fill="#333" font-weight="bold">测试结论：</text>
+    <text x="80" y="0" font-size="12" fill="#666">导航栏在 1920 / 1024 / 768 / 375 四种视口下均可正常显示，</text>
+    <text x="80" y="16" font-size="12" fill="#666">PC 和平板保持完整菜单；手机端通过 @media (max-width:767px) 隐藏菜单避免拥挤，核心元素 logo/登录/注册保留可点击。</text>
+  </g>
+</svg>

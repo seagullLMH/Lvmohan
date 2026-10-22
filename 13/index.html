@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+    ============================================================
+    课程作业：摄影作品展示静态首页
+    学号：24005240119   姓名：lvmohan
+    类名标识：lmh-nav / lmh-action-login / lmh-card
+    布局：纯 flex，无 id 选择器，全局 css/style.css
+    ============================================================
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="lvmohan">
+    <meta name="student-id" content="24005240119">
+    <title>摄影作品展示</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <!-- ===== 模块3：顶部网站主导航栏（静态导航，纯文字，无下拉效果）===== -->
+    <header class="header">
+        <nav class="nav lmh-nav">
+            <!-- Logo 占位图 -->
+            <a href="#" class="nav-logo">
+                <img src="./images/logo.png" alt="摄影作品展示" class="nav-logo-img">
+            </a>
+
+            <!-- 导航菜单：仅文字，无 hover 弹出 -->
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link">视频素材</a></li>
+                <li class="nav-item"><a href="#" class="nav-link nav-link-active">首页</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">社区</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">活动</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">短视频</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">发现</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">更多</a></li>
+            </ul>
+
+            <!-- 右侧功能图标 + 登录注册（本地 png 占位） -->
+            <ul class="nav-actions">
+                <li class="nav-action">
+                    <img src="./images/icon-search.png" alt="搜索" class="nav-icon">
+                </li>
+                <li class="nav-action lmh-action-login">
+                    <a href="#" class="nav-login">登录</a>
+                </li>
+                <li class="nav-action">
+                    <a href="#" class="nav-register">注册</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main">
+
+        <!-- ===== 热搜词栏：紧贴导航下方，横向标签流 ===== -->
+        <section class="hotsearch">
+            <span class="hotsearch-label">热搜词：</span>
+            <ul class="hotsearch-list">
+                <li class="hotsearch-item"><a href="#">风景</a></li>
+                <li class="hotsearch-item"><a href="#">水果</a></li>
+                <li class="hotsearch-item"><a href="#">萌宠</a></li>
+                <li class="hotsearch-item"><a href="#">科技</a></li>
+                <li class="hotsearch-item"><a href="#">壁纸</a></li>
+            </ul>
+        </section>
+
+        <!-- ===== 模块2：左图右文摄影专题推荐区块 ===== -->
+        <section class="topic">
+            <!-- 左侧：大摄影图片 -->
+            <img src="./images/topic.png" alt="专题封面" class="topic-image">
+
+            <!-- 右侧：标题 + 描述文字 -->
+            <article class="topic-body">
+                <span class="topic-tag">专题推荐</span>
+                <h3 class="topic-title">城市光影：记录都市的呼吸与脉搏</h3>
+                <p class="topic-desc">
+                    本专题汇集了来自全国各地摄影师的城市风光作品，从清晨的第一缕阳光到深夜的霓虹灯海，用镜头捕捉城市最动人的瞬间。每一张照片都是一个故事，每一帧画面都承载着摄影师对这座城市的独特理解。
+                </p>
+                <p class="topic-meta">收录作品 1280 张 · 参与摄影师 456 位</p>
+            </article>
+        </section>
+
+        <!-- ===== 模块1：上图下文摄影作品卡片列表（横向排列）===== -->
+        <section class="works">
+            <div class="works-head">
+                <h3 class="works-heading">精选作品</h3>
+                <a href="#" class="works-more">查看更多 ›</a>
+            </div>
+
+            <ul class="works-list">
+                <!-- 单张卡片：上图 + 下文，标题用 h4 修复层级 -->
+                <li class="work-card lmh-card">
+                    <img src="./images/work1.png" alt="作品封面" class="work-image">
+                    <h4 class="work-title">清晨的薄雾</h4>
+                    <p class="work-author">摄影师 · 林一</p>
+                </li>
+                <li class="work-card lmh-card">
+                    <img src="./images/work2.png" alt="作品封面" class="work-image">
+                    <h4 class="work-title">雪山之巅</h4>
+                    <p class="work-author">摄影师 · 陈默</p>
+                </li>
+                <li class="work-card lmh-card">
+                    <img src="./images/work3.png" alt="作品封面" class="work-image">
+                    <h4 class="work-title">老街故事</h4>
+                    <p class="work-author">摄影师 · 苏白</p>
+                </li>
+                <li class="work-card lmh-card">
+                    <img src="./images/work4.png" alt="作品封面" class="work-image">
+                    <h4 class="work-title">海边的黄昏</h4>
+                    <p class="work-author">摄影师 · 周南</p>
+                </li>
+                <li class="work-card lmh-card">
+                    <img src="./images/work5.png" alt="作品封面" class="work-image">
+                    <h4 class="work-title">森林秘境</h4>
+                    <p class="work-author">摄影师 · 何远</p>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- ===== 页脚：版权与合作信息 ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p class="footer-copy">© 2025 摄影作品展示 · 仅用于课程作业演示</p>
+            <ul class="footer-links">
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">商务合作</a></li>
+                <li><a href="#">隐私协议</a></li>
+                <li><a href="#">联系客服</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

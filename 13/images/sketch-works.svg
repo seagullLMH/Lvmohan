@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440">
+  <!-- 草图标注 -->
+  <text x="20" y="22" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#bbb" font-style="italic">设计草图 · 精选作品卡片列表 Works</text>
+
+  <!-- ===== 板块头部 ===== -->
+  <!-- 绿色竖线装饰 -->
+  <rect x="30" y="55" width="4" height="20" fill="#00b96b" rx="2"/>
+  <text x="44" y="72" font-family="'PingFang SC',sans-serif" font-size="20" fill="#222" font-weight="bold">精选作品</text>
+  <text x="30" y="45" font-family="sans-serif" font-size="9" fill="#bbb">绿色竖线 + 标题</text>
+
+  <!-- 查看更多 -->
+  <text x="1090" y="72" font-family="'PingFang SC',sans-serif" font-size="14" fill="#999">查看更多 ›</text>
+  <text x="1080" y="45" font-family="sans-serif" font-size="9" fill="#bbb">右对齐链接</text>
+
+  <!-- 头部分割线 -->
+  <line x1="30" y1="95" x2="1170" y2="95" stroke="#eee" stroke-width="1"/>
+
+  <!-- ===== 5 张卡片 ===== -->
+  <!-- 卡片1 -->
+  <g>
+    <rect x="30" y="115" width="210" height="290" fill="#ffffff" stroke="#ddd" stroke-width="1.5" rx="10"/>
+    <!-- 图片占位 -->
+    <rect x="30" y="115" width="210" height="200" fill="#f9f9f9" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 5" rx="10"/>
+    <line x1="30" y1="115" x2="240" y2="315" stroke="#eee" stroke-width="1"/>
+    <line x1="240" y1="115" x2="30" y2="315" stroke="#eee" stroke-width="1"/>
+    <rect x="100" y="180" width="70" height="50" fill="none" stroke="#ccc" stroke-width="2" rx="4"/>
+    <circle cx="120" cy="198" r="6" fill="none" stroke="#ccc" stroke-width="2"/>
+    <path d="M 100 230 L 125 210 L 140 222 L 170 195 L 170 230 Z" fill="none" stroke="#ccc" stroke-width="2"/>
+    <!-- 标题 -->
+    <text x="44" y="345" font-family="'PingFang SC',sans-serif" font-size="15" fill="#333" font-weight="500">清晨的薄雾</text>
+    <!-- 作者 -->
+    <text x="44" y="375" font-family="'PingFang SC',sans-serif" font-size="13" fill="#999">摄影师 · 林一</text>
+    <text x="44" y="395" font-family="sans-serif" font-size="9" fill="#bbb">↑标题  ↑作者</text>
+  </g>
+
+  <!-- 卡片2 -->
+  <g>
+    <rect x="265" y="115" width="210" height="290" fill="#ffffff" stroke="#ddd" stroke-width="1.5" rx="10"/>
+    <rect x="265" y="115" width="210" height="200" fill="#f9f9f9" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 5" rx="10"/>
+    <line x1="265" y1="115" x2="475" y2="315" stroke="#eee" stroke-width="1"/>
+    <line x1="475" y1="115" x2="265" y2="315" stroke="#eee" stroke-width="1"/>
+    <rect x="335" y="180" width="70" height="50" fill="none" stroke="#ccc" stroke-width="2" rx="4"/>
+    <circle cx="355" cy="198" r="6" fill="none" stroke="#ccc" stroke-width="2"/>
+    <path d="M 335 230 L 360 210 L 375 222 L 405 195 L 405 230 Z" fill="none" stroke="#ccc" stroke-width="2"/>
+    <text x="279" y="345" font-family="'PingFang SC',sans-serif" font-size="15" fill="#333" font-weight="500">雪山之巅</text>
+    <text x="279" y="375" font-family="'PingFang SC',sans-serif" font-size="13" fill="#999">摄影师 · 陈默</text>
+  </g>
+
+  <!-- 卡片3 -->
+  <g>
+    <rect x="500" y="115" width="210" height="290" fill="#ffffff" stroke="#ddd" stroke-width="1.5" rx="10"/>
+    <rect x="500" y="115" width="210" height="200" fill="#f9f9f9" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 5" rx="10"/>
+    <line x1="500" y1="115" x2="710" y2="315" stroke="#eee" stroke-width="1"/>
+    <line x1="710" y1="115" x2="500" y2="315" stroke="#eee" stroke-width="1"/>
+    <rect x="570" y="180" width="70" height="50" fill="none" stroke="#ccc" stroke-width="2" rx="4"/>
+    <circle cx="590" cy="198" r="6" fill="none" stroke="#ccc" stroke-width="2"/>
+    <path d="M 570 230 L 595 210 L 610 222 L 640 195 L 640 230 Z" fill="none" stroke="#ccc" stroke-width="2"/>
+    <text x="514" y="345" font-family="'PingFang SC',sans-serif" font-size="15" fill="#333" font-weight="500">老街故事</text>
+    <text x="514" y="375" font-family="'PingFang SC',sans-serif" font-size="13" fill="#999">摄影师 · 苏白</text>
+  </g>
+
+  <!-- 卡片4 -->
+  <g>
+    <rect x="735" y="115" width="210" height="290" fill="#ffffff" stroke="#ddd" stroke-width="1.5" rx="10"/>
+    <rect x="735" y="115" width="210" height="200" fill="#f9f9f9" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 5" rx="10"/>
+    <line x1="735" y1="115" x2="945" y2="315" stroke="#eee" stroke-width="1"/>
+    <line x1="945" y1="115" x2="735" y2="315" stroke="#eee" stroke-width="1"/>
+    <rect x="805" y="180" width="70" height="50" fill="none" stroke="#ccc" stroke-width="2" rx="4"/>
+    <circle cx="825" cy="198" r="6" fill="none" stroke="#ccc" stroke-width="2"/>
+    <path d="M 805 230 L 830 210 L 845 222 L 875 195 L 875 230 Z" fill="none" stroke="#ccc" stroke-width="2"/>
+    <text x="749" y="345" font-family="'PingFang SC',sans-serif" font-size="15" fill="#333" font-weight="500">海边的黄昏</text>
+    <text x="749" y="375" font-family="'PingFang SC',sans-serif" font-size="13" fill="#999">摄影师 · 周南</text>
+  </g>
+
+  <!-- 卡片5 -->
+  <g>
+    <rect x="970" y="115" width="210" height="290" fill="#ffffff" stroke="#ddd" stroke-width="1.5" rx="10"/>
+    <rect x="970" y="115" width="210" height="200" fill="#f9f9f9" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 5" rx="10"/>
+    <line x1="970" y1="115" x2="1180" y2="315" stroke="#eee" stroke-width="1"/>
+    <line x1="1180" y1="115" x2="970" y2="315" stroke="#eee" stroke-width="1"/>
+    <rect x="1040" y="180" width="70" height="50" fill="none" stroke="#ccc" stroke-width="2" rx="4"/>
+    <circle cx="1060" cy="198" r="6" fill="none" stroke="#ccc" stroke-width="2"/>
+    <path d="M 1040 230 L 1065 210 L 1080 222 L 1110 195 L 1110 230 Z" fill="none" stroke="#ccc" stroke-width="2"/>
+    <text x="984" y="345" font-family="'PingFang SC',sans-serif" font-size="15" fill="#333" font-weight="500">森林秘境</text>
+    <text x="984" y="375" font-family="'PingFang SC',sans-serif" font-size="13" fill="#999">摄影师 · 何远</text>
+  </g>
+
+  <!-- 整体标注 -->
+  <text x="30" y="425" font-family="sans-serif" font-size="9" fill="#bbb">← 5 张卡片横向排列，上图下文结构，gap:20px →</text>
+</svg>

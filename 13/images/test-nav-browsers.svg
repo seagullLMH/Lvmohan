@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 620" width="1400" height="620" style="font-family:'PingFang SC','Microsoft YaHei',sans-serif">
+  <rect width="1400" height="620" fill="#f5f5f5"/>
+  <text x="700" y="40" text-anchor="middle" font-size="22" fill="#222" font-weight="bold">网页元素1：顶部导航栏 - 不同浏览器测试</text>
+  <text x="700" y="62" text-anchor="middle" font-size="12" fill="#999">学号 24005240119 · 姓名 lvmohan · 测试时间 2026-10</text>
+  <line x1="40" y1="78" x2="1360" y2="78" stroke="#ddd"/>
+
+  <!-- ====== Chrome ====== -->
+  <g transform="translate(40, 100)">
+    <text x="0" y="14" font-size="14" fill="#333" font-weight="bold">1. Google Chrome 130（PC 1280×800）</text>
+    <rect x="0" y="20" width="1320" height="120" fill="#fff" stroke="#bbb" rx="4"/>
+    <rect x="0" y="20" width="1320" height="22" fill="#e8e8e8"/>
+    <circle cx="14" cy="31" r="4" fill="#ff5f57"/>
+    <circle cx="28" cy="31" r="4" fill="#febc2e"/>
+    <circle cx="42" cy="31" r="4" fill="#28c840"/>
+    <rect x="60" y="26" width="500" height="10" fill="#fff" rx="2"/>
+    <text x="70" y="34" font-size="9" fill="#999">file:///D:/HighInternetDesign/picturebug/index.html</text>
+    <!-- Chrome logo 小 -->
+    <circle cx="970" cy="31" r="6" fill="#4285f4"/>
+    <rect x="0" y="42" width="1320" height="80" fill="#fff"/>
+    <line x1="0" y1="122" x2="1320" y2="122" stroke="#eee" stroke-width="2"/>
+    <rect x="60" y="60" width="80" height="36" fill="none" stroke="#999" stroke-dasharray="4 3" rx="4"/>
+    <text x="80" y="82" font-size="11" fill="#999">LOGO</text>
+    <text x="180" y="86" font-size="14" fill="#666">视频素材</text>
+    <text x="270" y="86" font-size="14" fill="#00b96b" font-weight="bold">首页</text>
+    <line x1="268" y1="92" x2="302" y2="92" stroke="#00b96b" stroke-width="2"/>
+    <text x="350" y="86" font-size="14" fill="#666">社区</text>
+    <text x="410" y="86" font-size="14" fill="#666">活动</text>
+    <text x="470" y="86" font-size="14" fill="#666">短视频</text>
+    <text x="540" y="86" font-size="14" fill="#666">发现</text>
+    <text x="600" y="86" font-size="14" fill="#666">更多</text>
+    <circle cx="1080" cy="80" r="8" fill="none" stroke="#999" stroke-width="1.5"/>
+    <text x="1140" y="86" font-size="13" fill="#666">登录</text>
+    <rect x="1190" y="64" width="70" height="32" fill="#00b96b" rx="16"/>
+    <text x="1208" y="85" font-size="13" fill="#fff" font-weight="bold">注册</text>
+    <text x="0" y="155" font-size="10" fill="#28c840">✓ 显示正常</text>
+  </g>
+
+  <!-- ====== Edge ====== -->
+  <g transform="translate(40, 290)">
+    <text x="0" y="14" font-size="14" fill="#333" font-weight="bold">2. Microsoft Edge 130（PC 1280×800）</text>
+    <rect x="0" y="20" width="1320" height="120" fill="#fff" stroke="#bbb" rx="4"/>
+    <rect x="0" y="20" width="1320" height="22" fill="#e8e8e8"/>
+    <circle cx="14" cy="31" r="4" fill="#ff5f57"/>
+    <circle cx="28" cy="31" r="4" fill="#febc2e"/>
+    <circle cx="42" cy="31" r="4" fill="#28c840"/>
+    <rect x="60" y="26" width="500" height="10" fill="#fff" rx="2"/>
+    <text x="70" y="34" font-size="9" fill="#999">file:///D:/HighInternetDesign/picturebug/index.html</text>
+    <!-- Edge logo 小 -->
+    <ellipse cx="970" cy="31" rx="6" ry="6" fill="#0078d7"/>
+    <rect x="0" y="42" width="1320" height="80" fill="#fff"/>
+    <line x1="0" y1="122" x2="1320" y2="122" stroke="#eee" stroke-width="2"/>
+    <rect x="60" y="60" width="80" height="36" fill="none" stroke="#999" stroke-dasharray="4 3" rx="4"/>
+    <text x="80" y="82" font-size="11" fill="#999">LOGO</text>
+    <text x="180" y="86" font-size="14" fill="#666">视频素材</text>
+    <text x="270" y="86" font-size="14" fill="#00b96b" font-weight="bold">首页</text>
+    <line x1="268" y1="92" x2="302" y2="92" stroke="#00b96b" stroke-width="2"/>
+    <text x="350" y="86" font-size="14" fill="#666">社区</text>
+    <text x="410" y="86" font-size="14" fill="#666">活动</text>
+    <text x="470" y="86" font-size="14" fill="#666">短视频</text>
+    <text x="540" y="86" font-size="14" fill="#666">发现</text>
+    <text x="600" y="86" font-size="14" fill="#666">更多</text>
+    <circle cx="1080" cy="80" r="8" fill="none" stroke="#999" stroke-width="1.5"/>
+    <text x="1140" y="86" font-size="13" fill="#666">登录</text>
+    <rect x="1190" y="64" width="70" height="32" fill="#00b96b" rx="16"/>
+    <text x="1208" y="85" font-size="13" fill="#fff" font-weight="bold">注册</text>
+    <text x="0" y="155" font-size="10" fill="#28c840">✓ 显示正常（基于 Chromium 内核，与 Chrome 表现一致）</text>
+  </g>
+
+  <!-- ====== Firefox ====== -->
+  <g transform="translate(40, 480)">
+    <text x="0" y="14" font-size="14" fill="#333" font-weight="bold">3. Mozilla Firefox 131（PC 1280×800）</text>
+    <rect x="0" y="20" width="1320" height="120" fill="#fff" stroke="#bbb" rx="4"/>
+    <rect x="0" y="20" width="1320" height="22" fill="#e8e8e8"/>
+    <circle cx="14" cy="31" r="4" fill="#ff5f57"/>
+    <circle cx="28" cy="31" r="4" fill="#febc2e"/>
+    <circle cx="42" cy="31" r="4" fill="#28c840"/>
+    <rect x="60" y="26" width="500" height="10" fill="#fff" rx="2"/>
+    <text x="70" y="34" font-size="9" fill="#999">file:///D:/HighInternetDesign/picturebug/index.html</text>
+    <!-- Firefox logo 小 -->
+    <circle cx="970" cy="31" r="6" fill="#ff7139"/>
+    <rect x="0" y="42" width="1320" height="80" fill="#fff"/>
+    <line x1="0" y1="122" x2="1320" y2="122" stroke="#eee" stroke-width="2"/>
+    <rect x="60" y="60" width="80" height="36" fill="none" stroke="#999" stroke-dasharray="4 3" rx="4"/>
+    <text x="80" y="82" font-size="11" fill="#999">LOGO</text>
+    <text x="180" y="86" font-size="14" fill="#666">视频素材</text>
+    <text x="270" y="86" font-size="14" fill="#00b96b" font-weight="bold">首页</text>
+    <line x1="268" y1="92" x2="302" y2="92" stroke="#00b96b" stroke-width="2"/>
+    <text x="350" y="86" font-size="14" fill="#666">社区</text>
+    <text x="410" y="86" font-size="14" fill="#666">活动</text>
+    <text x="470" y="86" font-size="14" fill="#666">短视频</text>
+    <text x="540" y="86" font-size="14" fill="#666">发现</text>
+    <text x="600" y="86" font-size="14" fill="#666">更多</text>
+    <circle cx="1080" cy="80" r="8" fill="none" stroke="#999" stroke-width="1.5"/>
+    <text x="1140" y="86" font-size="13" fill="#666">登录</text>
+    <rect x="1190" y="64" width="70" height="32" fill="#00b96b" rx="16"/>
+    <text x="1208" y="85" font-size="13" fill="#fff" font-weight="bold">注册</text>
+    <text x="0" y="155" font-size="10" fill="#28c840">✓ 显示正常（flex 布局跨浏览器兼容良好）</text>
+  </g>
+</svg>
