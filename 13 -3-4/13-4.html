@@ -2,8 +2,11 @@
 <!--
     ============================================================
     课程作业：移动端固定底部导航栏（SVG 版）
-    学号：24005240119   姓名：lvmohan
+    学号：24005240119   姓名：吕墨涵
+    日期：2026-10-22
+    功能名称：移动端固定底部导航栏（SVG 版）
     图标来源：font_5244715_6fbx2jueos2/iconfont.js 内联 symbol
+    类名规则：所有 CSS 类均以 lmh_ 开头
     要点：fixed 固定底部 + flex:1 自适应宽度 + 徽章/红点
     ============================================================
 -->
@@ -11,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="author" content="lvmohan">
+    <meta name="author" content="吕墨涵">
     <meta name="student-id" content="24005240119">
     <title>移动端底部导航（SVG 版）</title>
     <style>
@@ -41,7 +44,7 @@
         }
 
         /* ===== 页面顶部标题栏（示意内容）===== */
-        .page-header {
+        .lmh_page-header {
             position: sticky;
             top: 0;
             z-index: 10;
@@ -56,11 +59,11 @@
         }
 
         /* ===== 页面示意内容区 ===== */
-        .page-body {
+        .lmh_page-body {
             padding: 16px;
         }
 
-        .demo-card {
+        .lmh_demo-card {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -70,7 +73,7 @@
             border-radius: 10px;
         }
 
-        .demo-card-dot {
+        .lmh_demo-card-dot {
             flex-shrink: 0;
             width: 40px;
             height: 40px;
@@ -78,16 +81,16 @@
             background: linear-gradient(135deg, #00b96b, #7bd8a8);
         }
 
-        .demo-card-text {
+        .lmh_demo-card-text {
             flex: 1;
         }
 
-        .demo-card-title {
+        .lmh_demo-card-title {
             font-size: 15px;
             font-weight: 600;
         }
 
-        .demo-card-desc {
+        .lmh_demo-card-desc {
             font-size: 12px;
             color: #999999;
         }
@@ -95,7 +98,7 @@
         /* ================================================================
            移动端固定底部导航：fixed 固定 + flex 自适应宽度
            ================================================================ */
-        .tabbar {
+        .lmh_tabbar {
             position: fixed;
             left: 0;
             right: 0;
@@ -112,7 +115,7 @@
         }
 
         /* 单个导航项：flex:1 平分宽度，自适应任意屏宽 */
-        .tabbar-item {
+        .lmh_tabbar-item {
             flex: 1 1 25%;
             display: flex;
             flex-direction: column;
@@ -126,12 +129,12 @@
         }
 
         /* 当前选中项：主题绿色高亮 */
-        .tabbar-item.is-active {
+        .lmh_tabbar-item.lmh_is-active {
             color: #00b96b;
         }
 
         /* 图标包裹层：徽章/红点相对此层定位 */
-        .tabbar-icon {
+        .lmh_tabbar-icon {
             position: relative;
             display: flex;
             align-items: center;
@@ -141,7 +144,7 @@
         }
 
         /* SVG 图标尺寸；fill 跟随文字颜色（currentColor） */
-        .tabbar-icon svg {
+        .lmh_tabbar-icon svg {
             width: 24px;
             height: 24px;
             fill: currentColor;
@@ -149,7 +152,7 @@
         }
 
         /* ===== 右上角数字徽章 ===== */
-        .tabbar-badge {
+        .lmh_tabbar-badge {
             position: absolute;
             top: -6px;
             left: 100%;
@@ -170,7 +173,7 @@
         }
 
         /* ===== 右上角红点（无数字）===== */
-        .tabbar-dot {
+        .lmh_tabbar-dot {
             position: absolute;
             top: -2px;
             left: 100%;
@@ -183,7 +186,7 @@
         }
 
         /* 文字标签 */
-        .tabbar-label {
+        .lmh_tabbar-label {
             max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -212,82 +215,82 @@
     </svg>
 
     <!-- ===== 页面顶部标题（示意）===== -->
-    <header class="page-header">底部导航演示 · SVG 版</header>
+    <header class="lmh_page-header">底部导航演示 · SVG 版</header>
 
     <!-- ===== 页面示意内容：滚动查看固定效果 ===== -->
-    <main class="page-body">
-        <div class="demo-card">
-            <span class="demo-card-dot"></span>
-            <div class="demo-card-text">
-                <p class="demo-card-title">首页 · 红点提示</p>
-                <p class="demo-card-desc">向下滚动页面，导航栏始终固定在底部</p>
+    <main class="lmh_page-body">
+        <div class="lmh_demo-card">
+            <span class="lmh_demo-card-dot"></span>
+            <div class="lmh_demo-card-text">
+                <p class="lmh_demo-card-title">首页 · 红点提示</p>
+                <p class="lmh_demo-card-desc">向下滚动页面，导航栏始终固定在底部</p>
             </div>
         </div>
-        <div class="demo-card">
-            <span class="demo-card-dot"></span>
-            <div class="demo-card-text">
-                <p class="demo-card-title">收藏 · 数字徽章</p>
-                <p class="demo-card-desc">图标右上角显示红色数字徽章</p>
+        <div class="lmh_demo-card">
+            <span class="lmh_demo-card-dot"></span>
+            <div class="lmh_demo-card-text">
+                <p class="lmh_demo-card-title">收藏 · 数字徽章</p>
+                <p class="lmh_demo-card-desc">图标右上角显示红色数字徽章</p>
             </div>
         </div>
-        <div class="demo-card">
-            <span class="demo-card-dot"></span>
-            <div class="demo-card-text">
-                <p class="demo-card-title">自适应宽度</p>
-                <p class="demo-card-desc">4 个导航项 flex:1 平分，适配不同屏宽</p>
+        <div class="lmh_demo-card">
+            <span class="lmh_demo-card-dot"></span>
+            <div class="lmh_demo-card-text">
+                <p class="lmh_demo-card-title">自适应宽度</p>
+                <p class="lmh_demo-card-desc">4 个导航项 flex:1 平分，适配不同屏宽</p>
             </div>
         </div>
-        <div class="demo-card">
-            <span class="demo-card-dot"></span>
-            <div class="demo-card-text">
-                <p class="demo-card-title">更多 · 徽章 + 红点</p>
-                <p class="demo-card-desc">99+ 超出上限时显示省略数字</p>
+        <div class="lmh_demo-card">
+            <span class="lmh_demo-card-dot"></span>
+            <div class="lmh_demo-card-text">
+                <p class="lmh_demo-card-title">更多 · 徽章 + 红点</p>
+                <p class="lmh_demo-card-desc">99+ 超出上限时显示省略数字</p>
             </div>
         </div>
-        <div class="demo-card">
-            <span class="demo-card-dot"></span>
-            <div class="demo-card-text">
-                <p class="demo-card-title">安全区适配</p>
-                <p class="demo-card-desc">使用 env(safe-area-inset-bottom) 适配刘海屏</p>
+        <div class="lmh_demo-card">
+            <span class="lmh_demo-card-dot"></span>
+            <div class="lmh_demo-card-text">
+                <p class="lmh_demo-card-title">安全区适配</p>
+                <p class="lmh_demo-card-desc">使用 env(safe-area-inset-bottom) 适配刘海屏</p>
             </div>
         </div>
     </main>
 
     <!-- ===== 移动端固定底部导航：SVG 实现 ===== -->
-    <nav class="tabbar">
+    <nav class="lmh_tabbar">
         <!-- 首页：红点提示 -->
-        <a href="#" class="tabbar-item is-active">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item lmh_is-active">
+            <span class="lmh_tabbar-icon">
                 <svg aria-hidden="true"><use href="#icon-shouye"></use></svg>
-                <span class="tabbar-dot"></span>
+                <span class="lmh_tabbar-dot"></span>
             </span>
-            <span class="tabbar-label">首页</span>
+            <span class="lmh_tabbar-label">首页</span>
         </a>
 
         <!-- 搜索：无提示 -->
-        <a href="#" class="tabbar-item">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item">
+            <span class="lmh_tabbar-icon">
                 <svg aria-hidden="true"><use href="#icon-sousuo"></use></svg>
             </span>
-            <span class="tabbar-label">搜索</span>
+            <span class="lmh_tabbar-label">搜索</span>
         </a>
 
         <!-- 收藏：数字徽章 -->
-        <a href="#" class="tabbar-item">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item">
+            <span class="lmh_tabbar-icon">
                 <svg aria-hidden="true"><use href="#icon-shoucang"></use></svg>
-                <em class="tabbar-badge">12</em>
+                <em class="lmh_tabbar-badge">12</em>
             </span>
-            <span class="tabbar-label">收藏</span>
+            <span class="lmh_tabbar-label">收藏</span>
         </a>
 
         <!-- 更多：99+ 徽章 -->
-        <a href="#" class="tabbar-item">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item">
+            <span class="lmh_tabbar-icon">
                 <svg aria-hidden="true"><use href="#icon-gengduo"></use></svg>
-                <em class="tabbar-badge">99+</em>
+                <em class="lmh_tabbar-badge">99+</em>
             </span>
-            <span class="tabbar-label">更多</span>
+            <span class="lmh_tabbar-label">更多</span>
         </a>
     </nav>
 

@@ -1,5 +1,7 @@
 /* ================================================================
    摄影作品展示静态首页样式表
+   学号：24005240119   姓名：吕墨涵   日期：2026-10-22
+   类名规则：所有选择器均以 lmh_ 开头
    布局仅使用 flex，禁止 float / table
    ================================================================ */
 
@@ -41,7 +43,7 @@ img {
 /* ================================================================
    模块3：顶部网站主导航栏
    ================================================================ */
-.header {
+.lmh_header {
     background-color: #ffffff;
     border-bottom: 1px solid #eaeaea;
     position: sticky;
@@ -50,7 +52,7 @@ img {
 }
 
 /* 导航容器：flex 横向排列，居中限宽 */
-.nav {
+.lmh_nav {
     display: flex;
     align-items: center;
     max-width: 1200px;
@@ -60,29 +62,29 @@ img {
 }
 
 /* Logo 区域 */
-.nav-logo {
+.lmh_nav-logo {
     display: flex;
     align-items: center;
     margin-right: 48px;
 }
 
-.nav-logo-img {
+.lmh_nav-logo-img {
     height: 36px;
 }
 
 /* 导航菜单：flex 横向排列 */
-.nav-menu {
+.lmh_nav-menu {
     display: flex;
     align-items: center;
     gap: 32px;
 }
 
-.nav-item {
+.lmh_nav-item {
     display: flex;
     align-items: center;
 }
 
-.nav-link {
+.lmh_nav-link {
     font-size: 15px;
     color: #333333;
     font-weight: 400;
@@ -90,47 +92,47 @@ img {
 }
 
 /* 导航链接少量 hover：仅变色，无下拉弹出 */
-.nav-link:hover {
+.lmh_nav-link:hover {
     color: #00b96b;
 }
 
 /* 当前页高亮（绿色为主题色） */
-.nav-link-active {
+.lmh_nav-link-active {
     color: #00b96b;
     font-weight: 600;
 }
 
 /* 右侧功能图标 + 按钮：margin-left:auto 推到最右 */
-.nav-actions {
+.lmh_nav-actions {
     display: flex;
     align-items: center;
     margin-left: auto;
     gap: 16px;
 }
 
-.nav-action {
+.lmh_nav-action {
     display: flex;
     align-items: center;
 }
 
-.nav-icon {
+.lmh_nav-icon {
     width: 20px;
     height: 20px;
 }
 
 /* 登录链接：纯文字 */
-.nav-login {
+.lmh_nav-login {
     font-size: 14px;
     color: #333333;
     padding: 6px 4px;
     transition: color 0.2s ease;
 }
-.nav-login:hover {
+.lmh_nav-login:hover {
     color: #00b96b;
 }
 
 /* 注册按钮：绿色填充胶囊 */
-.nav-register {
+.lmh_nav-register {
     display: inline-block;
     font-size: 14px;
     color: #ffffff;
@@ -139,7 +141,7 @@ img {
     padding: 6px 18px;
     transition: background-color 0.2s ease;
 }
-.nav-register:hover {
+.lmh_nav-register:hover {
     background-color: #00a35e;
 }
 
@@ -147,7 +149,7 @@ img {
 /* ================================================================
    主内容区：限宽居中，左右留白
    ================================================================ */
-.main {
+.lmh_main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 24px 24px 0;
@@ -157,7 +159,7 @@ img {
 /* ================================================================
    热搜词栏：横向标签流
    ================================================================ */
-.hotsearch {
+.lmh_hotsearch {
     display: flex;
     align-items: center;
     padding: 14px 0;
@@ -165,21 +167,21 @@ img {
     margin-bottom: 8px;
 }
 
-.hotsearch-label {
+.lmh_hotsearch-label {
     font-size: 13px;
     color: #999999;
     margin-right: 12px;
     flex-shrink: 0;
 }
 
-.hotsearch-list {
+.lmh_hotsearch-list {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.hotsearch-item a {
+.lmh_hotsearch-item a {
     font-size: 13px;
     color: #555555;
     padding: 3px 10px;
@@ -187,7 +189,7 @@ img {
     background-color: #f0f0f0;
     transition: color 0.2s ease, background-color 0.2s ease;
 }
-.hotsearch-item a:hover {
+.lmh_hotsearch-item a:hover {
     color: #00b96b;
     background-color: #e6f7f0;
 }
@@ -196,7 +198,7 @@ img {
 /* ================================================================
    模块2：左图右文摄影专题推荐区块
    ================================================================ */
-.topic {
+.lmh_topic {
     display: flex;
     margin: 24px auto;
     background-color: #ffffff;
@@ -206,13 +208,13 @@ img {
 }
 
 /* 左侧大图：占一半宽度 */
-.topic-image {
+.lmh_topic-image {
     width: 50%;
     object-fit: cover;
 }
 
 /* 右侧文字区域 */
-.topic-body {
+.lmh_topic-body {
     width: 50%;
     padding: 44px 40px;
     display: flex;
@@ -221,7 +223,7 @@ img {
 }
 
 /* 专题标签：绿色填充胶囊 */
-.topic-tag {
+.lmh_topic-tag {
     display: inline-block;
     width: fit-content;
     color: #ffffff;
@@ -233,7 +235,7 @@ img {
 }
 
 /* 专题标题 h3：板块主标题层级 */
-.topic-title {
+.lmh_topic-title {
     font-size: 24px;
     font-weight: 600;
     line-height: 1.4;
@@ -242,7 +244,7 @@ img {
 }
 
 /* 专题描述 */
-.topic-desc {
+.lmh_topic-desc {
     font-size: 14px;
     color: #666666;
     line-height: 1.8;
@@ -250,7 +252,7 @@ img {
 }
 
 /* 专题元信息 */
-.topic-meta {
+.lmh_topic-meta {
     font-size: 13px;
     color: #999999;
 }
@@ -259,12 +261,12 @@ img {
 /* ================================================================
    模块1：上图下文摄影作品卡片列表
    ================================================================ */
-.works {
+.lmh_works {
     margin: 0 0 48px;
 }
 
 /* 板块头部：标题 + 查看更多，左右两端对齐 */
-.works-head {
+.lmh_works-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -272,14 +274,14 @@ img {
 }
 
 /* 板块主标题 h3：左侧绿色竖线装饰 */
-.works-heading {
+.lmh_works-heading {
     display: flex;
     align-items: center;
     font-size: 20px;
     font-weight: 600;
     color: #222222;
 }
-.works-heading::before {
+.lmh_works-heading::before {
     content: "";
     display: inline-block;
     width: 4px;
@@ -290,23 +292,23 @@ img {
 }
 
 /* 查看更多链接 */
-.works-more {
+.lmh_works-more {
     font-size: 14px;
     color: #999999;
     transition: color 0.2s ease;
 }
-.works-more:hover {
+.lmh_works-more:hover {
     color: #00b96b;
 }
 
 /* 卡片列表：flex 横向排列，间距均等 */
-.works-list {
+.lmh_works-list {
     display: flex;
     gap: 20px;
 }
 
 /* 单张卡片 */
-.work-card {
+.lmh_work-card {
     flex: 1;
     min-width: 0;
     background-color: #ffffff;
@@ -317,20 +319,20 @@ img {
 }
 
 /* 卡片少量 hover：阴影增强 + 微上浮，无点击逻辑 */
-.work-card:hover {
+.lmh_work-card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     transform: translateY(-2px);
 }
 
 /* 卡片图片 */
-.work-image {
+.lmh_work-image {
     width: 100%;
     height: 220px;
     object-fit: cover;
 }
 
 /* 卡片标题 h4：修复标题层级（板块用 h3，卡片用 h4） */
-.work-title {
+.lmh_work-title {
     font-size: 15px;
     font-weight: 500;
     padding: 12px 14px 4px;
@@ -338,7 +340,7 @@ img {
 }
 
 /* 卡片作者 */
-.work-author {
+.lmh_work-author {
     font-size: 13px;
     color: #999999;
     padding: 0 14px 14px;
@@ -348,14 +350,14 @@ img {
 /* ================================================================
    页脚：版权与合作信息
    ================================================================ */
-.footer {
+.lmh_footer {
     background-color: #ffffff;
     border-top: 1px solid #eaeaea;
     padding: 24px 0;
     margin-top: 24px;
 }
 
-.footer-inner {
+.lmh_footer-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -364,60 +366,60 @@ img {
     padding: 0 24px;
 }
 
-.footer-copy {
+.lmh_footer-copy {
     font-size: 13px;
     color: #999999;
 }
 
-.footer-links {
+.lmh_footer-links {
     display: flex;
     align-items: center;
     gap: 24px;
 }
 
-.footer-links a {
+.lmh_footer-links a {
     font-size: 13px;
     color: #666666;
     transition: color 0.2s ease;
 }
-.footer-links a:hover {
+.lmh_footer-links a:hover {
     color: #00b96b;
 }
 
 
 /* ================================================================
    响应式适配：不同视口测试用
-   学号 24005240119 / lvmohan
+   学号 24005240119 / 吕墨涵 / 日期：2026-10-22
    ================================================================ */
 
 /* ===== 平板视口：768px ~ 1024px ===== */
 @media screen and (max-width: 1024px) {
-    .nav {
+    .lmh_nav {
         max-width: 100%;
         padding: 0 16px;
     }
-    .nav-logo {
+    .lmh_nav-logo {
         margin-right: 24px;
     }
-    .nav-menu {
+    .lmh_nav-menu {
         gap: 18px;
     }
-    .main {
+    .lmh_main {
         max-width: 100%;
         padding: 16px;
     }
     /* 专题：图变小，文字区收紧 */
-    .topic-body {
+    .lmh_topic-body {
         padding: 28px 24px;
     }
-    .topic-title {
+    .lmh_topic-title {
         font-size: 20px;
     }
     /* 卡片：5 张太挤，每行 3 张，自动换行 */
-    .works-list {
+    .lmh_works-list {
         flex-wrap: wrap;
     }
-    .work-card {
+    .lmh_work-card {
         flex: 1 1 30%;
         min-width: 0;
         margin-bottom: 16px;
@@ -427,54 +429,54 @@ img {
 /* ===== 手机视口：≤ 767px ===== */
 @media screen and (max-width: 767px) {
     /* 导航：logo 留下，菜单隐藏（静态作业不实现汉堡菜单） */
-    .nav {
+    .lmh_nav {
         height: 56px;
         padding: 0 12px;
     }
-    .nav-menu,
-    .nav-action:not(.lmh-action-login):not(:has(.nav-register)) {
+    .lmh_nav-menu,
+    .lmh_nav-action:not(.lmh_nav-action-login):not(:has(.lmh_nav-register)) {
         display: none;
     }
-    .nav-logo {
+    .lmh_nav-logo {
         margin-right: 0;
     }
-    .nav-actions {
+    .lmh_nav-actions {
         gap: 10px;
     }
     /* 热搜词：换行 */
-    .hotsearch {
+    .lmh_hotsearch {
         flex-wrap: wrap;
     }
     /* 专题：图上文下，纵向堆叠 */
-    .topic {
+    .lmh_topic {
         flex-direction: column;
     }
-    .topic-image,
-    .topic-body {
+    .lmh_topic-image,
+    .lmh_topic-body {
         width: 100%;
     }
-    .topic-image {
+    .lmh_topic-image {
         height: 200px;
     }
-    .topic-body {
+    .lmh_topic-body {
         padding: 20px 16px;
     }
-    .topic-title {
+    .lmh_topic-title {
         font-size: 18px;
     }
     /* 卡片：每行 2 张 */
-    .works-list {
+    .lmh_works-list {
         flex-wrap: wrap;
         gap: 12px;
     }
-    .work-card {
+    .lmh_work-card {
         flex: 1 1 45%;
     }
-    .work-image {
+    .lmh_work-image {
         height: 140px;
     }
     /* 页脚：纵向堆叠 */
-    .footer-inner {
+    .lmh_footer-inner {
         flex-direction: column;
         gap: 10px;
         text-align: center;
@@ -483,15 +485,15 @@ img {
 
 /* ===== 超宽屏视口：≥ 1440px ===== */
 @media screen and (min-width: 1440px) {
-    .nav,
-    .main,
-    .footer-inner {
+    .lmh_nav,
+    .lmh_main,
+    .lmh_footer-inner {
         max-width: 1400px;
     }
-    .topic-title {
+    .lmh_topic-title {
         font-size: 26px;
     }
-    .work-image {
+    .lmh_work-image {
         height: 240px;
     }
 }

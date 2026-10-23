@@ -1,17 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
     ============================================================
     课程作业：摄影作品展示移动端页面（字体图标版）
-    学号：24005240119   姓名：lvmohan
+    学号：24005240119   姓名：吕墨涵
+    日期：2026-10-22
+    功能名称：摄影作品展示移动端页面（字体图标版）
     图标来源：font_5244715_6fbx2jueos2/iconfont.css
+    类名规则：所有 CSS 类均以 lmh_ 开头
     要点：移动端自适应 + fixed 固定底部导航 + 徽章/红点
     ============================================================
 -->
-<html lang="zh-CN">
+<html lang="zh-CN">ss
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="author" content="lvmohan">
+    <meta name="author" content="吕墨涵">
     <meta name="student-id" content="24005240119">
     <title>摄影作品展示 · 移动端</title>
     <!-- 引入 iconfont 字体图标样式 -->
@@ -52,7 +55,7 @@
         }
 
         /* ===== 顶部导航：Logo + 搜索/用户图标 ===== */
-        .header {
+        .lmh_header {
             position: sticky;
             top: 0;
             z-index: 100;
@@ -65,23 +68,23 @@
             border-bottom: 1px solid #eaeaea;
         }
 
-        .header-logo {
+        .lmh_header-logo {
             height: 28px;
         }
 
-        .header-actions {
+        .lmh_header-actions {
             display: flex;
             align-items: center;
             gap: 16px;
         }
 
-        .header-icon {
+        .lmh_header-icon {
             font-size: 20px;
             color: #333333;
         }
 
         /* ===== 频道菜单：横向滚动 ===== */
-        .channels {
+        .lmh_channels {
             display: flex;
             gap: 20px;
             padding: 10px 16px;
@@ -92,11 +95,11 @@
             scrollbar-width: none;
         }
 
-        .channels::-webkit-scrollbar {
+        .lmh_channels::-webkit-scrollbar {
             display: none;
         }
 
-        .channel-link {
+        .lmh_channel-link {
             flex-shrink: 0;
             font-size: 14px;
             color: #666666;
@@ -104,14 +107,14 @@
             transition: color 0.2s ease;
         }
 
-        .channel-link:hover,
-        .channel-link-active {
+        .lmh_channel-link:hover,
+        .lmh_channel-link-active {
             color: #00b96b;
             font-weight: 600;
         }
 
         /* ===== 热搜词栏：横向滚动标签 ===== */
-        .hotsearch {
+        .lmh_hotsearch {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -120,21 +123,21 @@
             scrollbar-width: none;
         }
 
-        .hotsearch::-webkit-scrollbar {
+        .lmh_hotsearch::-webkit-scrollbar {
             display: none;
         }
 
-        .hotsearch-label {
+        .lmh_hotsearch-label {
             flex-shrink: 0;
             font-size: 12px;
             color: #999999;
         }
 
-        .hotsearch-item {
+        .lmh_hotsearch-item {
             flex-shrink: 0;
         }
 
-        .hotsearch-item a {
+        .lmh_hotsearch-item a {
             display: block;
             padding: 3px 10px;
             font-size: 12px;
@@ -145,24 +148,24 @@
         }
 
         /* ===== 专题推荐：图上文下 ===== */
-        .topic {
+        .lmh_topic {
             margin: 12px 16px;
             background-color: #ffffff;
             border-radius: 12px;
             overflow: hidden;
         }
 
-        .topic-image {
+        .lmh_topic-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
         }
 
-        .topic-body {
+        .lmh_topic-body {
             padding: 12px 14px 14px;
         }
 
-        .topic-tag {
+        .lmh_topic-tag {
             display: inline-block;
             padding: 2px 8px;
             font-size: 11px;
@@ -171,14 +174,14 @@
             border-radius: 4px;
         }
 
-        .topic-title {
+        .lmh_topic-title {
             margin: 8px 0 6px;
             font-size: 16px;
             font-weight: 600;
         }
 
         /* 移动端描述文字截断为 2 行 */
-        .topic-desc {
+        .lmh_topic-desc {
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
@@ -187,57 +190,57 @@
             color: #888888;
         }
 
-        .topic-meta {
+        .lmh_topic-meta {
             margin-top: 8px;
             font-size: 11px;
             color: #aaaaaa;
         }
 
         /* ===== 精选作品：两列网格，宽度自适应 ===== */
-        .works {
+        .lmh_works {
             margin: 0 16px 16px;
         }
 
-        .works-head {
+        .lmh_works-head {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 4px 0 10px;
         }
 
-        .works-heading {
+        .lmh_works-heading {
             font-size: 16px;
             font-weight: 600;
         }
 
-        .works-more {
+        .lmh_works-more {
             font-size: 12px;
             color: #999999;
         }
 
-        .works-list {
+        .lmh_works-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
-        .work-card {
+        .lmh_work-card {
             background-color: #ffffff;
             border-radius: 10px;
             overflow: hidden;
         }
 
-        .work-image {
+        .lmh_work-image {
             width: 100%;
             height: 120px;
             object-fit: cover;
         }
 
-        .work-info {
+        .lmh_work-info {
             padding: 8px 10px 10px;
         }
 
-        .work-title {
+        .lmh_work-title {
             font-size: 13px;
             font-weight: 600;
             overflow: hidden;
@@ -245,24 +248,24 @@
             white-space: nowrap;
         }
 
-        .work-author {
+        .lmh_work-author {
             margin-top: 2px;
             font-size: 11px;
             color: #999999;
         }
 
         /* ===== 页脚 ===== */
-        .footer {
+        .lmh_footer {
             padding: 20px 16px 24px;
             text-align: center;
         }
 
-        .footer-copy {
+        .lmh_footer-copy {
             font-size: 11px;
             color: #aaaaaa;
         }
 
-        .footer-links {
+        .lmh_footer-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -270,7 +273,7 @@
             margin-top: 8px;
         }
 
-        .footer-links a {
+        .lmh_footer-links a {
             font-size: 12px;
             color: #888888;
         }
@@ -278,7 +281,7 @@
         /* ================================================================
            移动端固定底部导航：fixed 固定 + flex 自适应宽度
            ================================================================ */
-        .tabbar {
+        .lmh_tabbar {
             position: fixed;
             left: 0;
             right: 0;
@@ -295,7 +298,7 @@
         }
 
         /* 单个导航项：flex:1 平分宽度，自适应任意屏宽 */
-        .tabbar-item {
+        .lmh_tabbar-item {
             flex: 1 1 25%;
             display: flex;
             flex-direction: column;
@@ -309,12 +312,12 @@
         }
 
         /* 当前选中项：主题绿色高亮 */
-        .tabbar-item.is-active {
+        .lmh_tabbar-item.lmh_is-active {
             color: #00b96b;
         }
 
         /* 图标包裹层：徽章/红点相对此层定位 */
-        .tabbar-icon {
+        .lmh_tabbar-icon {
             position: relative;
             display: flex;
             align-items: center;
@@ -324,13 +327,13 @@
         }
 
         /* 字体图标尺寸 */
-        .tabbar-icon .iconfont {
+        .lmh_tabbar-icon .iconfont {
             font-size: 24px;
             line-height: 1;
         }
 
         /* ===== 右上角数字徽章 ===== */
-        .tabbar-badge {
+        .lmh_tabbar-badge {
             position: absolute;
             top: -6px;
             left: 100%;
@@ -351,7 +354,7 @@
         }
 
         /* ===== 右上角红点（无数字）===== */
-        .tabbar-dot {
+        .lmh_tabbar-dot {
             position: absolute;
             top: -2px;
             left: 100%;
@@ -364,7 +367,7 @@
         }
 
         /* 文字标签 */
-        .tabbar-label {
+        .lmh_tabbar-label {
             max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -373,7 +376,7 @@
 
         /* ===== 大屏保护：内容区限制最大宽度 ===== */
         @media (min-width: 640px) {
-            .page-main {
+            .lmh_page-main {
                 max-width: 560px;
                 margin: 0 auto;
             }
@@ -383,110 +386,110 @@
 <body>
 
     <!-- ===== 顶部导航：Logo + 搜索/用户图标 ===== -->
-    <header class="header">
-        <img src="./images/logo.png" alt="摄影作品展示" class="header-logo">
-        <div class="header-actions">
-            <i class="iconfont icon-sousuo header-icon"></i>
+    <header class="lmh_header">
+        <img src="./images/logo.png" alt="摄影作品展示" class="lmh_header-logo">
+        <div class="lmh_header-actions">
+            <i class="iconfont icon-sousuo lmh_header-icon"></i>
             <img src="./images/icon-user.png" alt="用户中心" style="width: 20px; height: 20px;">
         </div>
     </header>
 
-    <main class="page-main">
+    <main class="lmh_page-main">
 
         <!-- ===== 频道菜单：横向滚动 ===== -->
-        <nav class="channels">
-            <a href="#" class="channel-link channel-link-active">首页</a>
-            <a href="#" class="channel-link">视频素材</a>
-            <a href="#" class="channel-link">社区</a>
-            <a href="#" class="channel-link">活动</a>
-            <a href="#" class="channel-link">短视频</a>
-            <a href="#" class="channel-link">发现</a>
-            <a href="#" class="channel-link">更多</a>
+        <nav class="lmh_channels">
+            <a href="#" class="lmh_channel-link lmh_channel-link-active">首页</a>
+            <a href="#" class="lmh_channel-link">视频素材</a>
+            <a href="#" class="lmh_channel-link">社区</a>
+            <a href="#" class="lmh_channel-link">活动</a>
+            <a href="#" class="lmh_channel-link">短视频</a>
+            <a href="#" class="lmh_channel-link">发现</a>
+            <a href="#" class="lmh_channel-link">更多</a>
         </nav>
 
         <!-- ===== 热搜词栏：横向滚动标签 ===== -->
-        <section class="hotsearch">
-            <span class="hotsearch-label">热搜词：</span>
-            <ul class="hotsearch-list" style="display: flex; gap: 8px;">
-                <li class="hotsearch-item"><a href="#">风景</a></li>
-                <li class="hotsearch-item"><a href="#">水果</a></li>
-                <li class="hotsearch-item"><a href="#">萌宠</a></li>
-                <li class="hotsearch-item"><a href="#">科技</a></li>
-                <li class="hotsearch-item"><a href="#">壁纸</a></li>
+        <section class="lmh_hotsearch">
+            <span class="lmh_hotsearch-label">热搜词：</span>
+            <ul class="lmh_hotsearch-list" style="display: flex; gap: 8px;">
+                <li class="lmh_hotsearch-item"><a href="#">风景</a></li>
+                <li class="lmh_hotsearch-item"><a href="#">水果</a></li>
+                <li class="lmh_hotsearch-item"><a href="#">萌宠</a></li>
+                <li class="lmh_hotsearch-item"><a href="#">科技</a></li>
+                <li class="lmh_hotsearch-item"><a href="#">壁纸</a></li>
             </ul>
         </section>
 
         <!-- ===== 专题推荐：图上文下卡片 ===== -->
-        <section class="topic">
-            <img src="./images/topic.png" alt="专题封面" class="topic-image">
-            <div class="topic-body">
-                <span class="topic-tag">专题推荐</span>
-                <h3 class="topic-title">城市光影：记录都市的呼吸与脉搏</h3>
-                <p class="topic-desc">
+        <section class="lmh_topic">
+            <img src="./images/topic.png" alt="专题封面" class="lmh_topic-image">
+            <div class="lmh_topic-body">
+                <span class="lmh_topic-tag">专题推荐</span>
+                <h3 class="lmh_topic-title">城市光影：记录都市的呼吸与脉搏</h3>
+                <p class="lmh_topic-desc">
                     本专题汇集了来自全国各地摄影师的城市风光作品，从清晨的第一缕阳光到深夜的霓虹灯海，用镜头捕捉城市最动人的瞬间。每一张照片都是一个故事，每一帧画面都承载着摄影师对这座城市的独特理解。
                 </p>
-                <p class="topic-meta">收录作品 1280 张 · 参与摄影师 456 位</p>
+                <p class="lmh_topic-meta">收录作品 1280 张 · 参与摄影师 456 位</p>
             </div>
         </section>
 
         <!-- ===== 精选作品：两列网格 ===== -->
-        <section class="works">
-            <div class="works-head">
-                <h3 class="works-heading">精选作品</h3>
-                <a href="#" class="works-more">查看更多 ›</a>
+        <section class="lmh_works">
+            <div class="lmh_works-head">
+                <h3 class="lmh_works-heading">精选作品</h3>
+                <a href="#" class="lmh_works-more">查看更多 ›</a>
             </div>
 
-            <ul class="works-list">
-                <li class="work-card">
-                    <img src="./images/work1.png" alt="作品封面" class="work-image">
-                    <div class="work-info">
-                        <h4 class="work-title">清晨的薄雾</h4>
-                        <p class="work-author">摄影师 · 林一</p>
+            <ul class="lmh_works-list">
+                <li class="lmh_work-card">
+                    <img src="./images/work1.png" alt="作品封面" class="lmh_work-image">
+                    <div class="lmh_work-info">
+                        <h4 class="lmh_work-title">清晨的薄雾</h4>
+                        <p class="lmh_work-author">摄影师 · 林一</p>
                     </div>
                 </li>
-                <li class="work-card">
-                    <img src="./images/work2.png" alt="作品封面" class="work-image">
-                    <div class="work-info">
-                        <h4 class="work-title">雪山之巅</h4>
-                        <p class="work-author">摄影师 · 陈默</p>
+                <li class="lmh_work-card">
+                    <img src="./images/work2.png" alt="作品封面" class="lmh_work-image">
+                    <div class="lmh_work-info">
+                        <h4 class="lmh_work-title">雪山之巅</h4>
+                        <p class="lmh_work-author">摄影师 · 陈默</p>
                     </div>
                 </li>
-                <li class="work-card">
-                    <img src="./images/work3.png" alt="作品封面" class="work-image">
-                    <div class="work-info">
-                        <h4 class="work-title">老街故事</h4>
-                        <p class="work-author">摄影师 · 苏白</p>
+                <li class="lmh_work-card">
+                    <img src="./images/work3.png" alt="作品封面" class="lmh_work-image">
+                    <div class="lmh_work-info">
+                        <h4 class="lmh_work-title">老街故事</h4>
+                        <p class="lmh_work-author">摄影师 · 苏白</p>
                     </div>
                 </li>
-                <li class="work-card">
-                    <img src="./images/work4.png" alt="作品封面" class="work-image">
-                    <div class="work-info">
-                        <h4 class="work-title">海边的黄昏</h4>
-                        <p class="work-author">摄影师 · 周南</p>
+                <li class="lmh_work-card">
+                    <img src="./images/work4.png" alt="作品封面" class="lmh_work-image">
+                    <div class="lmh_work-info">
+                        <h4 class="lmh_work-title">海边的黄昏</h4>
+                        <p class="lmh_work-author">摄影师 · 周南</p>
                     </div>
                 </li>
-                <li class="work-card">
-                    <img src="./images/work5.png" alt="作品封面" class="work-image">
-                    <div class="work-info">
-                        <h4 class="work-title">森林秘境</h4>
-                        <p class="work-author">摄影师 · 何远</p>
+                <li class="lmh_work-card">
+                    <img src="./images/work5.png" alt="作品封面" class="lmh_work-image">
+                    <div class="lmh_work-info">
+                        <h4 class="lmh_work-title">森林秘境</h4>
+                        <p class="lmh_work-author">摄影师 · 何远</p>
                     </div>
                 </li>
                 <!-- 占位卡片：保持两列网格对齐 -->
-                <li class="work-card">
-                    <img src="./images/topic.png" alt="作品封面" class="work-image">
-                    <div class="work-info">
-                        <h4 class="work-title">都市夜色</h4>
-                        <p class="work-author">摄影师 · 顾言</p>
+                <li class="lmh_work-card">
+                    <img src="./images/topic.png" alt="作品封面" class="lmh_work-image">
+                    <div class="lmh_work-info">
+                        <h4 class="lmh_work-title">都市夜色</h4>
+                        <p class="lmh_work-author">摄影师 · 顾言</p>
                     </div>
                 </li>
             </ul>
         </section>
 
         <!-- ===== 页脚 ===== -->
-        <footer class="footer">
-            <p class="footer-copy">© 2025 摄影作品展示 · 仅用于课程作业演示</p>
-            <ul class="footer-links">
+        <footer class="lmh_footer">
+            <p class="lmh_footer-copy">© 2025 摄影作品展示 · 仅用于课程作业演示</p>
+            <ul class="lmh_footer-links">
                 <li><a href="#">关于我们</a></li>
                 <li><a href="#">商务合作</a></li>
                 <li><a href="#">隐私协议</a></li>
@@ -497,40 +500,40 @@
     </main>
 
     <!-- ===== 移动端固定底部导航：字体图标实现 ===== -->
-    <nav class="tabbar">
+    <nav class="lmh_tabbar">
         <!-- 首页：红点提示 -->
-        <a href="#" class="tabbar-item is-active">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item lmh_is-active">
+            <span class="lmh_tabbar-icon">
                 <i class="iconfont icon-shouye"></i>
-                <span class="tabbar-dot"></span>
+                <span class="lmh_tabbar-dot"></span>
             </span>
-            <span class="tabbar-label">首页</span>
+            <span class="lmh_tabbar-label">首页</span>
         </a>
 
         <!-- 搜索：无提示 -->
-        <a href="#" class="tabbar-item">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item">
+            <span class="lmh_tabbar-icon">
                 <i class="iconfont icon-sousuo"></i>
             </span>
-            <span class="tabbar-label">搜索</span>
+            <span class="lmh_tabbar-label">搜索</span>
         </a>
 
         <!-- 收藏：数字徽章 -->
-        <a href="#" class="tabbar-item">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item">
+            <span class="lmh_tabbar-icon">
                 <i class="iconfont icon-shoucang"></i>
-                <em class="tabbar-badge">12</em>
+                <em class="lmh_tabbar-badge">12</em>
             </span>
-            <span class="tabbar-label">收藏</span>
+            <span class="lmh_tabbar-label">收藏</span>
         </a>
 
         <!-- 更多：99+ 徽章 -->
-        <a href="#" class="tabbar-item">
-            <span class="tabbar-icon">
+        <a href="#" class="lmh_tabbar-item">
+            <span class="lmh_tabbar-icon">
                 <i class="iconfont icon-gengduo"></i>
-                <em class="tabbar-badge">99+</em>
+                <em class="lmh_tabbar-badge">99+</em>
             </span>
-            <span class="tabbar-label">更多</span>
+            <span class="lmh_tabbar-label">更多</span>
         </a>
     </nav>
 
