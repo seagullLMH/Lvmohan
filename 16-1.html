@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<!--
+    姓名：吕墨涵
+    日期：2026-10-29
+    功能名称：JavaScript 数组常用方法可视化演示
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 数组方法可视化 - 吕墨涵</title>
+    <style>
+        :root {
+            --lmh_bg: #0a0f1c;
+            --lmh_panel: rgba(255, 255, 255, 0.04);
+            --lmh_line: rgba(120, 200, 255, 0.18);
+            --lmh_cyan: #38e1ff;
+            --lmh_green: #6ef2a8;
+            --lmh_pink: #ff7ac6;
+            --lmh_yellow: #ffd166;
+            --lmh_text: #e8f1ff;
+            --lmh_muted: #8ba0bf;
+            --lmh_mono: "Consolas", "Courier New", monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            min-height: 100vh;
+            padding: 36px 20px 56px;
+            color: var(--lmh_text);
+            background:
+                radial-gradient(1100px 560px at 15% -10%, #16304d 0%, transparent 55%),
+                radial-gradient(900px 520px at 92% 8%, #2a1640 0%, transparent 52%),
+                var(--lmh_bg);
+        }
+
+        .lmh_page { max-width: 1120px; margin: 0 auto; }
+
+        /* ========== 头部 ========== */
+        .lmh_header { text-align: center; margin-bottom: 34px; }
+
+        .lmh_kicker {
+            font-family: var(--lmh_mono);
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--lmh_cyan);
+            margin-bottom: 10px;
+        }
+
+        .lmh_header h1 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        .lmh_header h1 span {
+            color: var(--lmh_cyan);
+            text-shadow: 0 0 24px rgba(56, 225, 255, 0.45);
+        }
+
+        .lmh_sub {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--lmh_muted);
+            line-height: 1.8;
+        }
+
+        .lmh_home {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 6px 16px;
+            font-size: 13px;
+            color: var(--lmh_cyan);
+            text-decoration: none;
+            border: 1px solid rgba(56, 225, 255, 0.5);
+            border-radius: 999px;
+            background: rgba(56, 225, 255, 0.08);
+            transition: background 0.25s, transform 0.25s;
+        }
+
+        .lmh_home:hover {
+            background: rgba(56, 225, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ========== 数组舞台 ========== */
+        .lmh_stage {
+            padding: 22px;
+            margin-bottom: 44px;
+            border: 1px solid var(--lmh_line);
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(56, 225, 255, 0.08), rgba(255, 255, 255, 0.02));
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .lmh_stage_bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .lmh_stage_title {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .lmh_stage_title::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 8px;
+            border-radius: 50%;
+            background: var(--lmh_green);
+            box-shadow: 0 0 10px var(--lmh_green);
+            vertical-align: middle;
+        }
+
+        .lmh_len {
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            color: var(--lmh_muted);
+            padding: 5px 12px;
+            border: 1px solid var(--lmh_line);
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .lmh_len b { color: var(--lmh_green); font-size: 14px; }
+
+        .lmh_array_wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-height: 150px;
+            padding: 20px 8px;
+            border-radius: 14px;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 100% 34px,
+                rgba(2, 8, 18, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .lmh_bracket {
+            font-family: var(--lmh_mono);
+            font-size: 48px;
+            line-height: 1;
+            color: rgba(56, 225, 255, 0.45);
+            align-self: center;
+            user-select: none;
+        }
+
+        .lmh_array {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 10px;
+            padding: 4px 2px;
+        }
+
+        .lmh_slot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lmh_index {
+            font-family: var(--lmh_mono);
+            font-size: 11px;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_index::after {
+            content: "";
+            display: block;
+            width: 1px;
+            height: 6px;
+            margin: 2px auto 0;
+            background: rgba(139, 160, 191, 0.5);
+        }
+
+        .lmh_block {
+            width: 86px;
+            min-height: 66px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: #05121e;
+            word-break: break-all;
+            border-radius: 12px;
+            background: linear-gradient(160deg, hsl(var(--lmh_hue), 92%, 74%), hsl(var(--lmh_hue), 82%, 52%));
+            box-shadow: 0 6px 0 hsl(var(--lmh_hue), 55%, 30%), 0 12px 22px rgba(0, 0, 0, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .lmh_block--sm { font-size: 13px; }
+
+        .lmh_block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 0 hsl(var(--lmh_hue), 55%, 30%), 0 18px 26px rgba(0, 0, 0, 0.4);
+        }
+
+        .lmh_slot--in .lmh_block { animation: lmh_pop 0.45s cubic-bezier(0.2, 1.6, 0.4, 1); }
+
+        .lmh_slot--out .lmh_block { animation: lmh_out 0.3s ease forwards; }
+
+        .lmh_slot--move .lmh_block {
+            animation: lmh_flip 0.5s ease;
+            animation-delay: var(--lmh_delay, 0ms);
+        }
+
+        .lmh_empty {
+            padding: 26px 34px;
+            font-size: 13px;
+            color: var(--lmh_muted);
+            border: 1px dashed rgba(139, 160, 191, 0.4);
+            border-radius: 12px;
+            font-family: var(--lmh_mono);
+        }
+
+        @keyframes lmh_pop {
+            0% { transform: translateY(-26px) scale(0.6); opacity: 0; }
+            60% { transform: translateY(4px) scale(1.08); opacity: 1; }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        @keyframes lmh_out {
+            to { transform: translateY(28px) scale(0.45) rotate(8deg); opacity: 0; }
+        }
+
+        @keyframes lmh_flip {
+            0% { transform: rotateX(0deg) scale(1); }
+            45% { transform: rotateX(72deg) scale(0.94); }
+            100% { transform: rotateX(0deg) scale(1); }
+        }
+
+        .lmh_index_hint {
+            margin: 10px 2px 16px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_stage_code {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #05101d;
+            border: 1px solid rgba(120, 200, 255, 0.12);
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            line-height: 1.7;
+            overflow-x: auto;
+        }
+
+        .lmh_prompt {
+            color: var(--lmh_green);
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .lmh_stage_code code {
+            color: #a5d6ff;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .lmh_controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .lmh_input {
+            width: 108px;
+            padding: 9px 12px;
+            font-family: var(--lmh_mono);
+            font-size: 13px;
+            color: var(--lmh_text);
+            background: #08121f;
+            border: 1px solid var(--lmh_line);
+            border-radius: 9px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .lmh_input:focus {
+            border-color: var(--lmh_cyan);
+            box-shadow: 0 0 0 3px rgba(56, 225, 255, 0.15);
+        }
+
+        .lmh_btn {
+            padding: 9px 13px;
+            font-family: var(--lmh_mono);
+            font-size: 12px;
+            color: var(--lmh_cyan);
+            background: rgba(56, 225, 255, 0.06);
+            border: 1px solid rgba(56, 225, 255, 0.35);
+            border-radius: 9px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, border-color 0.2s;
+        }
+
+        .lmh_btn:hover {
+            background: rgba(56, 225, 255, 0.16);
+            border-color: var(--lmh_cyan);
+            transform: translateY(-2px);
+        }
+
+        .lmh_btn:active { transform: translateY(0) scale(0.97); }
+
+        .lmh_btn--alt {
+            color: var(--lmh_pink);
+            background: rgba(255, 122, 198, 0.06);
+            border-color: rgba(255, 122, 198, 0.35);
+        }
+
+        .lmh_btn--alt:hover {
+            background: rgba(255, 122, 198, 0.16);
+            border-color: var(--lmh_pink);
+        }
+
+        .lmh_btn--reset {
+            color: var(--lmh_muted);
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .lmh_btn--reset:hover {
+            color: var(--lmh_text);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .lmh_log {
+            margin-top: 14px;
+            padding: 11px 14px;
+            min-height: 42px;
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: var(--lmh_green);
+            background: #04101c;
+            border-left: 3px solid var(--lmh_cyan);
+            border-radius: 0 8px 8px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .lmh_log--warn {
+            color: var(--lmh_yellow);
+            border-left-color: var(--lmh_yellow);
+        }
+
+        /* ========== 方法卡片 ========== */
+        .lmh_section { margin-bottom: 40px; }
+
+        .lmh_section_head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .lmh_section_head h2 {
+            font-size: 19px;
+            letter-spacing: 1px;
+        }
+
+        .lmh_section_tag {
+            font-family: var(--lmh_mono);
+            font-size: 11.5px;
+            color: var(--lmh_muted);
+            padding: 4px 10px;
+            border: 1px dashed rgba(139, 160, 191, 0.35);
+            border-radius: 999px;
+        }
+
+        .lmh_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .lmh_card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 18px;
+            border: 1px solid rgba(120, 200, 255, 0.14);
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .lmh_card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56, 225, 255, 0.45);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+        }
+
+        .lmh_card_head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .lmh_method {
+            font-family: var(--lmh_mono);
+            font-size: 14.5px;
+            font-weight: bold;
+            color: var(--lmh_cyan);
+        }
+
+        .lmh_pill {
+            padding: 3px 9px;
+            font-size: 10.5px;
+            color: var(--lmh_green);
+            border: 1px solid rgba(110, 242, 168, 0.35);
+            border-radius: 999px;
+            background: rgba(110, 242, 168, 0.08);
+            white-space: nowrap;
+        }
+
+        .lmh_pill--warn {
+            color: var(--lmh_yellow);
+            border-color: rgba(255, 209, 102, 0.4);
+            background: rgba(255, 209, 102, 0.08);
+        }
+
+        .lmh_desc {
+            font-size: 12.5px;
+            line-height: 1.75;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_code {
+            padding: 10px 12px;
+            font-family: var(--lmh_mono);
+            font-size: 11.5px;
+            line-height: 1.7;
+            color: #a5d6ff;
+            background: #06101c;
+            border: 1px solid rgba(120, 200, 255, 0.1);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .lmh_res {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .lmh_res_key {
+            font-size: 11px;
+            color: var(--lmh_muted);
+            white-space: nowrap;
+        }
+
+        .lmh_res_val {
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            color: var(--lmh_green);
+            word-break: break-all;
+        }
+
+        .lmh_res_val--bool { color: var(--lmh_pink); }
+
+        .lmh_res_val--flash { animation: lmh_flash 0.8s ease; }
+
+        @keyframes lmh_flash {
+            0% { color: #ffffff; text-shadow: 0 0 14px rgba(110, 242, 168, 0.9); }
+            100% { text-shadow: none; }
+        }
+
+        .lmh_card_btn {
+            align-self: flex-start;
+            margin-top: auto;
+            padding: 7px 12px;
+            font-family: var(--lmh_mono);
+            font-size: 11.5px;
+            color: var(--lmh_yellow);
+            background: rgba(255, 209, 102, 0.06);
+            border: 1px solid rgba(255, 209, 102, 0.35);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .lmh_card_btn:hover {
+            background: rgba(255, 209, 102, 0.16);
+            transform: translateY(-2px);
+        }
+
+        .lmh_footer {
+            margin-top: 18px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.9;
+            color: #5b6b84;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 520px) {
+            body { padding: 24px 14px 44px; }
+            .lmh_stage { padding: 16px; }
+            .lmh_block { width: 68px; min-height: 58px; font-size: 14px; }
+            .lmh_block--sm { font-size: 12px; }
+            .lmh_bracket { font-size: 36px; }
+            .lmh_grid { grid-template-columns: 1fr; }
+            .lmh_input { width: 92px; }
+            .lmh_btn { padding: 8px 10px; font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lmh_page">
+
+        <header class="lmh_header">
+            <p class="lmh_kicker">JAVASCRIPT · ARRAY</p>
+            <h1>数组方法 <span>可视化实验室</span></h1>
+            <p class="lmh_sub">同一个数组，16 个常用方法。点按钮操作它，看看每个方法到底做了什么。</p>
+            <a href="13 -3-4/index.html" class="lmh_home">← 返回首页</a>
+        </header>
+
+        <!-- ===== 数组舞台：所有操作都在这个数组上进行 ===== -->
+        <section class="lmh_stage" aria-label="数组舞台">
+            <div class="lmh_stage_bar">
+                <span class="lmh_stage_title">数组舞台</span>
+                <span class="lmh_len">length = <b id="lmh_len">4</b></span>
+            </div>
+
+            <div class="lmh_array_wrap">
+                <span class="lmh_bracket">[</span>
+                <div class="lmh_array" id="lmh_array"></div>
+                <span class="lmh_bracket">]</span>
+            </div>
+            <p class="lmh_index_hint">方块上方的数字是下标 index，从 0 开始；最后一个元素的下标是 length - 1。</p>
+
+            <div class="lmh_stage_code">
+                <span class="lmh_prompt">&gt;</span>
+                <code id="lmh_code">lmh_arr = ["苹果", "香蕉", "橙子", "葡萄"];</code>
+            </div>
+
+            <div class="lmh_controls">
+                <input class="lmh_input" id="lmh_input" type="text" value="西瓜" maxlength="6" aria-label="要添加的元素">
+                <button class="lmh_btn" type="button" data-act="unshift">unshift · 头插</button>
+                <button class="lmh_btn" type="button" data-act="push">push · 尾插</button>
+                <button class="lmh_btn" type="button" data-act="shift">shift · 头删</button>
+                <button class="lmh_btn" type="button" data-act="pop">pop · 尾删</button>
+                <button class="lmh_btn lmh_btn--alt" type="button" data-act="reverse">reverse · 反转</button>
+                <button class="lmh_btn lmh_btn--alt" type="button" data-act="sort">sort · 排序</button>
+                <button class="lmh_btn lmh_btn--alt" type="button" data-act="splice">splice · 删中间</button>
+                <button class="lmh_btn lmh_btn--reset" type="button" data-act="reset">reset · 重置</button>
+            </div>
+
+            <div class="lmh_log" id="lmh_log" aria-live="polite">提示：在输入框里换个词，再点头插 / 尾插，就能看到方块进出。</div>
+        </section>
+
+        <!-- ===== 会改变原数组的方法 ===== -->
+        <section class="lmh_section">
+            <div class="lmh_section_head">
+                <h2>会改变原数组的方法</h2>
+                <span class="lmh_section_tag">mutating · 直接在队伍上动手</span>
+            </div>
+
+            <div class="lmh_grid">
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">push(值)</code>
+                        <span class="lmh_pill lmh_pill--warn">改变原数组</span>
+                    </div>
+                    <p class="lmh_desc">新元素从队尾进场，像排队时最后一个人站进来。返回值是数组的新长度。</p>
+                    <pre class="lmh_code">lmh_arr.push("西瓜");
+// 返回：数组的新长度</pre>
+                    <button class="lmh_card_btn" type="button" data-act="push">在舞台上执行 ↑</button>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">pop()</code>
+                        <span class="lmh_pill lmh_pill--warn">改变原数组</span>
+                    </div>
+                    <p class="lmh_desc">队尾最后一个人离开，数组少一个元素。返回值就是被删掉的那个元素。</p>
+                    <pre class="lmh_code">var lmh_last = lmh_arr.pop();
+// 返回：被删掉的元素</pre>
+                    <button class="lmh_card_btn" type="button" data-act="pop">在舞台上执行 ↑</button>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">unshift(值)</code>
+                        <span class="lmh_pill lmh_pill--warn">改变原数组</span>
+                    </div>
+                    <p class="lmh_desc">不讲武德地插到队伍最前面，后面所有人的下标都往后挪一位。</p>
+                    <pre class="lmh_code">lmh_arr.unshift("西瓜");
+// 返回：数组的新长度</pre>
+                    <button class="lmh_card_btn" type="button" data-act="unshift">在舞台上执行 ↑</button>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">shift()</code>
+                        <span class="lmh_pill lmh_pill--warn">改变原数组</span>
+                    </div>
+                    <p class="lmh_desc">队首第一个人离开，后面所有人整体前移一位，下标全部减 1。</p>
+                    <pre class="lmh_code">var lmh_first = lmh_arr.shift();
+// 返回：被删掉的元素</pre>
+                    <button class="lmh_card_btn" type="button" data-act="shift">在舞台上执行 ↑</button>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">reverse()</code>
+                        <span class="lmh_pill lmh_pill--warn">改变原数组</span>
+                    </div>
+                    <p class="lmh_desc">整个队伍向后转，第一个变最后一个，最后一个变第一个。</p>
+                    <pre class="lmh_code">lmh_arr.reverse();
+// 返回：反转后的原数组</pre>
+                    <button class="lmh_card_btn" type="button" data-act="reverse">在舞台上执行 ↑</button>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">sort(比较函数)</code>
+                        <span class="lmh_pill lmh_pill--warn">改变原数组</span>
+                    </div>
+                    <p class="lmh_desc">让元素按规则重新排队。这里用 localeCompare 按拼音排序，否则中文会按编码排。</p>
+                    <pre class="lmh_code">lmh_arr.sort(function (lmh_a, lmh_b) {
+    return lmh_a.localeCompare(lmh_b, "zh");
+});</pre>
+                    <button class="lmh_card_btn" type="button" data-act="sort">在舞台上执行 ↑</button>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">splice(起点, 个数)</code>
+                        <span class="lmh_pill lmh_pill--warn">改变原数组</span>
+                    </div>
+                    <p class="lmh_desc">一把剪刀，从中间剪掉若干个元素；也可以用来替换或插入。返回值是被剪掉的部分。</p>
+                    <pre class="lmh_code">lmh_arr.splice(1, 1);
+// 返回：被删元素组成的新数组</pre>
+                    <button class="lmh_card_btn" type="button" data-act="splice">在舞台上执行 ↑</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== 不改变原数组的方法 ===== -->
+        <section class="lmh_section">
+            <div class="lmh_section_head">
+                <h2>不改变原数组的方法</h2>
+                <span class="lmh_section_tag">non-mutating · 返回值会跟着上面的数组实时变化</span>
+            </div>
+
+            <div class="lmh_grid">
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">slice(1, 3)</code>
+                        <span class="lmh_pill">返回新数组</span>
+                    </div>
+                    <p class="lmh_desc">像切面包：切下下标 1 到 3 的一段（包含 1，不包含 3），原数组毫发无伤。</p>
+                    <pre class="lmh_code">var lmh_new = lmh_arr.slice(1, 3);</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="slice">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">concat(其他数组)</code>
+                        <span class="lmh_pill">返回新数组</span>
+                    </div>
+                    <p class="lmh_desc">把两摞盘子叠成一摞，原数组不变。参数可以是数组，也可以是单个值。</p>
+                    <pre class="lmh_code">var lmh_all = lmh_arr.concat(["西瓜", "柠檬"]);</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="concat">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">join(连接符)</code>
+                        <span class="lmh_pill">返回字符串</span>
+                    </div>
+                    <p class="lmh_desc">把每个元素用“胶水”粘起来，变成一串字符串；不传参数默认用逗号。</p>
+                    <pre class="lmh_code">var lmh_str = lmh_arr.join(" → ");</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="join">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">indexOf(值)</code>
+                        <span class="lmh_pill">返回数字</span>
+                    </div>
+                    <p class="lmh_desc">问“它坐在几号位”。找到返回下标，找不到就返回 -1。</p>
+                    <pre class="lmh_code">var lmh_pos = lmh_arr.indexOf("橙子");</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="indexOf">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">includes(值)</code>
+                        <span class="lmh_pill">返回布尔值</span>
+                    </div>
+                    <p class="lmh_desc">点名：队伍里有没有这个人？有就是 true，没有就是 false。</p>
+                    <pre class="lmh_code">var lmh_has = lmh_arr.includes("葡萄");</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="includes">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">find(条件函数)</code>
+                        <span class="lmh_pill">返回元素</span>
+                    </div>
+                    <p class="lmh_desc">从前往后找第一个满足条件的人，找到就停下并交出来；找不到返回 undefined。</p>
+                    <pre class="lmh_code">var lmh_hit = lmh_arr.find(function (lmh_x) {
+    return lmh_x.length === 2;
+});</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="find">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">map(加工函数)</code>
+                        <span class="lmh_pill">返回新数组</span>
+                    </div>
+                    <p class="lmh_desc">每个人都进一次加工厂：这里统一加个“汁”字。新数组长度和原数组一样。</p>
+                    <pre class="lmh_code">var lmh_juice = lmh_arr.map(function (lmh_x) {
+    return lmh_x + "汁";
+});</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="map">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">filter(条件函数)</code>
+                        <span class="lmh_pill">返回新数组</span>
+                    </div>
+                    <p class="lmh_desc">一个筛子，只有满足条件的元素才能留下来，其他的被挡在外面。</p>
+                    <pre class="lmh_code">var lmh_long = lmh_arr.filter(function (lmh_x) {
+    return lmh_x.length >= 2;
+});</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="filter">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">reduce(累加函数, 初值)</code>
+                        <span class="lmh_pill">返回一个结果</span>
+                    </div>
+                    <p class="lmh_desc">把所有元素一步步揉成一个结果。这里把每个名字的字数加起来，得到总字数。</p>
+                    <pre class="lmh_code">var lmh_total = lmh_arr.reduce(function (lmh_sum, lmh_x) {
+    return lmh_sum + lmh_x.length;
+}, 0);</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="reduce">…</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer class="lmh_footer">
+            <p>吕墨涵 · 24005240119 · JavaScript 数组方法演示 · 2026-10-29</p>
+            <p>改数组 → 看方块动 → 看返回值变，这就是数组方法最直观的样子。</p>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var lmh_initial = ['苹果', '香蕉', '橙子', '葡萄'];
+            var lmh_arr = lmh_initial.slice();
+            var lmh_busy = false;
+            var lmh_hues = [188, 262, 330, 42, 152, 210, 285, 10];
+
+            var lmh_arrayBox = document.getElementById('lmh_array');
+            var lmh_lenBox = document.getElementById('lmh_len');
+            var lmh_codeBox = document.getElementById('lmh_code');
+            var lmh_logBox = document.getElementById('lmh_log');
+            var lmh_input = document.getElementById('lmh_input');
+
+            // 把任意返回值转成好读的字符串
+            function lmh_format(lmh_value) {
+                if (Array.isArray(lmh_value)) {
+                    var lmh_parts = lmh_value.map(function (lmh_item) {
+                        return (typeof lmh_item === 'string') ? '"' + lmh_item + '"' : String(lmh_item);
+                    });
+                    return '[' + lmh_parts.join(', ') + ']';
+                }
+                if (typeof lmh_value === 'string') {
+                    return '"' + lmh_value + '"';
+                }
+                return String(lmh_value);
+            }
+
+            // 渲染数组方块
+            function lmh_render(lmh_opts) {
+                lmh_opts = lmh_opts || {};
+                lmh_arrayBox.innerHTML = '';
+
+                if (lmh_arr.length === 0) {
+                    var lmh_empty = document.createElement('div');
+                    lmh_empty.className = 'lmh_empty';
+                    lmh_empty.textContent = '空数组 · length = 0';
+                    lmh_arrayBox.appendChild(lmh_empty);
+                }
+
+                for (var lmh_i = 0; lmh_i < lmh_arr.length; lmh_i++) {
+                    var lmh_slot = document.createElement('div');
+                    lmh_slot.className = 'lmh_slot';
+                    lmh_slot.style.setProperty('--lmh_hue', lmh_hues[lmh_i % lmh_hues.length]);
+                    lmh_slot.style.setProperty('--lmh_delay', (lmh_i * 50) + 'ms');
+
+                    if (lmh_opts['in'] === lmh_i) {
+                        lmh_slot.classList.add('lmh_slot--in');
+                    }
+                    if (lmh_opts.out === lmh_i) {
+                        lmh_slot.classList.add('lmh_slot--out');
+                    }
+                    if (lmh_opts.move) {
+                        lmh_slot.classList.add('lmh_slot--move');
+                    }
+
+                    var lmh_index = document.createElement('span');
+                    lmh_index.className = 'lmh_index';
+                    lmh_index.textContent = lmh_i;
+
+                    var lmh_block = document.createElement('div');
+                    lmh_block.className = 'lmh_block';
+                    if (String(lmh_arr[lmh_i]).length > 3) {
+                        lmh_block.classList.add('lmh_block--sm');
+                    }
+                    lmh_block.textContent = lmh_arr[lmh_i];
+
+                    lmh_slot.appendChild(lmh_index);
+                    lmh_slot.appendChild(lmh_block);
+                    lmh_arrayBox.appendChild(lmh_slot);
+                }
+
+                lmh_lenBox.textContent = lmh_arr.length;
+                lmh_codeBox.textContent = 'lmh_arr = ' + lmh_format(lmh_arr) + ';';
+                lmh_updateResults();
+            }
+
+            // 九个不改原数组的方法，每次都拿当前数组重新算一遍
+            var lmh_demos = {
+                slice: function () {
+                    return lmh_arr.slice(1, 3);
+                },
+                concat: function () {
+                    return lmh_arr.concat(['西瓜', '柠檬']);
+                },
+                join: function () {
+                    return lmh_arr.join(' → ');
+                },
+                indexOf: function () {
+                    return lmh_arr.indexOf('橙子');
+                },
+                includes: function () {
+                    return lmh_arr.includes('葡萄');
+                },
+                find: function () {
+                    return lmh_arr.find(function (lmh_x) {
+                        return lmh_x.length === 2;
+                    });
+                },
+                map: function () {
+                    return lmh_arr.map(function (lmh_x) {
+                        return lmh_x + '汁';
+                    });
+                },
+                filter: function () {
+                    return lmh_arr.filter(function (lmh_x) {
+                        return lmh_x.length >= 2;
+                    });
+                },
+                reduce: function () {
+                    return lmh_arr.reduce(function (lmh_sum, lmh_x) {
+                        return lmh_sum + lmh_x.length;
+                    }, 0);
+                }
+            };
+
+            function lmh_updateResults() {
+                var lmh_nodes = document.querySelectorAll('.lmh_res_val');
+                for (var lmh_i = 0; lmh_i < lmh_nodes.length; lmh_i++) {
+                    var lmh_key = lmh_nodes[lmh_i].getAttribute('data-demo');
+                    var lmh_value = lmh_demos[lmh_key] ? lmh_demos[lmh_key]() : '—';
+
+                    lmh_nodes[lmh_i].textContent = lmh_format(lmh_value);
+                    lmh_nodes[lmh_i].classList.toggle('lmh_res_val--bool', typeof lmh_value === 'boolean');
+
+                    // 重新触发一次闪烁，提示这一行刚更新
+                    lmh_nodes[lmh_i].classList.remove('lmh_res_val--flash');
+                    void lmh_nodes[lmh_i].offsetWidth;
+                    lmh_nodes[lmh_i].classList.add('lmh_res_val--flash');
+                }
+            }
+
+            function lmh_log(lmh_text, lmh_isWarn) {
+                lmh_logBox.textContent = lmh_text;
+                lmh_logBox.classList.toggle('lmh_log--warn', !!lmh_isWarn);
+            }
+
+            function lmh_value() {
+                var lmh_v = lmh_input.value.trim();
+                return lmh_v === '' ? '西瓜' : lmh_v;
+            }
+
+            function lmh_stageVisible() {
+                var lmh_stage = document.querySelector('.lmh_stage');
+                var lmh_rect = lmh_stage.getBoundingClientRect();
+                return lmh_rect.top < window.innerHeight && lmh_rect.bottom > 0;
+            }
+
+            function lmh_run(lmh_act) {
+                if (lmh_busy) {
+                    return;
+                }
+
+                // 从卡片上的按钮触发时，先把舞台滚进视野
+                if (!lmh_stageVisible()) {
+                    document.querySelector('.lmh_stage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                // ---------- 尾部 / 头部添加 ----------
+                if (lmh_act === 'push' || lmh_act === 'unshift') {
+                    var lmh_v = lmh_value();
+
+                    if (lmh_act === 'push') {
+                        lmh_arr.push(lmh_v);
+                        lmh_render({ 'in': lmh_arr.length - 1 });
+                        lmh_log('lmh_arr.push("' + lmh_v + '") → 返回 ' + lmh_arr.length + '（新长度）');
+                    } else {
+                        lmh_arr.unshift(lmh_v);
+                        lmh_render({ 'in': 0 });
+                        lmh_log('lmh_arr.unshift("' + lmh_v + '") → 返回 ' + lmh_arr.length + '（新长度）');
+                    }
+                    return;
+                }
+
+                // ---------- 尾部 / 头部 / 中间删除 ----------
+                if (lmh_act === 'pop' || lmh_act === 'shift' || lmh_act === 'splice') {
+                    var lmh_idx;
+                    if (lmh_act === 'pop') {
+                        lmh_idx = lmh_arr.length - 1;
+                    } else if (lmh_act === 'shift') {
+                        lmh_idx = 0;
+                    } else {
+                        lmh_idx = 1;
+                    }
+
+                    if (lmh_arr.length === 0 || lmh_idx < 0 || lmh_idx >= lmh_arr.length) {
+                        lmh_log('数组里没有下标 ' + lmh_idx + ' 的元素，删不了。', true);
+                        return;
+                    }
+
+                    // 先让方块掉出去，再真正删数据
+                    var lmh_slot = lmh_arrayBox.children[lmh_idx];
+                    if (lmh_slot) {
+                        lmh_slot.classList.add('lmh_slot--out');
+                    }
+
+                    lmh_busy = true;
+                    setTimeout(function () {
+                        var lmh_removed;
+                        if (lmh_act === 'pop') {
+                            lmh_removed = lmh_arr.pop();
+                        } else if (lmh_act === 'shift') {
+                            lmh_removed = lmh_arr.shift();
+                        } else {
+                            lmh_removed = lmh_arr.splice(1, 1)[0];
+                        }
+
+                        lmh_render();
+                        lmh_busy = false;
+
+                        if (lmh_act === 'splice') {
+                            lmh_log('lmh_arr.splice(1, 1) → 返回 ["' + lmh_removed + '"]，原数组 length = ' + lmh_arr.length);
+                        } else {
+                            lmh_log('lmh_arr.' + lmh_act + '() → 返回 "' + lmh_removed + '"，length = ' + lmh_arr.length);
+                        }
+                    }, 300);
+                    return;
+                }
+
+                // ---------- 反转 ----------
+                if (lmh_act === 'reverse') {
+                    lmh_arr.reverse();
+                    lmh_render({ move: true });
+                    lmh_log('lmh_arr.reverse() → 队伍掉了个头：' + lmh_format(lmh_arr));
+                    return;
+                }
+
+                // ---------- 排序 ----------
+                if (lmh_act === 'sort') {
+                    lmh_arr.sort(function (lmh_a, lmh_b) {
+                        return lmh_a.localeCompare(lmh_b, 'zh');
+                    });
+                    lmh_render({ move: true });
+                    lmh_log('lmh_arr.sort(...) → 按拼音重新排队：' + lmh_format(lmh_arr));
+                    return;
+                }
+
+                // ---------- 重置 ----------
+                if (lmh_act === 'reset') {
+                    lmh_arr = lmh_initial.slice();
+                    lmh_render({ move: true });
+                    lmh_log('已重置，回到最初的 4 个水果。');
+                }
+            }
+
+            var lmh_buttons = document.querySelectorAll('.lmh_btn[data-act], .lmh_card_btn[data-act]');
+            for (var lmh_i = 0; lmh_i < lmh_buttons.length; lmh_i++) {
+                lmh_buttons[lmh_i].addEventListener('click', function () {
+                    lmh_run(this.getAttribute('data-act'));
+                });
+            }
+
+            lmh_input.addEventListener('keydown', function (lmh_event) {
+                if (lmh_event.key === 'Enter') {
+                    lmh_run('push');
+                }
+            });
+
+            lmh_render();
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数7游戏 - 吕墨涵</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Microsoft YaHei", sans-serif; background: #f5f7fa; padding: 40px; }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; }
+        .lvmohan_sub { text-align: center; color: #666; margin-bottom: 40px; }
+        .lvmohan_grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 12px; max-width: 900px; margin: 0 auto; }
+        .lvmohan_box { position: relative; background: #fff; border-radius: 8px; height: 70px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: #4a90d9; box-shadow: 0 2px 6px rgba(0,0,0,.08); transition: transform .2s; cursor: pointer; }
+        .lvmohan_box:hover { transform: scale(1.08); z-index: 10; }
+        .lvmohan_box.blank { background: #e0e4ea; color: transparent; }
+        .lvmohan_box.blank:hover { background: #ffd9d9; color: #e74c3c; }
+        .lvmohan_box.blank:hover::after { content: attr(data-tip); position: absolute; bottom: -26px; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: normal; color: #fff; background: #333; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+        .lvmohan_box:not(.blank):hover { background: #eaf4ff; }
+        .lvmohan_foot { text-align: center; color: #999; margin-top: 30px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <h1>数 7 游戏</h1>
+    <p class="lvmohan_sub">规则：遇到 7 的倍数 或 末尾是 7 的数，跳过后为空盒子</p>
+    <div class="lvmohan_grid" id="lvmohanGrid"></div>
+    <p class="lvmohan_foot">制作者：吕墨涵</p>
+    <script>
+        var grid = document.getElementById('lvmohanGrid');
+        var html = '';
+        for (var i = 1; i <= 100; i++) {
+            var isMul7 = (i % 7 === 0);
+            var endWith7 = (i % 10 === 7);
+            if (isMul7 || endWith7) {
+                var tip = '';
+                if (isMul7 && endWith7) tip = '7的倍数 · 含7';
+                else if (isMul7) tip = '7的倍数';
+                else tip = '含7';
+                html += '<div class="lvmohan_box blank" data-tip="' + tip + '">' + i + '</div>';
+            } else {
+                html += '<div class="lvmohan_box">' + i + '</div>';
+            }
+        }
+        grid.innerHTML = html;
+    </script>
+</body>
+</html>

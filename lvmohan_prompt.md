@@ -38,3 +38,13 @@
 
 * 模型: trae/ai-assistant
 * 提示词: 完成网页 14-2.html，演示 javascript 基本的 6 种数据类型。
+
+## 2026-10-29 10:30:00
+
+* 模型: DeepSeek-V4.1-Flash
+* 提示词: 完成16-1.html，展示javascript数组的主要方法，形象一些。
+
+## 2026-10-29 11:05:00
+
+* 模型: DeepSeek-V4.1-Flash
+* 提示词: 完成16-2.html，展示JavaScript对象。

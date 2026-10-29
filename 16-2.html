@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<!--
+    姓名：吕墨涵
+    日期：2026-10-29
+    功能名称：JavaScript 对象可视化演示
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 对象可视化 - 吕墨涵</title>
+    <style>
+        :root {
+            --lmh_bg: #0a0f1c;
+            --lmh_line: rgba(120, 200, 255, 0.18);
+            --lmh_cyan: #38e1ff;
+            --lmh_green: #6ef2a8;
+            --lmh_pink: #ff7ac6;
+            --lmh_yellow: #ffd166;
+            --lmh_purple: #c792ea;
+            --lmh_text: #e8f1ff;
+            --lmh_muted: #8ba0bf;
+            --lmh_mono: "Consolas", "Courier New", monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            min-height: 100vh;
+            padding: 36px 20px 56px;
+            color: var(--lmh_text);
+            background:
+                radial-gradient(1100px 560px at 15% -10%, #16304d 0%, transparent 55%),
+                radial-gradient(900px 520px at 92% 8%, #2a1640 0%, transparent 52%),
+                var(--lmh_bg);
+        }
+
+        .lmh_page { max-width: 1120px; margin: 0 auto; }
+
+        /* ========== 头部 ========== */
+        .lmh_header { text-align: center; margin-bottom: 34px; }
+
+        .lmh_kicker {
+            font-family: var(--lmh_mono);
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--lmh_cyan);
+            margin-bottom: 10px;
+        }
+
+        .lmh_header h1 {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        .lmh_header h1 span {
+            color: var(--lmh_cyan);
+            text-shadow: 0 0 24px rgba(56, 225, 255, 0.45);
+        }
+
+        .lmh_sub {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--lmh_muted);
+            line-height: 1.8;
+        }
+
+        .lmh_home {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 6px 16px;
+            font-size: 13px;
+            color: var(--lmh_cyan);
+            text-decoration: none;
+            border: 1px solid rgba(56, 225, 255, 0.5);
+            border-radius: 999px;
+            background: rgba(56, 225, 255, 0.08);
+            transition: background 0.25s, transform 0.25s;
+        }
+
+        .lmh_home:hover {
+            background: rgba(56, 225, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ========== 对象舞台 ========== */
+        .lmh_stage {
+            padding: 22px;
+            margin-bottom: 44px;
+            border: 1px solid var(--lmh_line);
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(56, 225, 255, 0.08), rgba(255, 255, 255, 0.02));
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .lmh_stage_bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .lmh_stage_title {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .lmh_stage_title::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 8px;
+            border-radius: 50%;
+            background: var(--lmh_green);
+            box-shadow: 0 0 10px var(--lmh_green);
+            vertical-align: middle;
+        }
+
+        .lmh_len {
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            color: var(--lmh_muted);
+            padding: 5px 12px;
+            border: 1px solid var(--lmh_line);
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .lmh_len b { color: var(--lmh_green); font-size: 14px; }
+
+        .lmh_stage_body {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(250px, 0.6fr);
+            gap: 16px;
+        }
+
+        .lmh_obj_panel {
+            min-height: 250px;
+            padding: 16px 18px;
+            font-family: var(--lmh_mono);
+            font-size: 13.5px;
+            line-height: 1.7;
+            background: #05101d;
+            border: 1px solid rgba(120, 200, 255, 0.14);
+            border-radius: 14px;
+        }
+
+        .lmh_obj_decl { color: var(--lmh_muted); }
+        .lmh_keyword { color: #ff7b72; }
+        .lmh_brace { color: var(--lmh_yellow); }
+
+        .lmh_obj_rows {
+            margin: 4px 0 4px 8px;
+            padding: 4px 0 4px 16px;
+            border-left: 1px dashed rgba(120, 200, 255, 0.22);
+        }
+
+        .lmh_row {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 4px;
+            padding: 6px 40px 6px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .lmh_row:hover { background: rgba(56, 225, 255, 0.07); }
+
+        .lmh_row--in { animation: lmh_row_in 0.4s ease; }
+        .lmh_row--out { animation: lmh_row_out 0.28s ease forwards; }
+        .lmh_row--flash { animation: lmh_row_flash 0.7s ease; }
+
+        .lmh_row--empty {
+            color: var(--lmh_muted);
+            cursor: default;
+            padding: 10px 8px;
+        }
+
+        .lmh_row--empty:hover { background: transparent; }
+
+        .lmh_key { color: var(--lmh_yellow); }
+        .lmh_colon { color: var(--lmh_muted); }
+        .lmh_comma { color: #5b6b84; }
+        .lmh_val { word-break: break-all; }
+        .lmh_val--string { color: #a5d6ff; }
+        .lmh_val--number { color: var(--lmh_green); }
+        .lmh_val--boolean { color: var(--lmh_pink); }
+        .lmh_val--array,
+        .lmh_val--object { color: var(--lmh_purple); }
+        .lmh_val--null,
+        .lmh_val--undefined { color: var(--lmh_muted); font-style: italic; }
+
+        .lmh_row_del {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            line-height: 1;
+            color: var(--lmh_pink);
+            background: rgba(255, 122, 198, 0.06);
+            border: 1px solid rgba(255, 122, 198, 0.3);
+            border-radius: 6px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-50%);
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lmh_row:hover .lmh_row_del { opacity: 1; }
+        .lmh_row_del:hover { background: rgba(255, 122, 198, 0.22); }
+
+        @keyframes lmh_row_in {
+            from { opacity: 0; transform: translateX(-14px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes lmh_row_out {
+            to { opacity: 0; transform: translateX(26px); }
+        }
+
+        @keyframes lmh_row_flash {
+            0% { background: rgba(56, 225, 255, 0.32); }
+            100% { background: transparent; }
+        }
+
+        .lmh_legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
+            font-size: 11.5px;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 5px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .lmh_dot--string { background: #a5d6ff; }
+        .lmh_dot--number { background: var(--lmh_green); }
+        .lmh_dot--boolean { background: var(--lmh_pink); }
+        .lmh_dot--object { background: var(--lmh_purple); }
+
+        .lmh_side {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 16px;
+            background: rgba(3, 10, 20, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+        }
+
+        .lmh_side_title {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 11.5px;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_input {
+            width: 100%;
+            padding: 8px 10px;
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            color: var(--lmh_text);
+            background: #08121f;
+            border: 1px solid var(--lmh_line);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .lmh_input:focus {
+            border-color: var(--lmh_cyan);
+            box-shadow: 0 0 0 3px rgba(56, 225, 255, 0.15);
+        }
+
+        .lmh_side_btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 2px;
+        }
+
+        .lmh_btn {
+            padding: 8px 12px;
+            font-family: var(--lmh_mono);
+            font-size: 11.5px;
+            color: var(--lmh_cyan);
+            background: rgba(56, 225, 255, 0.06);
+            border: 1px solid rgba(56, 225, 255, 0.35);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, border-color 0.2s;
+        }
+
+        .lmh_btn:hover {
+            background: rgba(56, 225, 255, 0.16);
+            border-color: var(--lmh_cyan);
+            transform: translateY(-2px);
+        }
+
+        .lmh_btn:active { transform: translateY(0) scale(0.97); }
+
+        .lmh_side_btns .lmh_btn { flex: 1 1 calc(50% - 6px); }
+
+        .lmh_btn--danger {
+            color: var(--lmh_pink);
+            background: rgba(255, 122, 198, 0.06);
+            border-color: rgba(255, 122, 198, 0.35);
+        }
+
+        .lmh_btn--danger:hover {
+            background: rgba(255, 122, 198, 0.16);
+            border-color: var(--lmh_pink);
+        }
+
+        .lmh_btn--reset {
+            color: var(--lmh_muted);
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .lmh_btn--reset:hover {
+            color: var(--lmh_text);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .lmh_side_hint {
+            margin-top: auto;
+            font-size: 11px;
+            line-height: 1.7;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_stage_code {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 14px;
+            padding: 12px 14px;
+            font-family: var(--lmh_mono);
+            font-size: 12px;
+            line-height: 1.7;
+            background: #05101d;
+            border: 1px solid rgba(120, 200, 255, 0.12);
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .lmh_prompt { color: var(--lmh_green); font-weight: bold; user-select: none; }
+
+        .lmh_stage_code code {
+            color: #a5d6ff;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .lmh_log {
+            margin-top: 14px;
+            padding: 11px 14px;
+            min-height: 42px;
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: var(--lmh_green);
+            background: #04101c;
+            border-left: 3px solid var(--lmh_cyan);
+            border-radius: 0 8px 8px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .lmh_log--warn {
+            color: var(--lmh_yellow);
+            border-left-color: var(--lmh_yellow);
+        }
+
+        /* ========== 方法卡片 ========== */
+        .lmh_section { margin-bottom: 42px; }
+
+        .lmh_section_head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .lmh_section_head h2 { font-size: 19px; letter-spacing: 1px; }
+
+        .lmh_section_tag {
+            font-family: var(--lmh_mono);
+            font-size: 11.5px;
+            color: var(--lmh_muted);
+            padding: 4px 10px;
+            border: 1px dashed rgba(139, 160, 191, 0.35);
+            border-radius: 999px;
+        }
+
+        .lmh_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .lmh_card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 18px;
+            border: 1px solid rgba(120, 200, 255, 0.14);
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .lmh_card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56, 225, 255, 0.45);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+        }
+
+        .lmh_card_head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .lmh_method {
+            font-family: var(--lmh_mono);
+            font-size: 14.5px;
+            font-weight: bold;
+            color: var(--lmh_cyan);
+        }
+
+        .lmh_pill {
+            padding: 3px 9px;
+            font-size: 10.5px;
+            color: var(--lmh_green);
+            border: 1px solid rgba(110, 242, 168, 0.35);
+            border-radius: 999px;
+            background: rgba(110, 242, 168, 0.08);
+            white-space: nowrap;
+        }
+
+        .lmh_pill--warn {
+            color: var(--lmh_yellow);
+            border-color: rgba(255, 209, 102, 0.4);
+            background: rgba(255, 209, 102, 0.08);
+        }
+
+        .lmh_desc {
+            font-size: 12.5px;
+            line-height: 1.75;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_desc b { color: var(--lmh_text); font-weight: 600; }
+
+        .lmh_code {
+            padding: 10px 12px;
+            font-family: var(--lmh_mono);
+            font-size: 11.5px;
+            line-height: 1.7;
+            color: #a5d6ff;
+            background: #06101c;
+            border: 1px solid rgba(120, 200, 255, 0.1);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .lmh_res {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .lmh_res_key {
+            font-size: 11px;
+            color: var(--lmh_muted);
+            white-space: nowrap;
+        }
+
+        .lmh_res_val {
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            color: var(--lmh_green);
+            word-break: break-all;
+        }
+
+        .lmh_res_val--bool { color: var(--lmh_pink); }
+        .lmh_res_val--flash { animation: lmh_flash 0.8s ease; }
+
+        @keyframes lmh_flash {
+            0% { color: #ffffff; text-shadow: 0 0 14px rgba(110, 242, 168, 0.9); }
+            100% { text-shadow: none; }
+        }
+
+        .lmh_card_btn {
+            align-self: flex-start;
+            margin-top: auto;
+            padding: 7px 12px;
+            font-family: var(--lmh_mono);
+            font-size: 11.5px;
+            color: var(--lmh_yellow);
+            background: rgba(255, 209, 102, 0.06);
+            border: 1px solid rgba(255, 209, 102, 0.35);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .lmh_card_btn:hover {
+            background: rgba(255, 209, 102, 0.16);
+            transform: translateY(-2px);
+        }
+
+        /* ========== 引用与拷贝 ========== */
+        .lmh_ref_code { margin-bottom: 16px; }
+
+        .lmh_ref_lab {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .lmh_ref_group {
+            padding: 16px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(120, 200, 255, 0.14);
+            border-radius: 14px;
+        }
+
+        .lmh_ref_vars {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .lmh_chip {
+            padding: 6px 12px;
+            font-family: var(--lmh_mono);
+            font-size: 12.5px;
+            color: var(--lmh_cyan);
+            background: rgba(56, 225, 255, 0.08);
+            border: 1px solid rgba(56, 225, 255, 0.35);
+            border-radius: 8px;
+        }
+
+        .lmh_chip--copy {
+            color: var(--lmh_yellow);
+            background: rgba(255, 209, 102, 0.08);
+            border-color: rgba(255, 209, 102, 0.35);
+        }
+
+        .lmh_chip--flash { animation: lmh_chip_flash 0.7s ease; }
+
+        @keyframes lmh_chip_flash {
+            0% { background: rgba(255, 255, 255, 0.35); color: #05121e; }
+            100% { background: rgba(56, 225, 255, 0.08); }
+        }
+
+        .lmh_ref_arrow {
+            margin: 8px 0;
+            font-size: 11.5px;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_ref_box {
+            padding: 14px;
+            background: #05101d;
+            border: 1px dashed rgba(56, 225, 255, 0.3);
+            border-radius: 12px;
+        }
+
+        .lmh_ref_box--flash { animation: lmh_box_flash 0.8s ease; }
+
+        @keyframes lmh_box_flash {
+            0% { border-color: #ffffff; box-shadow: 0 0 24px rgba(56, 225, 255, 0.55); }
+            100% { box-shadow: none; }
+        }
+
+        .lmh_ref_box_title {
+            margin-bottom: 8px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_ref_prop {
+            font-family: var(--lmh_mono);
+            font-size: 14px;
+            color: #a5d6ff;
+        }
+
+        .lmh_ref_prop b { font-size: 21px; color: var(--lmh_green); }
+
+        .lmh_ref_note {
+            margin-top: 10px;
+            font-size: 11.5px;
+            line-height: 1.7;
+            color: var(--lmh_muted);
+        }
+
+        .lmh_ref_actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .lmh_ref_actions .lmh_btn { font-size: 12px; }
+
+        .lmh_footer {
+            margin-top: 18px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.9;
+            color: #5b6b84;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 820px) {
+            .lmh_stage_body { grid-template-columns: 1fr; }
+            .lmh_obj_panel { min-height: 0; }
+            .lmh_row_del { opacity: 1; }
+        }
+
+        @media (max-width: 620px) {
+            .lmh_ref_lab { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 520px) {
+            body { padding: 24px 14px 44px; }
+            .lmh_stage { padding: 16px; }
+            .lmh_obj_panel { padding: 14px; font-size: 12.5px; }
+            .lmh_grid { grid-template-columns: 1fr; }
+            .lmh_side_btns .lmh_btn { flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lmh_page">
+
+        <header class="lmh_header">
+            <p class="lmh_kicker">JAVASCRIPT · OBJECT</p>
+            <h1>JavaScript 对象 <span>可视化实验室</span></h1>
+            <p class="lmh_sub">对象就是一组“键 → 值”。点一点、改一改，看看属性、方法和引用是怎么工作的。</p>
+            <a href="13 -3-4/index.html" class="lmh_home">← 返回首页</a>
+        </header>
+
+        <!-- ===== 对象舞台 ===== -->
+        <section class="lmh_stage" aria-label="对象舞台">
+            <div class="lmh_stage_bar">
+                <span class="lmh_stage_title">对象舞台</span>
+                <span class="lmh_len"><b id="lmh_count">5</b> 个属性</span>
+            </div>
+
+            <div class="lmh_stage_body">
+                <div class="lmh_obj_panel">
+                    <div class="lmh_obj_decl"><span class="lmh_keyword">var</span> lmh_stu = <span class="lmh_brace">{</span></div>
+                    <div class="lmh_obj_rows" id="lmh_obj_rows"></div>
+                    <div class="lmh_obj_decl"><span class="lmh_brace">}</span>;</div>
+
+                    <div class="lmh_legend">
+                        <span><i class="lmh_dot lmh_dot--string"></i>字符串</span>
+                        <span><i class="lmh_dot lmh_dot--number"></i>数字</span>
+                        <span><i class="lmh_dot lmh_dot--boolean"></i>布尔</span>
+                        <span><i class="lmh_dot lmh_dot--object"></i>数组 / 对象</span>
+                    </div>
+                </div>
+
+                <div class="lmh_side">
+                    <p class="lmh_side_title">操作这个对象</p>
+                    <label class="lmh_field">
+                        <span>属性名 key</span>
+                        <input class="lmh_input" id="lmh_key_input" type="text" value="age" maxlength="16">
+                    </label>
+                    <label class="lmh_field">
+                        <span>属性值 value</span>
+                        <input class="lmh_input" id="lmh_value_input" type="text" value="20" maxlength="40">
+                    </label>
+                    <div class="lmh_side_btns">
+                        <button class="lmh_btn" type="button" data-obj-act="set">设置属性</button>
+                        <button class="lmh_btn" type="button" data-obj-act="read">读取属性</button>
+                        <button class="lmh_btn lmh_btn--danger" type="button" data-obj-act="del">delete 删除</button>
+                        <button class="lmh_btn lmh_btn--reset" type="button" data-obj-act="reset">重置</button>
+                    </div>
+                    <p class="lmh_side_hint">点击左边的属性行也能直接读取值；输入的数字、true / false、[数组]、{对象} 会自动识别成对应类型。</p>
+                </div>
+            </div>
+
+            <div class="lmh_stage_code">
+                <span class="lmh_prompt">&gt;</span>
+                <code id="lmh_code">lmh_stu = {"name":"吕墨涵","age":19};</code>
+            </div>
+
+            <div class="lmh_log" id="lmh_log" aria-live="polite">提示：点一下名字，或者改个属性值试试。</div>
+        </section>
+
+        <!-- ===== 创建对象 ===== -->
+        <section class="lmh_section">
+            <div class="lmh_section_head">
+                <h2>创建对象的三种方式</h2>
+                <span class="lmh_section_tag">{ } · new Object() · 构造函数</span>
+            </div>
+
+            <div class="lmh_grid">
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">对象字面量</code>
+                        <span class="lmh_pill">最常用</span>
+                    </div>
+                    <pre class="lmh_code">var lmh_stu = {
+    name: "吕墨涵",
+    age: 19
+};</pre>
+                    <p class="lmh_desc">直接用 <b>{ }</b> 写键值对。键名符合标识符规则时可以省略引号，值可以是任意类型。</p>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">new Object()</code>
+                        <span class="lmh_pill lmh_pill--warn">能用但不推荐</span>
+                    </div>
+                    <pre class="lmh_code">var lmh_stu = new Object();
+lmh_stu.name = "吕墨涵";
+lmh_stu.age = 19;</pre>
+                    <p class="lmh_desc">先造一个空对象，再一个个挂属性。能跑，但写起来啰嗦，现代代码几乎都用字面量。</p>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">构造函数 + new</code>
+                        <span class="lmh_pill">批量创建</span>
+                    </div>
+                    <pre class="lmh_code">var lmh_Student = function (name, age) {
+    this.name = name;
+    this.age = age;
+};
+var lmh_stu = new lmh_Student("吕墨涵", 19);</pre>
+                    <p class="lmh_desc">把函数当“模具”，<b>this</b> 指向新对象，适合批量创建结构相同的对象。</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== 读取与判断 ===== -->
+        <section class="lmh_section">
+            <div class="lmh_section_head">
+                <h2>读取属性与判断</h2>
+                <span class="lmh_section_tag">non-mutating · 结果跟着上面的对象实时变化</span>
+            </div>
+
+            <div class="lmh_grid">
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">对象.属性名</code>
+                        <span class="lmh_pill">点语法</span>
+                    </div>
+                    <p class="lmh_desc">最直接的读法：对象后面点一个键名。键名必须是合法的标识符。</p>
+                    <pre class="lmh_code">var lmh_name = lmh_stu.name;</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="dot">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">对象["属性名"]</code>
+                        <span class="lmh_pill">方括号</span>
+                    </div>
+                    <p class="lmh_desc">括号里可以放字符串，也可以放变量。键名带空格、带横线时只能这样读。</p>
+                    <pre class="lmh_code">var lmh_age = lmh_stu["age"];</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="bracket">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">var { name, age } = obj</code>
+                        <span class="lmh_pill">解构赋值</span>
+                    </div>
+                    <p class="lmh_desc">一次性把多个属性“拆”出来装进变量，变量名要和键名对得上。</p>
+                    <pre class="lmh_code">var { name, age } = lmh_stu;</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">name / age</span>
+                        <span class="lmh_res_val" data-demo="destructure">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">"键" in 对象</code>
+                        <span class="lmh_pill">返回布尔值</span>
+                    </div>
+                    <p class="lmh_desc">问“这个属性在不在”，会连原型链一起查，返回 true 或 false。</p>
+                    <pre class="lmh_code">var lmh_hasCity = "city" in lmh_stu;</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="in">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">对象.hasOwnProperty(键)</code>
+                        <span class="lmh_pill">只看自己</span>
+                    </div>
+                    <p class="lmh_desc">只检查对象自己有没有这个属性，不去原型链上找，更严谨。</p>
+                    <pre class="lmh_code">var lmh_own = lmh_stu.hasOwnProperty("skills");</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="hasOwn">…</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== 遍历与转换 ===== -->
+        <section class="lmh_section">
+            <div class="lmh_section_head">
+                <h2>遍历与转换</h2>
+                <span class="lmh_section_tag">Object.keys / values / entries / JSON</span>
+            </div>
+
+            <div class="lmh_grid">
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">Object.keys(对象)</code>
+                        <span class="lmh_pill">返回数组</span>
+                    </div>
+                    <p class="lmh_desc">把所有键名收集成一个数组，配合 forEach 就能遍历对象。</p>
+                    <pre class="lmh_code">var lmh_keys = Object.keys(lmh_stu);</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="keys">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">Object.values(对象)</code>
+                        <span class="lmh_pill">返回数组</span>
+                    </div>
+                    <p class="lmh_desc">只要值、不要键，按属性的顺序收集成一个数组。</p>
+                    <pre class="lmh_code">var lmh_values = Object.values(lmh_stu);</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="values">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">Object.entries(对象)</code>
+                        <span class="lmh_pill">返回二维数组</span>
+                    </div>
+                    <p class="lmh_desc">每个属性变成 <b>[key, value]</b> 小数组，再组成一个大数组。</p>
+                    <pre class="lmh_code">var lmh_entries = Object.entries(lmh_stu);</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="entries">…</span>
+                    </div>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">JSON.stringify(对象)</code>
+                        <span class="lmh_pill">返回字符串</span>
+                    </div>
+                    <p class="lmh_desc">把对象压成 JSON 字符串，方便存到本地或发给服务器。函数和 undefined 会被忽略。</p>
+                    <pre class="lmh_code">var lmh_json = JSON.stringify(lmh_stu);</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" data-demo="json">…</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== 对象的方法 ===== -->
+        <section class="lmh_section">
+            <div class="lmh_section_head">
+                <h2>对象里也能放函数</h2>
+                <span class="lmh_section_tag">方法 · this · 调用者</span>
+            </div>
+
+            <div class="lmh_grid">
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">方法 + this</code>
+                        <span class="lmh_pill">函数也是值</span>
+                    </div>
+                    <p class="lmh_desc">属性的值可以是函数，这时叫“方法”。<b>this</b> 指向调用它的那个对象。</p>
+                    <pre class="lmh_code">var lmh_person = {
+    name: "吕墨涵",
+    say: function () {
+        return "我是" + this.name;
+    }
+};
+lmh_person.say();</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val" id="lmh_say_result">点下面的按钮试试</span>
+                    </div>
+                    <button class="lmh_card_btn" type="button" id="lmh_say_btn">调用 lmh_person.say()</button>
+                </article>
+
+                <article class="lmh_card">
+                    <div class="lmh_card_head">
+                        <code class="lmh_method">this 跟着调用者走</code>
+                        <span class="lmh_pill">同一个函数</span>
+                    </div>
+                    <p class="lmh_desc">把方法“借”给另一个对象，this 就变成那个对象，不再是原来的对象。</p>
+                    <pre class="lmh_code">var lmh_a = { name: "A", say: lmh_person.say };
+var lmh_b = { name: "B", say: lmh_person.say };
+lmh_b.say();   // 返回 "我是B"</pre>
+                    <div class="lmh_res">
+                        <span class="lmh_res_key">返回值</span>
+                        <span class="lmh_res_val">"我是B"</span>
+                    </div>
+                    <p class="lmh_desc">函数本身不记住 this，谁调用，this 就指向谁。</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== 引用与拷贝 ===== -->
+        <section class="lmh_section">
+            <div class="lmh_section_head">
+                <h2>对象是引用类型</h2>
+                <span class="lmh_section_tag">赋值 ≠ 复制 · 一个改，全部变</span>
+            </div>
+
+            <pre class="lmh_code lmh_ref_code">var lmh_a = { score: 90 };
+var lmh_b = lmh_a;                        // 赋值：只是多了一个指向
+var lmh_c = Object.assign({}, lmh_a);     // 拷贝：新对象，新内存</pre>
+
+            <div class="lmh_ref_lab">
+                <div class="lmh_ref_group">
+                    <div class="lmh_ref_vars">
+                        <span class="lmh_chip" id="lmh_chip_a">lmh_a</span>
+                        <span class="lmh_chip" id="lmh_chip_b">lmh_b</span>
+                    </div>
+                    <div class="lmh_ref_arrow">↓ 两个变量，指向同一块内存</div>
+                    <div class="lmh_ref_box" id="lmh_ref_shared_box">
+                        <div class="lmh_ref_box_title">同一个对象</div>
+                        <div class="lmh_ref_prop">score: <b id="lmh_ref_shared">90</b></div>
+                    </div>
+                    <p class="lmh_ref_note">改 a 或 b，另一边都会跟着变</p>
+                </div>
+
+                <div class="lmh_ref_group">
+                    <div class="lmh_ref_vars">
+                        <span class="lmh_chip lmh_chip--copy" id="lmh_chip_c">lmh_c</span>
+                    </div>
+                    <div class="lmh_ref_arrow">↓ Object.assign 复制出的新对象</div>
+                    <div class="lmh_ref_box" id="lmh_ref_copy_box">
+                        <div class="lmh_ref_box_title">另一块内存</div>
+                        <div class="lmh_ref_prop">score: <b id="lmh_ref_copy">90</b></div>
+                    </div>
+                    <p class="lmh_ref_note">改 c 不会影响 a / b</p>
+                </div>
+            </div>
+
+            <div class="lmh_ref_actions">
+                <button class="lmh_btn" type="button" data-ref="b">lmh_b.score += 10</button>
+                <button class="lmh_btn" type="button" data-ref="c">lmh_c.score += 10</button>
+                <button class="lmh_btn lmh_btn--reset" type="button" data-ref="reset">重置</button>
+            </div>
+
+            <div class="lmh_log" id="lmh_ref_log" aria-live="polite">点按钮，看看改 b 和改 c 有什么区别。</div>
+        </section>
+
+        <footer class="lmh_footer">
+            <p>吕墨涵 · 24005240119 · JavaScript 对象演示 · 2026-10-29</p>
+            <p>键值对是骨架，方法是动作，引用是对象最容易踩的坑。</p>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // ========== 对象舞台 ==========
+
+            function lmh_initialData() {
+                return {
+                    name: '吕墨涵',
+                    age: 19,
+                    city: '上海',
+                    skills: ['HTML', 'CSS', 'JS'],
+                    isStudent: true
+                };
+            }
+
+            var lmh_stu = lmh_initialData();
+            var lmh_busy = false;
+
+            var lmh_rowsBox = document.getElementById('lmh_obj_rows');
+            var lmh_countBox = document.getElementById('lmh_count');
+            var lmh_codeBox = document.getElementById('lmh_code');
+            var lmh_logBox = document.getElementById('lmh_log');
+            var lmh_keyInput = document.getElementById('lmh_key_input');
+            var lmh_valueInput = document.getElementById('lmh_value_input');
+
+            // 把任意值转成界面上好读的样子
+            function lmh_format(lmh_value) {
+                if (Array.isArray(lmh_value)) {
+                    return '[' + lmh_value.map(lmh_format).join(', ') + ']';
+                }
+                if (lmh_value !== null && typeof lmh_value === 'object') {
+                    var lmh_parts = Object.keys(lmh_value).map(function (lmh_key) {
+                        return lmh_key + ': ' + lmh_format(lmh_value[lmh_key]);
+                    });
+                    return '{' + lmh_parts.join(', ') + '}';
+                }
+                if (typeof lmh_value === 'string') {
+                    return '"' + lmh_value + '"';
+                }
+                return String(lmh_value);
+            }
+
+            function lmh_valueClass(lmh_value) {
+                if (Array.isArray(lmh_value)) {
+                    return 'lmh_val--array';
+                }
+                if (lmh_value === null) {
+                    return 'lmh_val--null';
+                }
+                var lmh_type = typeof lmh_value;
+                if (lmh_type === 'object') {
+                    return 'lmh_val--object';
+                }
+                return 'lmh_val--' + lmh_type;
+            }
+
+            function lmh_isIdentifier(lmh_key) {
+                return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(lmh_key);
+            }
+
+            function lmh_notation(lmh_key) {
+                return lmh_isIdentifier(lmh_key)
+                    ? 'lmh_stu.' + lmh_key
+                    : 'lmh_stu[' + JSON.stringify(lmh_key) + ']';
+            }
+
+            function lmh_log(lmh_text, lmh_isWarn) {
+                lmh_logBox.textContent = lmh_text;
+                lmh_logBox.classList.toggle('lmh_log--warn', !!lmh_isWarn);
+            }
+
+            function lmh_flashRow(lmh_key) {
+                var lmh_rows = lmh_rowsBox.children;
+                for (var lmh_i = 0; lmh_i < lmh_rows.length; lmh_i++) {
+                    if (lmh_rows[lmh_i].getAttribute('data-key') === lmh_key) {
+                        lmh_rows[lmh_i].classList.remove('lmh_row--flash');
+                        void lmh_rows[lmh_i].offsetWidth;
+                        lmh_rows[lmh_i].classList.add('lmh_row--flash');
+                    }
+                }
+            }
+
+            function lmh_readKey(lmh_key) {
+                if (!Object.prototype.hasOwnProperty.call(lmh_stu, lmh_key)) {
+                    lmh_log(lmh_notation(lmh_key) + ' → undefined（这个属性不存在）', true);
+                    return;
+                }
+                lmh_log(lmh_notation(lmh_key) + ' → ' + lmh_format(lmh_stu[lmh_key]));
+                lmh_flashRow(lmh_key);
+            }
+
+            // 渲染对象里的每一行
+            function lmh_render(lmh_opts) {
+                lmh_opts = lmh_opts || {};
+                lmh_rowsBox.innerHTML = '';
+
+                var lmh_keys = Object.keys(lmh_stu);
+
+                if (lmh_keys.length === 0) {
+                    var lmh_empty = document.createElement('div');
+                    lmh_empty.className = 'lmh_row lmh_row--empty';
+                    lmh_empty.textContent = '空对象 { }，一个属性也没有';
+                    lmh_rowsBox.appendChild(lmh_empty);
+                }
+
+                for (var lmh_i = 0; lmh_i < lmh_keys.length; lmh_i++) {
+                    var lmh_key = lmh_keys[lmh_i];
+                    var lmh_value = lmh_stu[lmh_key];
+
+                    var lmh_row = document.createElement('div');
+                    lmh_row.className = 'lmh_row';
+                    lmh_row.setAttribute('data-key', lmh_key);
+                    lmh_row.title = '点击读取 ' + lmh_notation(lmh_key);
+
+                    if (lmh_opts.inKey === lmh_key) {
+                        lmh_row.classList.add('lmh_row--in');
+                    }
+                    if (lmh_opts.flashKey === lmh_key) {
+                        lmh_row.classList.add('lmh_row--flash');
+                    }
+
+                    var lmh_keyEl = document.createElement('span');
+                    lmh_keyEl.className = 'lmh_key';
+                    lmh_keyEl.textContent = lmh_key;
+
+                    var lmh_colon = document.createElement('span');
+                    lmh_colon.className = 'lmh_colon';
+                    lmh_colon.textContent = ':';
+
+                    var lmh_valEl = document.createElement('span');
+                    lmh_valEl.className = 'lmh_val ' + lmh_valueClass(lmh_value);
+                    lmh_valEl.textContent = lmh_format(lmh_value);
+
+                    var lmh_comma = document.createElement('span');
+                    lmh_comma.className = 'lmh_comma';
+                    lmh_comma.textContent = (lmh_i < lmh_keys.length - 1) ? ',' : '';
+
+                    var lmh_delBtn = document.createElement('button');
+                    lmh_delBtn.type = 'button';
+                    lmh_delBtn.className = 'lmh_row_del';
+                    lmh_delBtn.textContent = '×';
+                    lmh_delBtn.title = 'delete ' + lmh_notation(lmh_key);
+                    lmh_delBtn.addEventListener('click', (function (lmh_k) {
+                        return function (lmh_event) {
+                            lmh_event.stopPropagation();
+                            lmh_deleteKey(lmh_k);
+                        };
+                    })(lmh_key));
+
+                    lmh_row.appendChild(lmh_keyEl);
+                    lmh_row.appendChild(lmh_colon);
+                    lmh_row.appendChild(lmh_valEl);
+                    lmh_row.appendChild(lmh_comma);
+                    lmh_row.appendChild(lmh_delBtn);
+
+                    lmh_row.addEventListener('click', (function (lmh_k) {
+                        return function () {
+                            lmh_readKey(lmh_k);
+                        };
+                    })(lmh_key));
+
+                    lmh_rowsBox.appendChild(lmh_row);
+                }
+
+                lmh_countBox.textContent = lmh_keys.length;
+                lmh_codeBox.textContent = 'lmh_stu = ' + JSON.stringify(lmh_stu) + ';';
+                lmh_updateResults();
+            }
+
+            // 解析输入框里的值，让它带上正确的类型
+            function lmh_parseValue(lmh_text) {
+                var lmh_t = lmh_text.trim();
+
+                if (lmh_t === 'true') { return true; }
+                if (lmh_t === 'false') { return false; }
+                if (lmh_t === 'null') { return null; }
+                if (lmh_t === '') { return ''; }
+
+                if (!isNaN(Number(lmh_t))) {
+                    return Number(lmh_t);
+                }
+
+                if (lmh_t.charAt(0) === '"' && lmh_t.charAt(lmh_t.length - 1) === '"') {
+                    return lmh_t.slice(1, -1);
+                }
+
+                if ((lmh_t.charAt(0) === '[' && lmh_t.charAt(lmh_t.length - 1) === ']') ||
+                    (lmh_t.charAt(0) === '{' && lmh_t.charAt(lmh_t.length - 1) === '}')) {
+                    try {
+                        return JSON.parse(lmh_t);
+                    } catch (lmh_error) {
+                        return lmh_t;
+                    }
+                }
+
+                return lmh_t;
+            }
+
+            function lmh_setProperty() {
+                if (lmh_busy) {
+                    return;
+                }
+
+                var lmh_key = lmh_keyInput.value.trim();
+                if (lmh_key === '') {
+                    lmh_log('属性名不能为空，先在左边输入一个 key。', true);
+                    return;
+                }
+
+                var lmh_value = lmh_parseValue(lmh_valueInput.value);
+                var lmh_existed = Object.prototype.hasOwnProperty.call(lmh_stu, lmh_key);
+
+                lmh_stu[lmh_key] = lmh_value;
+                lmh_render(lmh_existed ? { flashKey: lmh_key } : { inKey: lmh_key });
+
+                lmh_log((lmh_existed ? '修改属性：' : '新增属性：') +
+                    lmh_notation(lmh_key) + ' = ' + lmh_format(lmh_value) +
+                    ' → 现在有 ' + Object.keys(lmh_stu).length + ' 个属性');
+            }
+
+            function lmh_deleteKey(lmh_key) {
+                if (lmh_busy) {
+                    return;
+                }
+
+                if (!Object.prototype.hasOwnProperty.call(lmh_stu, lmh_key)) {
+                    lmh_log(lmh_notation(lmh_key) + ' 不存在，delete 不会报错，但什么也没删。', true);
+                    return;
+                }
+
+                var lmh_target = null;
+                var lmh_rows = lmh_rowsBox.children;
+                for (var lmh_i = 0; lmh_i < lmh_rows.length; lmh_i++) {
+                    if (lmh_rows[lmh_i].getAttribute('data-key') === lmh_key) {
+                        lmh_target = lmh_rows[lmh_i];
+                    }
+                }
+
+                if (lmh_target) {
+                    lmh_target.classList.add('lmh_row--out');
+                }
+
+                lmh_busy = true;
+                setTimeout(function () {
+                    delete lmh_stu[lmh_key];
+                    lmh_render();
+                    lmh_busy = false;
+                    lmh_log('delete ' + lmh_notation(lmh_key) + ' → true，剩 ' +
+                        Object.keys(lmh_stu).length + ' 个属性');
+                }, 280);
+            }
+
+            function lmh_resetObject() {
+                if (lmh_busy) {
+                    return;
+                }
+                lmh_stu = lmh_initialData();
+                lmh_render();
+                lmh_log('已重置，回到最初的 5 个属性。');
+            }
+
+            var lmh_objActBtns = document.querySelectorAll('[data-obj-act]');
+            for (var lmh_i = 0; lmh_i < lmh_objActBtns.length; lmh_i++) {
+                lmh_objActBtns[lmh_i].addEventListener('click', function () {
+                    var lmh_act = this.getAttribute('data-obj-act');
+                    var lmh_key = lmh_keyInput.value.trim();
+
+                    if (lmh_act === 'set') {
+                        lmh_setProperty();
+                    } else if (lmh_act === 'read') {
+                        if (lmh_key === '') {
+                            lmh_log('先输入要读取的属性名。', true);
+                            return;
+                        }
+                        lmh_readKey(lmh_key);
+                    } else if (lmh_act === 'del') {
+                        if (lmh_key === '') {
+                            lmh_log('先输入要删除的属性名。', true);
+                            return;
+                        }
+                        lmh_deleteKey(lmh_key);
+                    } else if (lmh_act === 'reset') {
+                        lmh_resetObject();
+                    }
+                });
+            }
+
+            lmh_keyInput.addEventListener('keydown', function (lmh_event) {
+                if (lmh_event.key === 'Enter') {
+                    lmh_setProperty();
+                }
+            });
+
+            lmh_valueInput.addEventListener('keydown', function (lmh_event) {
+                if (lmh_event.key === 'Enter') {
+                    lmh_setProperty();
+                }
+            });
+
+            // ========== 实时结果卡片 ==========
+
+            var lmh_demos = {
+                dot: function () {
+                    return lmh_stu.name;
+                },
+                bracket: function () {
+                    return lmh_stu['age'];
+                },
+                destructure: function () {
+                    var lmh_name = lmh_stu.name;
+                    var lmh_age = lmh_stu.age;
+                    return [lmh_name, lmh_age];
+                },
+                in: function () {
+                    return 'city' in lmh_stu;
+                },
+                hasOwn: function () {
+                    return Object.prototype.hasOwnProperty.call(lmh_stu, 'skills');
+                },
+                keys: function () {
+                    return Object.keys(lmh_stu);
+                },
+                values: function () {
+                    return Object.values(lmh_stu);
+                },
+                entries: function () {
+                    return Object.entries(lmh_stu);
+                },
+                json: function () {
+                    return JSON.stringify(lmh_stu);
+                }
+            };
+
+            function lmh_updateResults() {
+                var lmh_nodes = document.querySelectorAll('.lmh_res_val[data-demo]');
+                for (var lmh_i = 0; lmh_i < lmh_nodes.length; lmh_i++) {
+                    var lmh_key = lmh_nodes[lmh_i].getAttribute('data-demo');
+                    var lmh_value = lmh_demos[lmh_key] ? lmh_demos[lmh_key]() : '—';
+
+                    // JSON 卡片直接显示字符串本身，读起来更像 JSON
+                    lmh_nodes[lmh_i].textContent = (lmh_key === 'json')
+                        ? String(lmh_value)
+                        : lmh_format(lmh_value);
+                    lmh_nodes[lmh_i].classList.toggle('lmh_res_val--bool', typeof lmh_value === 'boolean');
+
+                    lmh_nodes[lmh_i].classList.remove('lmh_res_val--flash');
+                    void lmh_nodes[lmh_i].offsetWidth;
+                    lmh_nodes[lmh_i].classList.add('lmh_res_val--flash');
+                }
+            }
+
+            // ========== 方法演示 ==========
+
+            var lmh_person = {
+                name: '吕墨涵',
+                say: function () {
+                    return '我是' + this.name;
+                }
+            };
+
+            var lmh_sayResult = document.getElementById('lmh_say_result');
+            document.getElementById('lmh_say_btn').addEventListener('click', function () {
+                lmh_sayResult.textContent = '"' + lmh_person.say() + '"';
+                lmh_sayResult.classList.remove('lmh_res_val--flash');
+                void lmh_sayResult.offsetWidth;
+                lmh_sayResult.classList.add('lmh_res_val--flash');
+            });
+
+            // ========== 引用与拷贝 ==========
+
+            var lmh_refA = { score: 90 };
+            var lmh_refB = lmh_refA;
+            var lmh_refC = Object.assign({}, lmh_refA);
+
+            var lmh_sharedScore = document.getElementById('lmh_ref_shared');
+            var lmh_copyScore = document.getElementById('lmh_ref_copy');
+            var lmh_sharedBox = document.getElementById('lmh_ref_shared_box');
+            var lmh_copyBox = document.getElementById('lmh_ref_copy_box');
+            var lmh_chipA = document.getElementById('lmh_chip_a');
+            var lmh_chipB = document.getElementById('lmh_chip_b');
+            var lmh_chipC = document.getElementById('lmh_chip_c');
+            var lmh_refLog = document.getElementById('lmh_ref_log');
+
+            function lmh_refLogText(lmh_text) {
+                lmh_refLog.textContent = lmh_text;
+            }
+
+            function lmh_playFlash(lmh_node) {
+                lmh_node.classList.remove('lmh_chip--flash', 'lmh_ref_box--flash');
+                void lmh_node.offsetWidth;
+                lmh_node.classList.add(lmh_node.classList.contains('lmh_ref_box') ? 'lmh_ref_box--flash' : 'lmh_chip--flash');
+            }
+
+            function lmh_updateRef() {
+                lmh_sharedScore.textContent = lmh_refA.score;
+                lmh_copyScore.textContent = lmh_refC.score;
+            }
+
+            document.querySelector('[data-ref="b"]').addEventListener('click', function () {
+                lmh_refB.score += 10;
+                lmh_updateRef();
+                lmh_playFlash(lmh_sharedBox);
+                lmh_playFlash(lmh_chipA);
+                lmh_playFlash(lmh_chipB);
+                lmh_refLogText('lmh_b.score += 10 → ' + lmh_refB.score +
+                    '；lmh_a.score 也变成 ' + lmh_refA.score + '，因为它们指向同一个对象。');
+            });
+
+            document.querySelector('[data-ref="c"]').addEventListener('click', function () {
+                lmh_refC.score += 10;
+                lmh_updateRef();
+                lmh_playFlash(lmh_copyBox);
+                lmh_playFlash(lmh_chipC);
+                lmh_refLogText('lmh_c.score += 10 → ' + lmh_refC.score +
+                    '；lmh_a.score 还是 ' + lmh_refA.score + '，因为 c 是复制出来的新对象。');
+            });
+
+            document.querySelector('[data-ref="reset"]').addEventListener('click', function () {
+                lmh_refA = { score: 90 };
+                lmh_refB = lmh_refA;
+                lmh_refC = Object.assign({}, lmh_refA);
+                lmh_updateRef();
+                lmh_refLogText('已重置：a / b 重新指向同一个新对象，c 是另一个拷贝。');
+            });
+
+            // 初始化
+            lmh_render();
+        })();
+    </script>
+</body>
+</html>
