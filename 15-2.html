@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 程序结构 - 吕墨涵</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            min-height: 100vh;
+            padding: 36px 20px 56px;
+            color: #e8f1ff;
+            background:
+                radial-gradient(900px 500px at 15% -10%, #16304d 0%, transparent 55%),
+                radial-gradient(800px 480px at 92% 8%, #2a1640 0%, transparent 52%),
+                #0a0f1c;
+        }
+        .lvmohan_page { max-width: 1080px; margin: 0 auto; }
+
+        .lvmohan_header { text-align: center; margin-bottom: 34px; }
+        .lvmohan_kicker {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px; letter-spacing: 4px; color: #38e1ff; margin-bottom: 10px;
+        }
+        .lvmohan_header h1 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; letter-spacing: 1px; }
+        .lvmohan_header h1 span { color: #38e1ff; text-shadow: 0 0 24px rgba(56,225,255,.45); }
+        .lvmohan_sub { margin-top: 12px; font-size: 14px; color: #8ba0bf; line-height: 1.8; }
+
+        .lvmohan_section { margin-bottom: 44px; }
+        .lvmohan_section_head {
+            display: flex; flex-wrap: wrap; align-items: baseline;
+            gap: 12px; margin-bottom: 16px;
+        }
+        .lvmohan_section_head h2 { font-size: 19px; letter-spacing: 1px; }
+        .lvmohan_section_tag {
+            font-family: Consolas, monospace; font-size: 11.5px; color: #8ba0bf;
+            padding: 4px 10px; border: 1px dashed rgba(139,160,191,.35); border-radius: 999px;
+        }
+
+        .lvmohan_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .lvmohan_card {
+            display: flex; flex-direction: column;
+            padding: 18px;
+            border: 1px solid rgba(120,200,255,.14);
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .lvmohan_card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56,225,255,.45);
+            box-shadow: 0 14px 32px rgba(0,0,0,.38);
+        }
+
+        .lvmohan_card_head {
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;
+            margin-bottom: 10px;
+        }
+        .lvmohan_title { font-size: 15px; font-weight: 600; letter-spacing: .5px; }
+        .lvmohan_pill {
+            font-family: Consolas, monospace; font-size: 11px;
+            padding: 3px 9px; border-radius: 999px;
+        }
+        .lvmohan_pill--cyan { color: #38e1ff; border: 1px solid rgba(56,225,255,.4); background: rgba(56,225,255,.08); }
+        .lvmohan_pill--pink { color: #ff7ac6; border: 1px solid rgba(255,122,198,.4); background: rgba(255,122,198,.08); }
+        .lvmohan_pill--green { color: #6ef2a8; border: 1px solid rgba(110,242,168,.4); background: rgba(110,242,168,.08); }
+        .lvmohan_pill--yellow { color: #ffd166; border: 1px solid rgba(255,209,102,.4); background: rgba(255,209,102,.08); }
+
+        .lvmohan_desc { font-size: 12.5px; line-height: 1.75; color: #8ba0bf; margin-bottom: 10px; }
+
+        .lvmohan_code {
+            padding: 12px 14px; margin-bottom: 12px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px; line-height: 1.75; color: #a5d6ff;
+            background: #06101c; border: 1px solid rgba(120,200,255,.1);
+            border-radius: 10px; overflow-x: auto; white-space: pre;
+        }
+        .lvmohan_code .kw { color: #ff7ac6; }
+        .lvmohan_code .fn { color: #ffd166; }
+        .lvmohan_code .str { color: #6ef2a8; }
+        .lvmohan_code .num { color: #38e1ff; }
+        .lvmohan_code .cm { color: #5b6b84; font-style: italic; }
+
+        .lvmohan_output {
+            min-height: 46px; max-height: 130px; overflow-y: auto;
+            padding: 10px 12px; margin-bottom: 12px;
+            font-family: Consolas, monospace;
+            font-size: 12px; line-height: 1.7;
+            color: #6ef2a8; background: #04101c;
+            border-left: 3px solid #38e1ff; border-radius: 0 8px 8px 0;
+            white-space: pre-wrap; word-break: break-all;
+        }
+        .lvmohan_output:empty::before {
+            content: "点击 ▶ 运行 查看输出";
+            color: #5b6b84;
+        }
+
+        .lvmohan_controls { display: flex; gap: 8px; margin-top: auto; }
+        .lvmohan_btn {
+            padding: 8px 14px; font-size: 12px; font-family: Consolas, monospace;
+            color: #38e1ff; background: rgba(56,225,255,.06);
+            border: 1px solid rgba(56,225,255,.35); border-radius: 8px;
+            cursor: pointer; transition: all .2s;
+        }
+        .lvmohan_btn:hover { background: rgba(56,225,255,.18); border-color: #38e1ff; transform: translateY(-1px); }
+        .lvmohan_btn:active { transform: translateY(0) scale(.97); }
+        .lvmohan_btn--alt {
+            color: #ff7ac6; background: rgba(255,122,198,.06);
+            border-color: rgba(255,122,198,.35);
+        }
+        .lvmohan_btn--alt:hover { background: rgba(255,122,198,.16); border-color: #ff7ac6; }
+
+        .lvmohan_footer {
+            margin-top: 30px; padding-top: 20px; text-align: center;
+            font-size: 12px; line-height: 1.9; color: #5b6b84;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+
+        @media (max-width: 520px) {
+            body { padding: 24px 14px 44px; }
+            .lvmohan_grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="lvmohan_page">
+
+    <header class="lvmohan_header">
+        <p class="lvmohan_kicker">JAVASCRIPT · STRUCTURE</p>
+        <h1>程序结构 <span>条件与循环</span></h1>
+        <p class="lvmohan_sub">
+            条件结构让程序"做选择"，循环结构让程序"重复做"。<br>
+            每张卡片都是一段可运行的代码 —— 点 ▶ 运行 看它输出什么。
+        </p>
+    </header>
+
+    <!-- ========== 条件结构 ========== -->
+    <section class="lvmohan_section">
+        <div class="lvmohan_section_head">
+            <h2>条件结构</h2>
+            <span class="lvmohan_section_tag">conditions · 让程序会思考</span>
+        </div>
+
+        <div class="lvmohan_grid">
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">if / else if / else</span>
+                    <span class="lvmohan_pill lvmohan_pill--cyan">条件判断</span>
+                </div>
+                <p class="lvmohan_desc">从上往下依次判断，哪个条件先为 true 就执行哪个分支；都不满足走 else。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> score = <span class="num">82</span>;
+<span class="kw">if</span> (score >= <span class="num">90</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"优秀"</span>);
+} <span class="kw">else if</span> (score >= <span class="num">80</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"良好"</span>);
+} <span class="kw">else if</span> (score >= <span class="num">60</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"及格"</span>);
+} <span class="kw">else</span> {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"不及格"</span>);
+}</pre>
+                <div class="lvmohan_output" data-output="ifelse"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="ifelse">▶ 运行</button>
+                </div>
+            </article>
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">switch / case</span>
+                    <span class="lvmohan_pill lvmohan_pill--cyan">多分支</span>
+                </div>
+                <p class="lvmohan_desc">当判断某个变量"等于"不同值时，switch 比 if 链更清晰。记得加 break，否则会穿透。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> day = <span class="num">3</span>;
+<span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span>: <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"周一"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>: <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"周二"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">3</span>: <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"周三"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">4</span>: <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"周四"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">5</span>: <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"周五"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>: <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"周末"</span>);
+}</pre>
+                <div class="lvmohan_output" data-output="switch"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="switch">▶ 运行</button>
+                </div>
+            </article>
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">三元运算符 ? :</span>
+                    <span class="lvmohan_pill lvmohan_pill--pink">简写</span>
+                </div>
+                <p class="lvmohan_desc">if/else 只有一句话时，可以压缩成一行：条件 ? 真值 : 假值。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> age = <span class="num">20</span>;
+<span class="kw">var</span> tip = age >= <span class="num">18</span>
+    ? <span class="str">"成年"</span>
+    : <span class="str">"未成年"</span>;
+<span class="fn">console</span>.<span class="fn">log</span>(tip);
+
+<span class="kw">var</span> num = <span class="num">7</span>;
+<span class="fn">console</span>.<span class="fn">log</span>(
+    num % <span class="num">2</span> === <span class="num">0</span> ? <span class="str">"偶数"</span> : <span class="str">"奇数"</span>
+);</pre>
+                <div class="lvmohan_output" data-output="ternary"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="ternary">▶ 运行</button>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ========== 循环结构 ========== -->
+    <section class="lvmohan_section">
+        <div class="lvmohan_section_head">
+            <h2>循环结构</h2>
+            <span class="lvmohan_section_tag">loops · 让程序重复劳动</span>
+        </div>
+
+        <div class="lvmohan_grid">
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">for 循环</span>
+                    <span class="lvmohan_pill lvmohan_pill--green">最常用</span>
+                </div>
+                <p class="lvmohan_desc">三段式：初始化；条件；更新。已知循环次数时首选。这里求 1 到 10 的和。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> sum = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="kw">var</span> i = <span class="num">1</span>; i <= <span class="num">10</span>; i++) {
+    sum += i;
+}
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"1~10 的和："</span> + sum);
+
+<span class="cm">// 倒序输出 5 1</span>
+<span class="kw">for</span> (<span class="kw">var</span> j = <span class="num">5</span>; j >= <span class="num">1</span>; j--) {
+    <span class="fn">console</span>.<span class="fn">log</span>(j);
+}</pre>
+                <div class="lvmohan_output" data-output="for"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="for">▶ 运行</button>
+                </div>
+            </article>
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">while 循环</span>
+                    <span class="lvmohan_pill lvmohan_pill--green">条件先判断</span>
+                </div>
+                <p class="lvmohan_desc">先判断条件，为 true 才执行循环体；可能一次都不执行。适合不知道要循环多少次的场景。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> n = <span class="num">1</span>;
+<span class="kw">while</span> (n < <span class="num">100</span>) {
+    n *= <span class="num">2</span>;
+    <span class="fn">console</span>.<span class="fn">log</span>(n);
+}</pre>
+                <div class="lvmohan_output" data-output="while"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="while">▶ 运行</button>
+                </div>
+            </article>
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">do...while 循环</span>
+                    <span class="lvmohan_pill lvmohan_pill--green">至少跑一次</span>
+                </div>
+                <p class="lvmohan_desc">先执行一次循环体，再判断条件。无论条件真假，循环体至少会跑一遍。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> i = <span class="num">3</span>;
+<span class="kw">do</span> {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"倒计时："</span> + i);
+    i--;
+} <span class="kw">while</span> (i > <span class="num">0</span>);
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"发射！"</span>);
+
+<span class="cm">// 即使条件一开始就是 false，也会进一次</span>
+<span class="kw">var</span> x = <span class="num">0</span>;
+<span class="kw">do</span> {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"do-while 至少执行一次"</span>);
+} <span class="kw">while</span> (x > <span class="num">0</span>);</pre>
+                <div class="lvmohan_output" data-output="dowhile"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="dowhile">▶ 运行</button>
+                </div>
+            </article>
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">for...of 遍历数组</span>
+                    <span class="lvmohan_pill lvmohan_pill--yellow">ES6+</span>
+                </div>
+                <p class="lvmohan_desc">直接拿到元素本身，不用下标。最干净的数组遍历方式（不能直接取到下标）。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> fruits = [<span class="str">"苹果"</span>, <span class="str">"香蕉"</span>, <span class="str">"橙子"</span>];
+<span class="kw">for</span> (<span class="kw">var</span> fruit <span class="kw">of</span> fruits) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"吃到了："</span> + fruit);
+}</pre>
+                <div class="lvmohan_output" data-output="forof"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="forof">▶ 运行</button>
+                </div>
+            </article>
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">for...in 遍历对象</span>
+                    <span class="lvmohan_pill lvmohan_pill--yellow">遍历键名</span>
+                </div>
+                <p class="lvmohan_desc">专门用来遍历对象的可枚举属性（键名 key）。不推荐用来遍历数组，顺序可能乱。</p>
+                <pre class="lvmohan_code"><span class="kw">var</span> user = {
+    name: <span class="str">"吕墨涵"</span>,
+    age: <span class="num">20</span>,
+    major: <span class="str">"计算机"</span>
+};
+<span class="kw">for</span> (<span class="kw">var</span> key <span class="kw">in</span> user) {
+    <span class="fn">console</span>.<span class="fn">log</span>(key + <span class="str">" = "</span> + user[key]);
+}</pre>
+                <div class="lvmohan_output" data-output="forin"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="forin">▶ 运行</button>
+                </div>
+            </article>
+
+            <article class="lvmohan_card">
+                <div class="lvmohan_card_head">
+                    <span class="lvmohan_title">break 与 continue</span>
+                    <span class="lvmohan_pill lvmohan_pill--pink">跳出 / 跳过</span>
+                </div>
+                <p class="lvmohan_desc">break 直接结束整个循环；continue 跳过这一次，进入下一次。这里用它来打印 1~10 中除了 7 的倍数以外的数。</p>
+                <pre class="lvmohan_code"><span class="kw">for</span> (<span class="kw">var</span> i = <span class="num">1</span>; i <= <span class="num">15</span>; i++) {
+    <span class="kw">if</span> (i === <span class="num">12</span>) {
+        <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"遇到 12，break 退出"</span>);
+        <span class="kw">break</span>;
+    }
+    <span class="kw">if</span> (i % <span class="num">3</span> === <span class="num">0</span>) {
+        <span class="kw">continue</span>;
+    }
+    <span class="fn">console</span>.<span class="fn">log</span>(i);
+}</pre>
+                <div class="lvmohan_output" data-output="breakcont"></div>
+                <div class="lvmohan_controls">
+                    <button class="lvmohan_btn" data-run="breakcont">▶ 运行</button>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer class="lvmohan_footer">
+        <p>吕墨涵 · 24005240119 · JavaScript 程序结构演示 · 2026-10-29</p>
+        <p>条件决定走向，循环决定效率 —— 两者组合，就能表达几乎所有算法逻辑。</p>
+    </footer>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    function lvmohan_capture(code) {
+        var logs = [];
+        var origLog = console.log;
+        console.log = function () {
+            var parts = [];
+            for (var i = 0; i < arguments.length; i++) {
+                var v = arguments[i];
+                if (typeof v === 'object') {
+                    try { parts.push(JSON.stringify(v)); }
+                    catch (e) { parts.push(String(v)); }
+                } else {
+                    parts.push(String(v));
+                }
+            }
+            logs.push(parts.join(' '));
+        };
+        try {
+            eval(code);
+        } catch (err) {
+            logs.push('❌ 运行错误：' + err.message);
+        }
+        console.log = origLog;
+        return logs.join('\n');
+    }
+
+    var examples = {
+        ifelse: [
+            'var score = 82;',
+            'if (score >= 90) {',
+            '    console.log("优秀");',
+            '} else if (score >= 80) {',
+            '    console.log("良好");',
+            '} else if (score >= 60) {',
+            '    console.log("及格");',
+            '} else {',
+            '    console.log("不及格");',
+            '}'
+        ].join('\n'),
+
+        switch: [
+            'var day = 3;',
+            'switch (day) {',
+            '    case 1: console.log("周一"); break;',
+            '    case 2: console.log("周二"); break;',
+            '    case 3: console.log("周三"); break;',
+            '    case 4: console.log("周四"); break;',
+            '    case 5: console.log("周五"); break;',
+            '    default: console.log("周末");',
+            '}'
+        ].join('\n'),
+
+        ternary: [
+            'var age = 20;',
+            'var tip = age >= 18 ? "成年" : "未成年";',
+            'console.log(tip);',
+            'var num = 7;',
+            'console.log(num % 2 === 0 ? "偶数" : "奇数");'
+        ].join('\n'),
+
+        for: [
+            'var sum = 0;',
+            'for (var i = 1; i <= 10; i++) { sum += i; }',
+            'console.log("1~10 的和：" + sum);',
+            'for (var j = 5; j >= 1; j--) { console.log(j); }'
+        ].join('\n'),
+
+        while: [
+            'var n = 1;',
+            'while (n < 100) { n *= 2; console.log(n); }'
+        ].join('\n'),
+
+        dowhile: [
+            'var i = 3;',
+            'do { console.log("倒计时：" + i); i--; } while (i > 0);',
+            'console.log("发射！");',
+            'var x = 0;',
+            'do { console.log("do-while 至少执行一次"); } while (x > 0);'
+        ].join('\n'),
+
+        forof: [
+            'var fruits = ["苹果", "香蕉", "橙子"];',
+            'for (var fruit of fruits) { console.log("吃到了：" + fruit); }'
+        ].join('\n'),
+
+        forin: [
+            'var user = { name: "吕墨涵", age: 20, major: "计算机" };',
+            'for (var key in user) { console.log(key + " = " + user[key]); }'
+        ].join('\n'),
+
+        breakcont: [
+            'for (var i = 1; i <= 15; i++) {',
+            '    if (i === 12) { console.log("遇到 12，break 退出"); break; }',
+            '    if (i % 3 === 0) { continue; }',
+            '    console.log(i);',
+            '}'
+        ].join('\n')
+    };
+
+    var btns = document.querySelectorAll('[data-run]');
+    for (var k = 0; k < btns.length; k++) {
+        btns[k].addEventListener('click', function () {
+            var key = this.getAttribute('data-run');
+            var code = examples[key];
+            var outBox = document.querySelector('[data-output="' + key + '"]');
+            if (!code || !outBox) return;
+            outBox.textContent = '⏳ 运行中...';
+            setTimeout(function () {
+                outBox.textContent = lvmohan_capture(code);
+            }, 30);
+        });
+    }
+})();
+</script>
+</body>
+</html>
