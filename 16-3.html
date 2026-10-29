@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--
+    姓名：吕墨涵
+    日期：2026-10-29
+    功能名称：星巴克精选栏目页（iconfont 字体图标版）
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星巴克精选 - 吕墨涵</title>
+    <!-- 图标来自 font 目录的 iconfont 字体图标 -->
+    <link rel="stylesheet" href="13 -3-4/font_5244715_6fbx2jueos2/iconfont.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #f7f8fa;
+            color: #1f1f1f;
+        }
+
+        /* 顶部白色条带，模拟截图最上方的白色区域 */
+        .lmh_topbar { height: 34px; background: #fff; }
+
+        .lmh_home {
+            position: absolute;
+            top: 48px;
+            left: 24px;
+            font-size: 12px;
+            color: #9aa3ad;
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+
+        .lmh_home:hover { color: #00a862; }
+
+        .lmh_main { max-width: 1080px; margin: 0 auto; padding: 0 20px 80px; }
+
+        /* ===== 栏目标题 ===== */
+        .lmh_title {
+            margin-top: 54px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #1f1f1f;
+        }
+
+        .lmh_subtitle {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            color: #7c7c7c;
+        }
+
+        /* ===== 卡片列表 ===== */
+        .lmh_cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            /* 卡片上方要留出图标悬浮的空间 */
+            margin-top: 76px;
+        }
+
+        .lmh_card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 178px;
+            padding: 0 16px 26px;
+            text-align: center;
+            text-decoration: none;
+            background: #fff;
+            box-shadow: 0 1px 5px rgba(31, 45, 61, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lmh_card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 28px rgba(31, 45, 61, 0.14);
+        }
+
+        /* ===== 卡片顶部的“商品图”：用 iconfont 图标代替照片 ===== */
+        .lmh_thumb {
+            width: 106px;
+            height: 78px;
+            margin: -36px auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #ffffff 30%, #eef7f2 100%);
+            border-radius: 8px;
+            box-shadow: 0 8px 18px rgba(31, 45, 61, 0.16);
+            transition: transform 0.3s ease;
+        }
+
+        .lmh_card:hover .lmh_thumb { transform: translateY(-3px) scale(1.04); }
+
+        .lmh_thumb .iconfont {
+            font-size: 42px;
+            color: #00a862;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .lmh_card:hover .lmh_thumb .iconfont {
+            color: #c8a45f;
+            transform: scale(1.08);
+        }
+
+        /* 每张卡片一点差异化的底色，靠近真实商品图的丰富感 */
+        .lmh_card:nth-child(1) .lmh_thumb { background: linear-gradient(160deg, #ffffff 30%, #fdf3e0 100%); }
+        .lmh_card:nth-child(2) .lmh_thumb { background: linear-gradient(160deg, #ffffff 30%, #eaf3ee 100%); }
+        .lmh_card:nth-child(3) .lmh_thumb { background: linear-gradient(160deg, #ffffff 30%, #eef1f7 100%); }
+        .lmh_card:nth-child(4) .lmh_thumb { background: linear-gradient(160deg, #ffffff 30%, #f7efe7 100%); }
+
+        /* ===== 卡片文字 ===== */
+        .lmh_card_title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f1f1f;
+            margin-bottom: 8px;
+        }
+
+        .lmh_line {
+            font-size: 12.5px;
+            line-height: 2.1;
+            color: #7c7c7c;
+        }
+
+        .lmh_more {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 12px;
+            color: #bfa074;
+        }
+
+        /* 纯 CSS 画的小箭头 › */
+        .lmh_arrow {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin-left: 5px;
+            vertical-align: 1px;
+            border-top: 1px solid currentColor;
+            border-right: 1px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+        }
+
+        .lmh_card:hover .lmh_arrow { transform: rotate(45deg) translate(2px, -2px); }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 860px) {
+            .lmh_cards { gap: 28px; }
+            .lmh_card { width: calc(50% - 20px); max-width: 220px; }
+        }
+
+        @media (max-width: 460px) {
+            .lmh_cards { gap: 24px; margin-top: 64px; }
+            .lmh_card { width: 82%; }
+            .lmh_home { position: static; display: inline-block; margin: 14px 0 0 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lmh_topbar"></div>
+    <a href="13 -3-4/index.html" class="lmh_home">&larr; 返回首页</a>
+
+    <main class="lmh_main">
+        <!-- 星巴克精选栏目 -->
+        <section class="lmh_featured">
+            <h2 class="lmh_title">星巴克精选</h2>
+            <p class="lmh_subtitle">在星巴克天猫旗舰店发现更多咖啡心意</p>
+
+            <div class="lmh_cards">
+                <a href="#" class="lmh_card">
+                    <div class="lmh_thumb"><i class="iconfont icon-shoucang"></i></div>
+                    <h3 class="lmh_card_title">会员星礼包</h3>
+                    <p class="lmh_line">星享卡新升级</p>
+                    <p class="lmh_line">更多心意好礼</p>
+                    <span class="lmh_more">了解更多<span class="lmh_arrow"></span></span>
+                </a>
+
+                <a href="#" class="lmh_card">
+                    <div class="lmh_thumb"><i class="iconfont icon-fasong"></i></div>
+                    <h3 class="lmh_card_title">星礼卡</h3>
+                    <p class="lmh_line">用一份心意</p>
+                    <p class="lmh_line">让心意相随</p>
+                    <span class="lmh_more">了解更多<span class="lmh_arrow"></span></span>
+                </a>
+
+                <a href="#" class="lmh_card">
+                    <div class="lmh_thumb"><i class="iconfont icon-bofang"></i></div>
+                    <h3 class="lmh_card_title">电子产品券</h3>
+                    <p class="lmh_line">心意</p>
+                    <p class="lmh_line">从这一杯开始</p>
+                    <span class="lmh_more">了解更多<span class="lmh_arrow"></span></span>
+                </a>
+
+                <a href="#" class="lmh_card">
+                    <div class="lmh_thumb"><i class="iconfont icon-dizhi"></i></div>
+                    <h3 class="lmh_card_title">咖啡生活</h3>
+                    <p class="lmh_line">星巴克</p>
+                    <p class="lmh_line">用心制作</p>
+                    <span class="lmh_more">了解更多<span class="lmh_arrow"></span></span>
+                </a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

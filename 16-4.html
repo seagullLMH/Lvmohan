@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--
+    姓名：吕墨涵
+    日期：2026-10-29
+    功能名称：JavaScript tab 选项卡切换（新闻栏目）
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab 选项卡切换 - 吕墨涵</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Microsoft YaHei", "SimSun", sans-serif;
+            background: #f7f8fa;
+            color: #1f1f1f;
+            padding: 40px 20px 60px;
+        }
+
+        .lmh_page { max-width: 380px; margin: 0 auto; }
+
+        .lmh_home {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #9aa3ad;
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+
+        .lmh_home:hover { color: #d43c33; }
+
+        /* ===== 选项卡整体容器 ===== */
+        .lmh_tabs {
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            box-shadow: 0 6px 20px rgba(31, 45, 61, 0.08);
+        }
+
+        /* ===== 选项卡按钮行 ===== */
+        .lmh_tab_bar {
+            display: flex;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .lmh_tab {
+            flex: 1;
+            padding: 9px 0;
+            font-family: inherit;
+            font-size: 14px;
+            color: #333;
+            background: #f5f5f5;
+            border: none;
+            border-right: 1px solid #d9d9d9;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .lmh_tab:last-child { border-right: none; }
+
+        .lmh_tab:hover { color: #d43c33; }
+
+        /* 选中的选项卡：红底白字 */
+        .lmh_tab.lmh_active {
+            color: #fff;
+            font-weight: 700;
+            background: #d43c33;
+        }
+
+        /* ===== 内容面板 ===== */
+        .lmh_panel { display: none; }
+
+        .lmh_panel.lmh_active { display: block; animation: lmh_fade_in 0.3s ease; }
+
+        @keyframes lmh_fade_in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ===== 新闻列表 ===== */
+        .lmh_news {
+            list-style: none;
+            padding: 6px 14px;
+        }
+
+        .lmh_news li {
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .lmh_news li:last-child { border-bottom: none; }
+
+        .lmh_news a {
+            position: relative;
+            display: block;
+            padding: 9px 0 9px 16px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #1a53a0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        /* 红色小圆点 */
+        .lmh_news a::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            width: 5px;
+            height: 5px;
+            margin-top: -2px;
+            border-radius: 50%;
+            background: #d43c33;
+        }
+
+        .lmh_news a:hover {
+            color: #d43c33;
+            text-decoration: underline;
+        }
+
+        /* ===== 说明区 ===== */
+        .lmh_note {
+            margin-top: 22px;
+            padding: 14px 16px;
+            font-size: 12px;
+            line-height: 1.9;
+            color: #7c7c7c;
+            background: #fff;
+            border-left: 3px solid #d43c33;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .lmh_note b { color: #1f1f1f; }
+    </style>
+</head>
+<body>
+    <div class="lmh_page">
+        <a href="13 -3-4/index.html" class="lmh_home">&larr; 返回首页</a>
+
+        <!-- tab 选项卡 -->
+        <div class="lmh_tabs">
+            <div class="lmh_tab_bar" role="tablist" aria-label="旅游新闻选项卡">
+                <button class="lmh_tab lmh_active" type="button" role="tab" id="lmh_tab_1"
+                        aria-selected="true" aria-controls="lmh_panel_1" data-index="0">最新投诉</button>
+                <button class="lmh_tab" type="button" role="tab" id="lmh_tab_2"
+                        aria-selected="false" aria-controls="lmh_panel_2" data-index="1">官方回应</button>
+                <button class="lmh_tab" type="button" role="tab" id="lmh_tab_3"
+                        aria-selected="false" aria-controls="lmh_panel_3" data-index="2">追踪调查</button>
+            </div>
+
+            <!-- 面板一：最新投诉 -->
+            <div class="lmh_panel lmh_active" role="tabpanel" id="lmh_panel_1" aria-labelledby="lmh_tab_1">
+                <ul class="lmh_news">
+                    <li><a href="javascript:;">北京火车站出租车乱象调查 司机称计价器坏</a></li>
+                    <li><a href="javascript:;">公园仙人掌被刻字"毁容" 一棵仙人掌被刻满</a></li>
+                    <li><a href="javascript:;">昆明强收游客"束手就擒"费 网友遗弃(组图)</a></li>
+                    <li><a href="javascript:;">四川一星级酒店公开建1年未开放变"茶楼"</a></li>
+                    <li><a href="javascript:;">北京北海地坛公园暗藏高端会所 园方称"暖"</a></li>
+                    <li><a href="javascript:;">北京北海金丝楠木柱遭英文"签名"毁坏</a></li>
+                    <li><a href="javascript:;">北京动物园门票玩谐音 低价门票遭"雪藏"</a></li>
+                    <li><a href="javascript:;">女子不慎"无购物"被投诉旅行社 新东一样被</a></li>
+                    <li><a href="javascript:;">老年人团游权益受损 旅行社称硬对老人</a></li>
+                </ul>
+            </div>
+
+            <!-- 面板二：官方回应 -->
+            <div class="lmh_panel" role="tabpanel" id="lmh_panel_2" aria-labelledby="lmh_tab_2">
+                <ul class="lmh_news">
+                    <li><a href="javascript:;">大绿鸭、猎尾购物热闹 法官解读"山寨鸭"是</a></li>
+                    <li><a href="javascript:;">国家旅游局回应涨价："团队游价格系正常"</a></li>
+                    <li><a href="javascript:;">国家旅游局回应"新旅游法实施后旅行社团"</a></li>
+                    <li><a href="javascript:;">出游遇纠纷可依《旅游法》维权 明确旅游投</a></li>
+                    <li><a href="javascript:;">解读《新旅游法》"谣传" 扫货族可安心</a></li>
+                    <li><a href="javascript:;">《旅游法》将抑制"零负团费"和"门票经济"</a></li>
+                    <li><a href="javascript:;">文旅部将导入旅游合同行为指南和公约作</a></li>
+                    <li><a href="javascript:;">天津二季度旅行社服务质量公报发布 投诉及8</a></li>
+                    <li><a href="javascript:;">敦煌：国家法定节假日所有景点景区免收停</a></li>
+                </ul>
+            </div>
+
+            <!-- 面板三：追踪调查 -->
+            <div class="lmh_panel" role="tabpanel" id="lmh_panel_3" aria-labelledby="lmh_tab_3">
+                <ul class="lmh_news">
+                    <li><a href="javascript:;">《旅游法》实施半月 月度景区遭正经一日游</a></li>
+                    <li><a href="javascript:;">追呼香格里拉旅游"怪象"：涉事导游等已</a></li>
+                    <li><a href="javascript:;">导游被称"攻略"：逃离旅行社自己</a></li>
+                    <li><a href="javascript:;">九寨沟为何变"死胡同"？——数千游客</a></li>
+                    <li><a href="javascript:;">九寨沟为何吓观光游客滞留？</a></li>
+                    <li><a href="javascript:;">旅游之尴尬"粮爷"博物馆，女士超性威进</a></li>
+                    <li><a href="javascript:;">记者暗访兵马俑景区：玉器店玉器 过期门票</a></li>
+                    <li><a href="javascript:;">睁冒省涉游客借卡转账 两女子忽悠女大学生</a></li>
+                    <li><a href="javascript:;">39家旅游单位违法被罚1800万 购物店结盟统</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lmh_note">
+            <b>实现思路：</b>三个选项卡按钮与三个新闻面板通过 data-index 一一对应，点击时统一<b>清空所有选中状态</b>，再为当前索引的按钮和面板添加 <b>lmh_active</b> 类；选中的标签呈红底白字，配合淡入动画切换面板内容，并用 ARIA 属性标注无障碍信息。
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var lmh_tabs = document.querySelectorAll('.lmh_tab');
+            var lmh_panels = document.querySelectorAll('.lmh_panel');
+
+            // 切换到第 index 个选项卡
+            function lmh_switchTab(lmh_index) {
+                if (lmh_index < 0 || lmh_index >= lmh_tabs.length) {
+                    return;
+                }
+
+                for (var lmh_i = 0; lmh_i < lmh_tabs.length; lmh_i++) {
+                    var lmh_isActive = (lmh_i === lmh_index);
+
+                    lmh_tabs[lmh_i].classList.toggle('lmh_active', lmh_isActive);
+                    lmh_tabs[lmh_i].setAttribute('aria-selected', lmh_isActive ? 'true' : 'false');
+                    lmh_panels[lmh_i].classList.toggle('lmh_active', lmh_isActive);
+                }
+            }
+
+            for (var lmh_i = 0; lmh_i < lmh_tabs.length; lmh_i++) {
+                lmh_tabs[lmh_i].addEventListener('click', function () {
+                    lmh_switchTab(Number(this.getAttribute('data-index')));
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
