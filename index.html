@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吕墨涵 · 网页设计作品集</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px 56px;
+            color: #e8f1ff;
+            background:
+                radial-gradient(900px 500px at 15% -10%, #16304d 0%, transparent 55%),
+                radial-gradient(800px 480px at 92% 8%, #2a1640 0%, transparent 52%),
+                #0a0f1c;
+        }
+        .lvmohan_page { max-width: 1100px; margin: 0 auto; }
+
+        .lvmohan_header { text-align: center; margin-bottom: 40px; }
+        .lvmohan_kicker {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px; letter-spacing: 4px; color: #38e1ff; margin-bottom: 10px;
+        }
+        .lvmohan_header h1 {
+            font-size: clamp(28px, 5vw, 44px); font-weight: 700; letter-spacing: 2px;
+        }
+        .lvmohan_header h1 span { color: #38e1ff; text-shadow: 0 0 24px rgba(56,225,255,.45); }
+        .lvmohan_sub { margin-top: 14px; font-size: 14px; color: #8ba0bf; line-height: 1.8; }
+
+        .lvmohan_group { margin-bottom: 36px; }
+        .lvmohan_group_title {
+            font-size: 16px; font-weight: 600; letter-spacing: 1px;
+            padding-bottom: 8px; margin-bottom: 16px;
+            border-bottom: 1px solid rgba(120,200,255,.18);
+        }
+        .lvmohan_group_title small {
+            font-family: Consolas, monospace; font-size: 11px; color: #8ba0bf;
+            margin-left: 10px; font-weight: normal; letter-spacing: 0;
+        }
+
+        .lvmohan_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .lvmohan_link {
+            display: block; padding: 14px 16px;
+            text-decoration: none; color: #a5d6ff;
+            background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+            border: 1px solid rgba(120,200,255,.14); border-radius: 10px;
+            transition: transform .2s, border-color .2s, background .2s, box-shadow .2s;
+        }
+        .lvmohan_link:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56,225,255,.55);
+            background: rgba(56,225,255,.08);
+            box-shadow: 0 10px 26px rgba(0,0,0,.4);
+            color: #38e1ff;
+        }
+        .lvmohan_link .lvmohan_file {
+            font-family: Consolas, monospace; font-size: 13px; font-weight: bold;
+            display: block; margin-bottom: 4px;
+        }
+        .lvmohan_link .lvmohan_desc {
+            font-size: 11.5px; color: #8ba0bf; line-height: 1.5;
+        }
+
+        .lvmohan_footer {
+            margin-top: 40px; padding-top: 20px; text-align: center;
+            font-size: 12px; line-height: 1.9; color: #5b6b84;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+        .lvmohan_footer a { color: #38e1ff; text-decoration: none; }
+        .lvmohan_footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 520px) {
+            body { padding: 28px 14px 40px; }
+            .lvmohan_grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="lvmohan_page">
+
+    <header class="lvmohan_header">
+        <p class="lvmohan_kicker">PORTFOLIO · 2026</p>
+        <h1>吕墨涵 <span>网页设计作品集</span></h1>
+        <p class="lvmohan_sub">HTML · CSS · JavaScript 练习合集 —— 点击下方卡片直接打开</p>
+    </header>
+
+    <!-- ===== 第 1-5 章：基础 HTML / CSS ===== -->
+    <section class="lvmohan_group">
+        <h2 class="lvmohan_group_title">基础页面
+            <small>HTML 结构 · CSS 入门</small>
+        </h2>
+        <div class="lvmohan_grid">
+            <a class="lvmohan_link" href="1.html"><span class="lvmohan_file">1.html</span><span class="lvmohan_desc">第一课练习</span></a>
+            <a class="lvmohan_link" href="2.html"><span class="lvmohan_file">2.html</span><span class="lvmohan_desc">第二课练习</span></a>
+            <a class="lvmohan_link" href="2-2.html"><span class="lvmohan_file">2-2.html</span><span class="lvmohan_desc">第二课练习2</span></a>
+            <a class="lvmohan_link" href="3-1.html"><span class="lvmohan_file">3-1.html</span><span class="lvmohan_desc">第三课1</span></a>
+            <a class="lvmohan_link" href="3-2.html"><span class="lvmohan_file">3-2.html</span><span class="lvmohan_desc">第三课2</span></a>
+            <a class="lvmohan_link" href="4-1.html"><span class="lvmohan_file">4-1.html</span><span class="lvmohan_desc">第四课1</span></a>
+            <a class="lvmohan_link" href="5-1 层叠与继承.html"><span class="lvmohan_file">5-1 层叠与继承.html</span><span class="lvmohan_desc">CSS 层叠与继承</span></a>
+            <a class="lvmohan_link" href="5-2 盒模型.html"><span class="lvmohan_file">5-2 盒模型.html</span><span class="lvmohan_desc">CSS 盒模型</span></a>
+        </div>
+    </section>
+
+    <!-- ===== 第 6 章：浮动与 Flex ===== -->
+    <section class="lvmohan_group">
+        <h2 class="lvmohan_group_title">布局
+            <small>浮动 · Flex · 定位</small>
+        </h2>
+        <div class="lvmohan_grid">
+            <a class="lvmohan_link" href="6-1.html"><span class="lvmohan_file">6-1.html</span><span class="lvmohan_desc">浮动布局</span></a>
+            <a class="lvmohan_link" href="6-1flex.html"><span class="lvmohan_file">6-1flex.html</span><span class="lvmohan_desc">Flex 布局</span></a>
+            <a class="lvmohan_link" href="6-2.html"><span class="lvmohan_file">6-2.html</span><span class="lvmohan_desc">布局练习2</span></a>
+            <a class="lvmohan_link" href="7/7-1 上图下文.html"><span class="lvmohan_file">7-1 上图下文.html</span><span class="lvmohan_desc">图文布局1</span></a>
+            <a class="lvmohan_link" href="7/7-2 左图右文.html"><span class="lvmohan_file">7-2 左图右文.html</span><span class="lvmohan_desc">图文布局2</span></a>
+        </div>
+    </section>
+
+    <!-- ===== 第 9-10 章：动画 / 过渡 ===== -->
+    <section class="lvmohan_group">
+        <h2 class="lvmohan_group_title">动画与过渡
+            <small>transition · animation</small>
+        </h2>
+        <div class="lvmohan_grid">
+            <a class="lvmohan_link" href="9/transition.html"><span class="lvmohan_file">transition.html</span><span class="lvmohan_desc">过渡效果</span></a>
+            <a class="lvmohan_link" href="10/10-1 animation.html"><span class="lvmohan_file">10-1 animation.html</span><span class="lvmohan_desc">动画基础</span></a>
+            <a class="lvmohan_link" href="10/10-2.html"><span class="lvmohan_file">10-2.html</span><span class="lvmohan_desc">动画练习2</span></a>
+            <a class="lvmohan_link" href="10/10-3.html"><span class="lvmohan_file">10-3.html</span><span class="lvmohan_desc">动画练习3</span></a>
+            <a class="lvmohan_link" href="10/10-4.html"><span class="lvmohan_file">10-4.html</span><span class="lvmohan_desc">动画练习4</span></a>
+            <a class="lvmohan_link" href="11-1.html"><span class="lvmohan_file">11-1.html</span><span class="lvmohan_desc">第十一课1</span></a>
+            <a class="lvmohan_link" href="11-2.html"><span class="lvmohan_file">11-2.html</span><span class="lvmohan_desc">第十一课2</span></a>
+        </div>
+    </section>
+
+    <!-- ===== 第 13-14 章：Font Awesome / JS 入门 ===== -->
+    <section class="lvmohan_group">
+        <h2 class="lvmohan_group_title">图标与 JavaScript 入门
+            <small>Font Icon · alert/prompt/confirm</small>
+        </h2>
+        <div class="lvmohan_grid">
+            <a class="lvmohan_link" href="13-1.html"><span class="lvmohan_file">13-1.html</span><span class="lvmohan_desc">Font Awesome 字体图标</span></a>
+            <a class="lvmohan_link" href="13-2.html"><span class="lvmohan_file">13-2.html</span><span class="lvmohan_desc">图标练习2</span></a>
+            <a class="lvmohan_link" href="13 -3-4/index.html"><span class="lvmohan_file">13-3/13-4 项目</span><span class="lvmohan_desc">完整网页项目</span></a>
+            <a class="lvmohan_link" href="14-1.html"><span class="lvmohan_file">14-1.html</span><span class="lvmohan_desc">JS 基础输出</span></a>
+            <a class="lvmohan_link" href="14-2.html"><span class="lvmohan_file">14-2.html</span><span class="lvmohan_desc">JS 练习2</span></a>
+        </div>
+    </section>
+
+    <!-- ===== 第 15 章：条件 / 循环 ===== -->
+    <section class="lvmohan_group">
+        <h2 class="lvmohan_group_title">JavaScript 程序结构
+            <small>条件 · 循环 · 可运行演示</small>
+        </h2>
+        <div class="lvmohan_grid">
+            <a class="lvmohan_link" href="15-1.html"><span class="lvmohan_file">15-1.html</span><span class="lvmohan_desc">数 7 游戏（条件判断）</span></a>
+            <a class="lvmohan_link" href="15-2.html"><span class="lvmohan_file">15-2.html</span><span class="lvmohan_desc">条件与循环可视化演示</span></a>
+        </div>
+    </section>
+
+    <!-- ===== 第 16 章：数组 ===== -->
+    <section class="lvmohan_group">
+        <h2 class="lvmohan_group_title">JavaScript 数组
+            <small>方法 · 可视化实验室</small>
+        </h2>
+        <div class="lvmohan_grid">
+            <a class="lvmohan_link" href="16-1.html"><span class="lvmohan_file">16-1.html</span><span class="lvmohan_desc">数组方法可视化实验室</span></a>
+            <a class="lvmohan_link" href="16-2.html"><span class="lvmohan_file">16-2.html</span><span class="lvmohan_desc">数组练习2</span></a>
+            <a class="lvmohan_link" href="16-3.html"><span class="lvmohan_file">16-3.html</span><span class="lvmohan_desc">数组练习3</span></a>
+            <a class="lvmohan_link" href="16-4.html"><span class="lvmohan_file">16-4.html</span><span class="lvmohan_desc">数组练习4</span></a>
+        </div>
+    </section>
+
+    <!-- ===== 零散 ===== -->
+    <section class="lvmohan_group">
+        <h2 class="lvmohan_group_title">其他
+            <small>8-1 等零散页面</small>
+        </h2>
+        <div class="lvmohan_grid">
+            <a class="lvmohan_link" href="8-1.html"><span class="lvmohan_file">8-1.html</span><span class="lvmohan_desc">第八课</span></a>
+        </div>
+    </section>
+
+    <footer class="lvmohan_footer">
+        <p>吕墨涵 · 24005240119 · 网页设计课程作品集</p>
+        <p>仓库地址：<a href="https://github.com/seagullLMH/Lvmohan" target="_blank">github.com/seagullLMH/Lvmohan</a></p>
+    </footer>
+</div>
+</body>
+</html>
